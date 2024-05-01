@@ -15,7 +15,7 @@ public class CameraCollision : MonoBehaviour
         _cameraDistance = _cameraDistanceMinMax.y;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         CheckCameraCollision();
         
