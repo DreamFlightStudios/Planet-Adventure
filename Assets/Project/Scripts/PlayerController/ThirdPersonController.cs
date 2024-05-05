@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
 public class ThirdPersonController : AnimationObject
@@ -24,7 +25,8 @@ public class ThirdPersonController : AnimationObject
 
     public override event Action<float, float> Moved;
 
-    private void Awake() => _playerInput = new PlayerInput();
+    [Inject]
+    private void Construct(PlayerInput input) => _playerInput = input;  
 
     private void Start() => _characterController = GetComponent<CharacterController>();
 
@@ -61,8 +63,4 @@ public class ThirdPersonController : AnimationObject
         _movementDirection = Quaternion.Euler(0, rotationAngle, 0) * Vector3.forward;
         transform.rotation = Quaternion.Euler(0f, smoothRotationAngle, 0f);
     }
-
-    private void OnEnable() => _playerInput.Enable();
-
-    private void OnDisable() => _playerInput.Disable();
 }
