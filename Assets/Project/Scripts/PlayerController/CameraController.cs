@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class CameraController : MonoBehaviour
 
     private PlayerInput _playerInput;
 
-    private void Awake() => _playerInput = new PlayerInput();
+    [Inject]
+    private void Construct(PlayerInput input) => _playerInput = input;
 
     private void Start()
     {

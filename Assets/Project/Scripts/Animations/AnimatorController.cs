@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
 {
-    [SerializeField] private AnimationObject _controller;
     [SerializeField] private Animator _animator;
+    private IAnimationObject _controller;
+
+    private void Awake() => _controller ??= GetComponent<IAnimationObject>();
 
     private void OnMove(float forvardVelocity, float velocityY)
     {
@@ -13,11 +15,13 @@ public class AnimatorController : MonoBehaviour
 
     private void OnEnable()
     {
-        _controller.Moved += OnMove;
+        if (_controller != null)
+            _controller.Moved += OnMove;
     }
 
     private void OnDisable()
     {
-        _controller.Moved -= OnMove;
+        if (_controller != null)
+            _controller.Moved -= OnMove;
     }
 }

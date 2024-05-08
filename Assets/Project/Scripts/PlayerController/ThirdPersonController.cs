@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
-public class ThirdPersonController : AnimationObject
+public class ThirdPersonController : MonoBehaviour, IAnimationObject
 {
     [Header("Movement Settings")]
     [SerializeField] private float _walkingSpeed;
@@ -23,7 +23,7 @@ public class ThirdPersonController : AnimationObject
     private float _rotationSmoothVelocity;
     private float _velocity;
 
-    public override event Action<float, float> Moved;
+    public event Action<float, float> Moved;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;  
