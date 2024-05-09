@@ -42,7 +42,7 @@ public class ThirdPersonController : MonoBehaviour, IAnimationObject
 
         if (_velocity > 0f && forvardInput == 0f) _velocity -= Time.deltaTime * _acceleration;
 
-        if (_inputDirection.magnitude > 0f) Rotate();
+        if (_inputDirection.sqrMagnitude > 0f) Rotate();
 
         _movementDirection *= _velocity * _walkingSpeed;
 
