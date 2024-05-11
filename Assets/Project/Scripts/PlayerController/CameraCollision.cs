@@ -18,7 +18,6 @@ public class CameraCollision : MonoBehaviour
     private void FixedUpdate()
     {
         CheckCameraCollision();
-        
         _camera.localPosition = _cameraDirection * _cameraDistance;
     }
 

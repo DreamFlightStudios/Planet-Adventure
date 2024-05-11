@@ -3,9 +3,9 @@ using UnityEngine;
 public class AnimatorController : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    private IAnimationObject _controller;
+    private IAnimated _controller;
 
-    private void Awake() => _controller ??= GetComponent<IAnimationObject>();
+    private void Awake() => _controller ??= GetComponent<IAnimated>();
 
     private void OnMove(float forvardVelocity, float velocityY)
     {

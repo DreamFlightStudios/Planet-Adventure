@@ -3,15 +3,12 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
-public class ThirdPersonController : MonoBehaviour, IAnimationObject
+public class ThirdPersonController : MonoBehaviour, IAnimated
 {
-    [Header("Movement Settings")]
     [SerializeField] private float _walkingSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _gravity;
-
-    [Header("Transforms")]
     [SerializeField] private Transform _cameraContainer;
 
     private PlayerInput _playerInput;

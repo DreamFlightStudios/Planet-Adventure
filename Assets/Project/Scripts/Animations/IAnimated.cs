@@ -1,6 +1,6 @@
 using System;
 
-public interface IAnimationObject
+public interface IAnimated
 {
     public event Action<float, float> Moved;
 }
