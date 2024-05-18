@@ -4,16 +4,15 @@ using Zenject;
 
 public class Hand : MonoBehaviour
 {
-    private IInteraction _interactionObject;
+    private IInteractive _interactionObject;
     private PlayerInput _playerInput;
-    private bool _canInteract;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
 
     private void Interaction(InputAction.CallbackContext context)
     {
-        if(_interactionObject != null && _canInteract)
+        if(_interactionObject != null && _interactionObject.CanInteract())
         {
             _interactionObject.Interaction();
             AddItem();
@@ -27,9 +26,7 @@ public class Hand : MonoBehaviour
 
     private void OnTrigger(bool onEnter, GameObject triggerObject)
     {
-        IInteraction interactionObject = triggerObject?.GetComponent<IInteraction>();
-        _canInteract = onEnter;
-        if (onEnter && interactionObject != null)
+        if (onEnter && triggerObject.TryGetComponent<IInteractive>(out IInteractive interactionObject))
         {
             _interactionObject = interactionObject;
             return;
