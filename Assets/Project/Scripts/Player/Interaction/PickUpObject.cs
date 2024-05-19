@@ -1,9 +1,9 @@
 using UnityEngine;
 
 public class PickUpObject : MonoBehaviour, IInteractive
-{
-    [SerializeField] private bool _canInteract = true;
-    public bool CanInteract() => _canInteract;
+{   
+    [SerializeField] private bool _canInteract;
+    public bool CanInteract { get => _canInteract; }
 
     public void Interaction()
     {

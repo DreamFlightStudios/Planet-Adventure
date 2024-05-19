@@ -12,7 +12,7 @@ public class Hand : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext context)
     {
-        if(_interactionObject != null && _interactionObject.CanInteract())
+        if(_interactionObject != null && _interactionObject.CanInteract)
         {
             _interactionObject.Interaction();
             AddItem();

@@ -1,5 +1,5 @@
 public interface IInteractive
 {
     public void Interaction();
-    public bool CanInteract();
+    public bool CanInteract { get; }
 }
