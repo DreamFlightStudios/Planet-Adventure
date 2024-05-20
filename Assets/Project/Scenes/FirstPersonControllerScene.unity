@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a1a2f1d1c6ba742bf279dc5342b10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteract: 1
+  <CanInteract>k__BackingField: 1
 --- !u!54 &24585793
 Rigidbody:
   m_ObjectHideFlags: 0
