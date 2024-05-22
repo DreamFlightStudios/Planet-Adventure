@@ -7,10 +7,13 @@ public class AnimatorController : MonoBehaviour
 
     private void Awake() => _controller ??= GetComponent<IAnimated>();
 
-    private void OnMove(float forvardVelocity, float velocityY)
+    private void OnMove(float forvardVelocity)
     {
         _animator.SetFloat("ForvardVelocity", forvardVelocity);
-        _animator.SetFloat("VelocityY", velocityY);
+    }
+    private void OnRotate(float velocityY)
+    {
+        _animator.SetFloat("TurnVelocity", velocityY);
     }
 
     private void OnEnable()

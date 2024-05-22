@@ -3,13 +3,14 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
-public class ThirdPersonController : MonoBehaviour, IAnimated
+public class ThirdPersonController : MonoBehaviour
 {
     [SerializeField] private float _walkingSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _gravity;
     [SerializeField] private Transform _cameraContainer;
+    [SerializeField] private Animator _animator;
 
     private PlayerInput _playerInput;
     private CharacterController _characterController;
@@ -19,8 +20,6 @@ public class ThirdPersonController : MonoBehaviour, IAnimated
 
     private float _rotationSmoothVelocity;
     private float _velocity;
-
-    public event Action<float, float> Moved;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;  
@@ -49,7 +48,7 @@ public class ThirdPersonController : MonoBehaviour, IAnimated
         }   
 
         _characterController.Move(_movementDirection);
-        Moved?.Invoke(_velocity, _movementDirection.normalized.y);
+        _animator.SetFloat("ForvardVelocity", _velocity);
     }
 
     private void Rotate()

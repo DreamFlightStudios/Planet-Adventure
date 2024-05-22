@@ -24,9 +24,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Run",
+                    "name": "RunInput",
                     "type": "Button",
                     "id": "0c06ea70-1293-40e1-b04e-8b5b80d41dc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AimInput",
+                    "type": "Button",
+                    "id": "632ea992-fc0d-42c2-8107-58de9085ce5c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -107,7 +116,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Run",
+                    "action": "RunInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "679e8b3a-dc32-4bdc-87dc-b4ccdcf8f0bb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
