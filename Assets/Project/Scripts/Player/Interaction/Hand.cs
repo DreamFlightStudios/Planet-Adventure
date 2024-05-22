@@ -29,14 +29,12 @@ public class Hand : MonoBehaviour
         if (onEnter && triggerObject.TryGetComponent<IInteractive>(out IInteractive interactionObject))
         {
             _interactionObject = interactionObject;
-            return;
         }
-        _interactionObject = null;
     }
 
     private void OnTriggerEnter(Collider other) => OnTrigger(true, other.gameObject);
 
-    private void OnTriggerExit(Collider other) => OnTrigger(false, other.gameObject);
+    private void OnTriggerExit(Collider other) => _interactionObject = null;
 
     private void OnEnable() => _playerInput.Player.Interaction.performed += Interaction;
 
