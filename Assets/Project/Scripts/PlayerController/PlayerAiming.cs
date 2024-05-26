@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
@@ -5,25 +6,35 @@ using Zenject;
 
 public class PlayerAiming : MonoBehaviour
 {
-    private PlayerInput _playerInput;
-    private bool _isAiming;
     private int _targetWeight;
     float k;
 
     [SerializeField] private float _sensivity;
+    [SerializeField] private ThirdPersonController _thirdPersonController;
+
+    [Header("Rig")]
     [SerializeField] private Animator _animator;
     [SerializeField] private Rig _aimRig;
     [SerializeField] private Rig _handRig;
 
+    private PlayerInput _playerInput;
+    private bool _isAiming;
+
+    public event Action<bool> Aimed;
+
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
 
-    private void Aim(InputAction.CallbackContext context) => _isAiming = !_isAiming;
+    private void Aim(InputAction.CallbackContext context)
+    {
+        _isAiming = !_isAiming;
+        Aimed.Invoke(_isAiming);
+    }
 
     private void Update()
     {
         k = Mathf.Lerp(k, _targetWeight, Time.deltaTime * 10f);
-        if (!_isAiming)
+        if (_isAiming)
         {
             _targetWeight = 1;
         }
@@ -33,14 +44,6 @@ public class PlayerAiming : MonoBehaviour
         }
         _aimRig.weight = k;
         _handRig.weight = k;
-        Debug.Log(k);
-    }
-
-    private void RotatePlayer()
-    {
-        Vector2 input = _playerInput.Player.LookInput.ReadValue<Vector2>() * _sensivity * Time.deltaTime;
-
-        _animator.SetFloat("TurnVelocity", input.x);
     }
 
     private void OnEnable()
