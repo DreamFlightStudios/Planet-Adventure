@@ -24,15 +24,15 @@ public class Hand : MonoBehaviour
         //add item
     }
 
-    private void OnTrigger(bool onEnter, GameObject triggerObject)
+    private void OnTrigger(GameObject triggerObject)
     {
-        if (onEnter && triggerObject.TryGetComponent<IInteractive>(out IInteractive interactionObject))
+        if (triggerObject.TryGetComponent<IInteractive>(out IInteractive interactionObject))
         {
             _interactionObject = interactionObject;
         }
     }
 
-    private void OnTriggerEnter(Collider other) => OnTrigger(true, other.gameObject);
+    private void OnTriggerEnter(Collider other) => OnTrigger(other.gameObject);
 
     private void OnTriggerExit(Collider other) => _interactionObject = null;
 
