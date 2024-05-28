@@ -25,8 +25,8 @@ public class ThirdPersonController : MonoBehaviour
 
     private bool _isAiming;
 
-    Vector3 targetDir;
     private Vector3 _inputDirection;
+    private float _velocity;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
@@ -41,10 +41,11 @@ public class ThirdPersonController : MonoBehaviour
     {
         Vector2 input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
         _input = Vector2.SmoothDamp(_input, input, ref _smoothInputVelocity, _acceleration);
+        _input = input;
 
         if (!_characterController.isGrounded)
         {
-            _movementDirection.y -= _gravity * Time.deltaTime;
+           // _movementDirection.y -= _gravity * Time.deltaTime;
         }
 
         if (_isAiming)
@@ -52,23 +53,31 @@ public class ThirdPersonController : MonoBehaviour
         else
             Move();
 
-        _movementDirection *= _isAiming ? _aimingSpeed : _walkingSpeed;
-        _characterController.Move(_movementDirection * Time.deltaTime);
+        Debug.Log(input);
+        Debug.Log(_input);
+        Debug.Log(_movementDirection);
     }
 
     private void Move()
     {
+        Vector2 input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
+        float forvardInput = Mathf.Clamp01(Mathf.Abs(input.x) + Mathf.Abs(input.y));
+        _inputDirection = new Vector3(input.x, 0f, input.y);
 
-        _movementDirection = _input.x * _cameraContainer.right + _input.y * _cameraContainer.forward;
+        if (_velocity < 1f && forvardInput > 0f) _velocity += Time.deltaTime * _acceleration;
 
-        if (_movementDirection.magnitude >= 0f)
+        if (_velocity > 0f && forvardInput == 0f) _velocity -= Time.deltaTime * _acceleration;
+
+        if (_inputDirection.sqrMagnitude > 0f) Rotate();
+
+        _movementDirection *= _velocity * _walkingSpeed;
+
+        if (!_characterController.isGrounded)
         {
-            _input.Normalize();
-            float forvardInput = Mathf.Clamp01(Mathf.Abs(_input.x) + Mathf.Abs(_input.y));
-            _inputDirection = new Vector3(_input.x, 0f, _input.y);
-
-            Rotate();
+            _movementDirection.y -= _gravity * Time.deltaTime;
         }
+
+        _characterController.Move(_movementDirection);
     }
 
     private void Rotate()
