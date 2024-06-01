@@ -15,13 +15,7 @@ public class Hand : MonoBehaviour
         if(_interactionObject != null && _interactionObject.CanInteract)
         {
             _interactionObject.Interaction();
-            AddItem();
         }
-    }
-
-    private void AddItem()
-    {
-        //add item
     }
 
     private void OnTriggerEnter(Collider triggerObject)
