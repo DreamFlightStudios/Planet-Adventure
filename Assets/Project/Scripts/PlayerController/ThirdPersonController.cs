@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Windows;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
@@ -12,6 +11,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private Transform _cameraContainer;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Vector2 _movementDeadZone;
 
     private PlayerInput _playerInput;
     private CharacterController _characterController;
@@ -19,13 +19,12 @@ public class ThirdPersonController : MonoBehaviour
 
     private Vector3 _movementDirection;
     private Vector2 _input;
-
-    private Vector2 _smoothInputVelocity;
-    private float _smoothRotationVelocity;
+    float _forvardInput;
 
     private bool _isAiming;
 
-    private Vector3 _inputDirection;
+    private float _smoothRotationVelocity;
+    private Vector2 _smoothInputVelocity;
     private float _velocity;
 
     [Inject]
@@ -41,11 +40,13 @@ public class ThirdPersonController : MonoBehaviour
     {
         Vector2 input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
         _input = Vector2.SmoothDamp(_input, input, ref _smoothInputVelocity, _acceleration);
-        _input = input;
+        _movementDirection *= _isAiming ? _aimingSpeed : _walkingSpeed;
+
+        Debug.Log(_input);
 
         if (!_characterController.isGrounded)
         {
-           // _movementDirection.y -= _gravity * Time.deltaTime;
+           _movementDirection.y -= _gravity * Time.deltaTime;
         }
 
         if (_isAiming)
@@ -53,40 +54,22 @@ public class ThirdPersonController : MonoBehaviour
         else
             Move();
 
-        Debug.Log(input);
-        Debug.Log(_input);
-        Debug.Log(_movementDirection);
+        _characterController.Move(_movementDirection * Time.deltaTime);
     }
 
     private void Move()
     {
-        Vector2 input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
-        float forvardInput = Mathf.Clamp01(Mathf.Abs(input.x) + Mathf.Abs(input.y));
-        _inputDirection = new Vector3(input.x, 0f, input.y);
-
-        if (_velocity < 1f && forvardInput > 0f) _velocity += Time.deltaTime * _acceleration;
-
-        if (_velocity > 0f && forvardInput == 0f) _velocity -= Time.deltaTime * _acceleration;
-
-        if (_inputDirection.sqrMagnitude > 0f) Rotate();
-
-        _movementDirection *= _velocity * _walkingSpeed;
-
-        if (!_characterController.isGrounded)
+        _forvardInput = Mathf.Abs(_input.x) + Mathf.Abs(_input.y);
+        if (_input.sqrMagnitude > _movementDeadZone.sqrMagnitude) 
         {
-            _movementDirection.y -= _gravity * Time.deltaTime;
+            float rotationAngle = Mathf.Atan2(_input.x, _input.y) * Mathf.Rad2Deg + _cameraContainer.eulerAngles.y;
+            float smoothRotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationAngle, ref _smoothRotationVelocity, _rotationSpeed);
+
+            _movementDirection = Quaternion.Euler(0, rotationAngle, 0) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0f, smoothRotationAngle, 0f);
         }
 
-        _characterController.Move(_movementDirection);
-    }
-
-    private void Rotate()
-    {
-        float rotationAngle = Mathf.Atan2(_inputDirection.x, _inputDirection.z) * Mathf.Rad2Deg + _cameraContainer.eulerAngles.y;
-        float smoothRotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationAngle, ref _smoothRotationVelocity, _rotationSpeed);
-
-        _movementDirection = Quaternion.Euler(0, rotationAngle, 0) * Vector3.forward;
-        transform.rotation = Quaternion.Euler(0f, smoothRotationAngle, 0f);
+        _animator.SetFloat("ForvardVelocity", _forvardInput);
     }
 
     private void AimMove()
@@ -96,8 +79,8 @@ public class ThirdPersonController : MonoBehaviour
         float smoothRotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, _cameraContainer.eulerAngles.y, ref _smoothRotationVelocity, _rotationSpeed);
         transform.rotation = Quaternion.Euler(0f, smoothRotationAngle, 0f);
 
-        _animator.SetFloat("AimingDiractionX", _movementDirection.x);
-        _animator.SetFloat("AimingDiractionY", -_movementDirection.z);
+        _animator.SetFloat("VelocityY", _input.x);
+        _animator.SetFloat("VelocityX", _input.y);
     }
 
     private void OnAimed(bool isAimed)

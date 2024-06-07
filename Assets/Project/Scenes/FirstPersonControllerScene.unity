@@ -4052,13 +4052,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3980fa3d247ad84b82cf2dee89254d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkingSpeed: 0.02
-  _aimingSpeed: 1
+  _walkingSpeed: 0.01
+  _aimingSpeed: 0.01
   _rotationSpeed: 0.3
   _acceleration: 0.2
   _gravity: 9
   _cameraContainer: {fileID: 805580403}
   _animator: {fileID: 194955766}
+  _movementDeadZone: {x: 0.28, y: 0.28}
 --- !u!4 &1371868054
 Transform:
   m_ObjectHideFlags: 0
