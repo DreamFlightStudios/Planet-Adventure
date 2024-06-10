@@ -31,7 +31,7 @@ public class PlayerAiming : MonoBehaviour
         Aimed.Invoke(_isAiming);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         k = Mathf.Lerp(k, _targetWeight, Time.deltaTime * 10f);
         if (_isAiming)
@@ -42,8 +42,12 @@ public class PlayerAiming : MonoBehaviour
         {
             _targetWeight = 0;
         }
-        _aimRig.weight = k;
+
         _handRig.weight = k;
+        if(_handRig.weight < 0.1 || _handRig.weight == 0.9)
+        {
+            _aimRig.weight = k;
+        }
     }
 
     private void OnEnable()

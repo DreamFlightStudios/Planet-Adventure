@@ -11,21 +11,19 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private Transform _cameraContainer;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Vector2 _movementDeadZone;
 
     private PlayerInput _playerInput;
     private CharacterController _characterController;
     private PlayerAiming _playerAiming;
 
     private Vector3 _movementDirection;
+    private Vector2 _smoothInput;
     private Vector2 _input;
-    float _forvardInput;
-
-    private bool _isAiming;
 
     private float _smoothRotationVelocity;
     private Vector2 _smoothInputVelocity;
-    private float _velocity;
+
+    private bool _isAiming;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
@@ -38,11 +36,8 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
-        _input = Vector2.SmoothDamp(_input, input, ref _smoothInputVelocity, _acceleration);
-        _movementDirection *= _isAiming ? _aimingSpeed : _walkingSpeed;
-
-        Debug.Log(_input);
+        _input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
+        _smoothInput = Vector2.SmoothDamp(_smoothInput, _input, ref _smoothInputVelocity, _acceleration);
 
         if (!_characterController.isGrounded)
         {
@@ -54,33 +49,37 @@ public class ThirdPersonController : MonoBehaviour
         else
             Move();
 
+        _movementDirection *= _isAiming ? _aimingSpeed : _walkingSpeed;
         _characterController.Move(_movementDirection * Time.deltaTime);
     }
 
     private void Move()
     {
-        _forvardInput = Mathf.Abs(_input.x) + Mathf.Abs(_input.y);
-        if (_input.sqrMagnitude > _movementDeadZone.sqrMagnitude) 
+        if (_input.sqrMagnitude > 0) 
         {
-            float rotationAngle = Mathf.Atan2(_input.x, _input.y) * Mathf.Rad2Deg + _cameraContainer.eulerAngles.y;
+            float rotationAngle = Mathf.Atan2(_smoothInput.x, _smoothInput.y) * Mathf.Rad2Deg + _cameraContainer.eulerAngles.y;
             float smoothRotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationAngle, ref _smoothRotationVelocity, _rotationSpeed);
 
             _movementDirection = Quaternion.Euler(0, rotationAngle, 0) * Vector3.forward;
             transform.rotation = Quaternion.Euler(0f, smoothRotationAngle, 0f);
         }
+        else _movementDirection = Vector3.zero;
 
-        _animator.SetFloat("ForvardVelocity", _forvardInput);
+        float forvardInput = Mathf.Abs(_smoothInput.x) + Mathf.Abs(_smoothInput.y);
+        _animator.SetFloat("ForvardVelocity", forvardInput);
     }
 
     private void AimMove()
     {
-        _movementDirection = _input.x * transform.right + _input.y * transform.forward;
+        _movementDirection = _smoothInput.x * transform.right + _smoothInput.y * transform.forward;
 
         float smoothRotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, _cameraContainer.eulerAngles.y, ref _smoothRotationVelocity, _rotationSpeed);
         transform.rotation = Quaternion.Euler(0f, smoothRotationAngle, 0f);
 
-        _animator.SetFloat("VelocityY", _input.x);
-        _animator.SetFloat("VelocityX", _input.y);
+        _animator.SetFloat("VelocityY", _smoothInput.x);
+        _animator.SetFloat("VelocityX", _smoothInput.y);
+
+       // _animator.SetFloat("TurnVelocity", );
     }
 
     private void OnAimed(bool isAimed)
