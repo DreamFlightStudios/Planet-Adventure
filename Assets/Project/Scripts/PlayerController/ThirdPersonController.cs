@@ -39,16 +39,17 @@ public class ThirdPersonController : MonoBehaviour
         _input = _playerInput.Player.MovementInput.ReadValue<Vector2>();
         _smoothInput = Vector2.SmoothDamp(_smoothInput, _input, ref _smoothInputVelocity, _acceleration);
 
-        if (!_characterController.isGrounded)
-        {
-           _movementDirection.y -= _gravity * Time.deltaTime;
-        }
 
         if (_isAiming)
             AimMove();
         else
             Move();
 
+        if (!_characterController.isGrounded)
+        {
+           _movementDirection.y -= _gravity * Time.deltaTime;
+        }
+        
         _movementDirection *= _isAiming ? _aimingSpeed : _walkingSpeed;
         _characterController.Move(_movementDirection * Time.deltaTime);
     }
@@ -78,8 +79,6 @@ public class ThirdPersonController : MonoBehaviour
 
         _animator.SetFloat("VelocityY", _smoothInput.x);
         _animator.SetFloat("VelocityX", _smoothInput.y);
-
-       // _animator.SetFloat("TurnVelocity", );
     }
 
     private void OnAimed(bool isAimed)

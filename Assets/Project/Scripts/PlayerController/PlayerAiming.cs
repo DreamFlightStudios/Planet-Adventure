@@ -44,10 +44,7 @@ public class PlayerAiming : MonoBehaviour
         }
 
         _handRig.weight = k;
-        if(_handRig.weight < 0.1 || _handRig.weight == 0.9)
-        {
-            _aimRig.weight = k;
-        }
+        _aimRig.weight = k;
     }
 
     private void OnEnable()
