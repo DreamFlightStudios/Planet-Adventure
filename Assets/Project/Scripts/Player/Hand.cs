@@ -8,7 +8,6 @@ public class Hand : MonoBehaviour
     public event Action<bool> ObjectDetected;
     public event Action Interacted;
 
-
     private IInteractive _interactionObject;
     private PlayerInput _playerInput;
 
@@ -42,7 +41,10 @@ public class Hand : MonoBehaviour
         ObjectDetected(false);
     }
 
-    private void OnEnable() => _playerInput.Player.Interaction.performed += Interaction;
+    private void OnEnable()
+    {
+        _playerInput.Player.Interaction.performed += Interaction;
+    }
 
     private void OnDisable() => _playerInput.Player.Interaction.performed -= Interaction;
 }
