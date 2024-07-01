@@ -1,39 +1,40 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    [SerializeField] private InventorySlotViewe[] _slots;
+    [SerializeField] private InventorySlotViewe[] _viewe;
+    private List<InventorySlotData> _slotsData = new();
 
     private void Awake()
     {
-        foreach (var slot in _slots)
+        foreach (var slot in _viewe)
         {
-            slot.Initialize();
+            var data = new InventorySlotData();
+            _slotsData.Add(data);
+            slot.Initialize(data);
+        }
+
+        for (int i = 0; i < _slotsData.Count; i++)
+        {
+            //_slotsData[i].Load(_stateProvider.xtnj[i]);
         }
     }
 
-    private void UpdateSlots()
+    public void RemoveItem(ItemInfo item)
     {
-        
-    }
-
-    public void RemoveItem()
-    {
-
+     
     }
 
     public void AddItem(ItemInfo item)
     {
-        //foreach (var slot in _slots)
-        //{
-        //    if (slot.Data.Item == null)
-        //    {
-        //        slot.Data.
-        //    }
-        //}
+    
     }
 
-    private void OnEnable() => UpdateSlots();
+    private void OnEnable()
+    {
+
+    }
 
     private void OnDisable()
     {

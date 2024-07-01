@@ -1,26 +1,31 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySlotViewe : MonoBehaviour
 {
-    public InventorySlotData Data { get; private set; }
-
     [SerializeField] private Image _icon;
-    [SerializeField] private int _ammount;
-    [SerializeField] private string _name;
+    [SerializeField] private TMP_Text _ammount;
+    [SerializeField] private TMP_Text _name;
+    
+    private InventorySlotData _data;
 
-    public void Initialize()
+    public void Initialize(InventorySlotData data)
     {
-        Data = new InventorySlotData();
-        Data.ItemChanged += UpdateViewe;
+        _data = data;
+
+        _data.SlotChanged += UpdateViewe;
+        UpdateViewe();
     }
 
-    public void UpdateViewe()
+    private void UpdateViewe()
     {
-        var item = Data.Item;
-        _icon.sprite = item.Icon;
-        _name = item.Name;
-
-        _ammount = Data.Amount;
+        _icon.sprite = _data.Item.Icon;
+        _name.text = _data.Item.Name;
+        _ammount.text = _data.Amount.ToString();
     }
+
+    private void OnEnable() => UpdateViewe();
+
+    private void OnDisable() => UpdateViewe();
 }

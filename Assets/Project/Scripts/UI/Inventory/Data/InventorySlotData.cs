@@ -1,17 +1,17 @@
 using System;
 
 [Serializable]
-public class InventorySlotData : IStorable
+public class InventorySlotData
 {
     public ItemInfo Item
     {
-        get => _data.Item;
+        get => Item;
 
         private set
         {
-            if (value != _data.Item)
+            if (value != Item)
             {
-                _data.Item = value;
+                Item = value;
                 _itemId = value.Id;
             }
         }
@@ -19,27 +19,32 @@ public class InventorySlotData : IStorable
 
     public int Amount
     {
-        get => _data.Amount;
+        get => Amount;
 
         private set
         {
-            if (value != _data.Amount)
+            if (value != Amount)
             {
-                _data.Amount = value;
+                Amount = value;
             }
         }
     }
 
+    public event Action SlotChanged;
+
+    public bool IsEmpty => Amount == 0;
     private string _itemId;
-    private InventorySlotData _data;
-    public event Action ItemChanged;
 
-    public void Load()
+    public void AddItem(ItemInfo item)
     {
-        Item = null;
-        Amount = 0;
+        Item = item;
 
-        ItemChanged?.Invoke();
+        SlotChanged?.Invoke();
+    }
+
+    public void Load(string id)
+    {
+        _itemId = id;
     }
 
     public void Save()
