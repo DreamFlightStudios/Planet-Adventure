@@ -1,54 +1,24 @@
 using System;
 
 [Serializable]
-public class InventorySlotData
+public class InventorySlotData : IAddItemToSlot, IRemoveItemFromSlot
 {
-    public ItemInfo Item
-    {
-        get => Item;
+    public ItemInfo Item { get; private set; }
+    public string _itemId { get; private set; }
 
-        private set
-        {
-            if (value != Item)
-            {
-                Item = value;
-                _itemId = value.Id;
-            }
-        }
-    }
-
-    public int Amount
-    {
-        get => Amount;
-
-        private set
-        {
-            if (value != Amount)
-            {
-                Amount = value;
-            }
-        }
-    }
+    public bool IsEmpty => Item == null;
 
     public event Action SlotChanged;
-
-    public bool IsEmpty => Amount == 0;
-    private string _itemId;
 
     public void AddItem(ItemInfo item)
     {
         Item = item;
-
         SlotChanged?.Invoke();
     }
 
-    public void Load(string id)
+    public void RemoveItem()
     {
-        _itemId = id;
-    }
-
-    public void Save()
-    {
-        //сохраняет
+        Item = null; 
+        SlotChanged?.Invoke();
     }
 }

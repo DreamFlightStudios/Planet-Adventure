@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryController : MonoBehaviour, IAddItemToSlot, IRemoveItemFromSlot
 {
     [SerializeField] private InventorySlotViewe[] _viewe;
     private List<InventorySlotData> _slotsData = new();
@@ -17,27 +17,32 @@ public class InventoryController : MonoBehaviour
 
         for (int i = 0; i < _slotsData.Count; i++)
         {
-            //_slotsData[i].Load(_stateProvider.xtnj[i]);
+
         }
     }
 
-    public void RemoveItem(ItemInfo item)
+    public bool IsEmptySlots()
     {
-     
+        foreach(var slot in _slotsData)
+        {
+            if (slot.IsEmpty)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void AddItem(ItemInfo item)
     {
-    
+        foreach (var slot in _slotsData)
+        {
+            if (slot.IsEmpty)
+            {
+                slot.AddItem(item);
+            }
+        }
     }
 
-    private void OnEnable()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-        
-    }
+    public void RemoveItem(InventorySlotData slot) => slot.RemoveItem();
 }

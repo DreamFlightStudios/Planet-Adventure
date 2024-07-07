@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class InventorySlotViewe : MonoBehaviour
 {
     [SerializeField] private Image _icon;
-    [SerializeField] private TMP_Text _ammount;
     [SerializeField] private TMP_Text _name;
     
     private InventorySlotData _data;
@@ -22,7 +21,6 @@ public class InventorySlotViewe : MonoBehaviour
     {
         _icon.sprite = _data.Item.Icon;
         _name.text = _data.Item.Name;
-        _ammount.text = _data.Amount.ToString();
     }
 
     private void OnEnable() => UpdateViewe();

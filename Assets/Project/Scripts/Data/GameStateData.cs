@@ -1,8 +1,9 @@
 using System;
-using System.Collections.Generic;
 
 [Serializable]
 public class GameStateData
 {
-    public Dictionary<int, string> Inventory;
+    public string[] ItemsSlotsId;
+    public string GunSlot;
+    public int[] BulletsAmmount;
 }
