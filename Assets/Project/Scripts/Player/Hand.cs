@@ -5,6 +5,8 @@ using Zenject;
 
 public class Hand : MonoBehaviour
 {
+    [SerializeField] private InventoryProvider _inventoryProvider;
+
     public event Action<bool> ObjectDetected;
     public event Action Interacted;
 
@@ -18,8 +20,13 @@ public class Hand : MonoBehaviour
     {
         if(_interactionObject != null)
         {
-            _interactionObject.Interaction();
-            Interacted?.Invoke();
+            if (_interactionObject is PickUpObject pickUpObject && _inventoryProvider.HasEmptySlot())
+            {
+                _inventoryProvider.AddItemToSlot(pickUpObject.Item);
+                _interactionObject.Interaction();
+                _interactionObject = null;
+                Interacted?.Invoke();
+            }
         }
     }
 
@@ -41,10 +48,7 @@ public class Hand : MonoBehaviour
         ObjectDetected(false);
     }
 
-    private void OnEnable()
-    {
-        _playerInput.Player.Interaction.performed += Interaction;
-    }
+    private void OnEnable() => _playerInput.Player.Interaction.performed += Interaction;
 
     private void OnDisable() => _playerInput.Player.Interaction.performed -= Interaction;
 }

@@ -4,6 +4,4 @@ using System;
 public class GameStateData
 {
     public string[] ItemsSlotsId;
-    public string GunSlot;
-    public int[] BulletsAmmount;
 }

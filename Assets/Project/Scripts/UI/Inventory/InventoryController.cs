@@ -1,48 +1,19 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Zenject;
 
-public class InventoryController : MonoBehaviour, IAddItemToSlot, IRemoveItemFromSlot
+public class InventoryController : MonoBehaviour
 {
-    [SerializeField] private InventorySlotViewe[] _viewe;
-    private List<InventorySlotData> _slotsData = new();
+    [SerializeField] private GameObject _panal;
+    [SerializeField] private InventoryProvider _provider;
+    private PlayerInput _playerInput;
 
-    private void Awake()
-    {
-        foreach (var slot in _viewe)
-        {
-            var data = new InventorySlotData();
-            _slotsData.Add(data);
-            slot.Initialize(data);
-        }
+    [Inject]
+    private void Construct(PlayerInput input) => _playerInput = input;
 
-        for (int i = 0; i < _slotsData.Count; i++)
-        {
+    private void CloseOpenPanal(InputAction.CallbackContext context) => _panal.SetActive(!_panal.activeSelf);
 
-        }
-    }
+    private void OnEnable() => _playerInput.Player.Inventory.performed += CloseOpenPanal;
 
-    public bool IsEmptySlots()
-    {
-        foreach(var slot in _slotsData)
-        {
-            if (slot.IsEmpty)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void AddItem(ItemInfo item)
-    {
-        foreach (var slot in _slotsData)
-        {
-            if (slot.IsEmpty)
-            {
-                slot.AddItem(item);
-            }
-        }
-    }
-
-    public void RemoveItem(InventorySlotData slot) => slot.RemoveItem();
+    private void OnDisable() => _playerInput.Player.Inventory.performed -= CloseOpenPanal;
 }
