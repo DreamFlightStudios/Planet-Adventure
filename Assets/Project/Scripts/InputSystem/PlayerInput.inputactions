@@ -51,8 +51,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Scroll",
-                    "type": "Value",
+                    "name": "MouseScroll",
+                    "type": "PassThrough",
                     "id": "01fef05d-aaa0-48e7-a7a7-6102991d29cc",
                     "expectedControlType": "Axis",
                     "processors": "",
@@ -161,37 +161,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Mouse",
-                    "id": "0e221323-83c5-4503-a019-455f181d0a76",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "964d37ab-def8-4154-8491-c95059c4f74b",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scroll",
-                    "isComposite": true,
+                    "action": "MouseScroll",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "ff60c81f-1261-437d-9aaf-d158f58d68a1",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "6ab3ee9f-506a-4c2e-90f1-efe7dc6d0648",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }
