@@ -5,38 +5,42 @@ using Zenject;
 
 public class InventoryController : MonoBehaviour
 {
-    [SerializeField] private InventoryProvider _provider;
-    [Header("UI")]
-    [SerializeField] private GameObject _panal;
     [SerializeField] private Transform _slotsPanal;
     [SerializeField] private Transform _slots;
-    [Header("Settings")]
-    [SerializeField] private float _durationScale;
-    [SerializeField] private float _durationScroll;
+    private Vector2 _slotsShakingDiraction;
+    private bool _isInventoryOpen;
+
+    [SerializeField] private float _scrollDuration;
     [SerializeField] private float _scrollSensivity;
+
+    [SerializeField] private InventoryProvider _provider;
     private PlayerInput _playerInput;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
 
+    private void FixedUpdate()
+    {
+        Vector2 input = _playerInput.Player.LookInput.ReadValue<Vector2>();
+
+        _slotsShakingDiraction = input;
+        _slotsPanal.DOLocalMove(_slotsShakingDiraction, 1);
+    }
+
     private void CloseOpenPanal(InputAction.CallbackContext context)
     {
-        _panal.SetActive(!_panal.activeSelf);
-        if (_panal.activeSelf == true)
+        if (_isInventoryOpen)
         {
             _slotsPanal.DOScaleX(1, 0.1f);
         }
         else
         {
             _slotsPanal.DOScaleX(0, 0.1f);
-            //_slotsPanal.localScale = new Vector2(0, _slotsPanal.localScale.y);
         }
+        _isInventoryOpen = !_isInventoryOpen;
     }
 
-    private void ScrollSlots(float value)
-    {
-        _slots.DOLocalMoveX(_slots.localPosition.x + _scrollSensivity * value, _durationScroll);
-    }
+    private void ScrollSlots(float value) => _slots.DOLocalMoveX(_slots.localPosition.x + _scrollSensivity * value, _scrollDuration);
 
     private void OnEnable()
     {
@@ -47,6 +51,6 @@ public class InventoryController : MonoBehaviour
     private void OnDisable()
     {
         _playerInput.Player.Inventory.performed -= CloseOpenPanal;
-        //_playerInput.Player.MouseScroll.performed -= ScrollSlots;
+        _playerInput.Player.MouseScroll.performed -= value => ScrollSlots(value.ReadValue<float>());
     }
 }
