@@ -29,15 +29,14 @@ public class InventoryController : MonoBehaviour
 
     private void CloseOpenPanal(InputAction.CallbackContext context)
     {
-        if (_isInventoryOpen)
-        {
-            _slotsPanal.DOScaleX(1, 0.1f);
-        }
-        else
-        {
-            _slotsPanal.DOScaleX(0, 0.1f);
-        }
-        _isInventoryOpen = !_isInventoryOpen;
+        _isInventoryOpen = _slotsPanal.gameObject.activeSelf;
+
+        _slotsPanal.gameObject.SetActive(_isInventoryOpen);
+
+        int finalyScale = _isInventoryOpen ? 1 : 0;
+
+        _slotsPanal.DOScaleX(finalyScale, 0.1f);
+
     }
 
     private void ScrollSlots(float value) => _slots.DOLocalMoveX(_slots.localPosition.x + _scrollSensivity * value, _scrollDuration);
