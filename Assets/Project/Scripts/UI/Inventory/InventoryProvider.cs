@@ -5,6 +5,9 @@ using UnityEngine;
 public class InventoryProvider : MonoBehaviour
 {
     [SerializeField] private InventorySlotViewe[] _viewe;
+    [SerializeField] private WarningController _warningController;
+    [SerializeField] private string _fullInventoryWarning;
+
     private List<InventorySlot> _slots = new();
 
     private void Awake()
@@ -26,18 +29,7 @@ public class InventoryProvider : MonoBehaviour
                 return true;
             }
         }
-        return false;
-    }
-
-    public bool HasItem(ItemInfo item)
-    {
-        foreach (var slot in _slots)
-        {
-            if (slot.Item == item)
-            {
-                return true;
-            }
-        }
+        _warningController.InvokeWarning(_fullInventoryWarning, WarningType.FullInventory);
         return false;
     }
 
@@ -51,10 +43,5 @@ public class InventoryProvider : MonoBehaviour
                 break;
             }
         }
-    }
-
-    public void RemoveItemFromSlot(InventorySlot slot)
-    {
-        slot.RemoveItem();
     }
 }

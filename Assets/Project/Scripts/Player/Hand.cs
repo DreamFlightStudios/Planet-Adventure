@@ -6,6 +6,7 @@ using Zenject;
 public class Hand : MonoBehaviour
 {
     [SerializeField] private InventoryProvider _inventoryProvider;
+    [SerializeField] private AudioManager _audioManager;
 
     public event Action<bool> ObjectDetected;
     public event Action Interacted;
@@ -18,13 +19,15 @@ public class Hand : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext context)
     {
-        if(_interactionObject != null)
+        if (_interactionObject != null)
         {
             if (_interactionObject is PickUpObject pickUpObject && _inventoryProvider.HasEmptySlot())
             {
                 _inventoryProvider.AddItemToSlot(pickUpObject.Item);
                 _interactionObject.Interaction();
+                _audioManager.PlaySound(_interactionObject.InteractionSound, SoundType.Interaction);
                 _interactionObject = null;
+
                 Interacted?.Invoke();
             }
         }
@@ -34,9 +37,9 @@ public class Hand : MonoBehaviour
     {
         if (triggerObject.TryGetComponent<IInteractive>(out IInteractive interactionObject))
         {
-            _interactionObject = interactionObject;
-            if(_interactionObject.CanInteract)
+            if (interactionObject.CanInteract)
             {
+                _interactionObject = interactionObject;
                 ObjectDetected(true);
             }
         }

@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,19 +11,25 @@ public class InventoryController : MonoBehaviour
     private Vector2 _slotsShakingDiraction;
     private bool _isInventoryOpen;
 
+    [Header("Audio")]
     [SerializeField] private TMP_Text _fullInventoryWarning;
+    [SerializeField] AudioManager _audioManager;
+    [SerializeField] private AudioClip _close;
+    [SerializeField] private AudioClip _open;
 
     [SerializeField] private float _scrollDuration;
     [SerializeField] private float _scrollSensivity;
 
-    [SerializeField] private InventoryProvider _provider;
     private PlayerInput _playerInput;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
 
     private void Start()
-    {
+    {   
+        _slotsPanal.gameObject.SetActive(false);
+        _slotsPanal.DOScaleX(0f, 0f);
+
         _isInventoryOpen = _slotsPanal.gameObject.activeSelf;
     }
 
@@ -40,25 +45,16 @@ public class InventoryController : MonoBehaviour
     private void CloseOpenPanal(InputAction.CallbackContext context)
     {
         _isInventoryOpen = !_isInventoryOpen;
-
         _slotsPanal.gameObject.SetActive(_isInventoryOpen);
+
         int finalyScale = _isInventoryOpen ? 1 : 0;
+        AudioClip clip = _isInventoryOpen ? _open : _close;
 
         _slotsPanal.DOScaleX(finalyScale, 0.1f);
+        _audioManager.PlaySound(clip, SoundType.UI);
     }
 
-    private void ScrollSlots(float value) => _slots.DOLocalMoveX(_slots.localPosition.x + _scrollSensivity * value, _scrollDuration);
-
-    private IEnumerator FullInventoryException()
-    {
-        _fullInventoryWarning.DOFade(1, 0.1f);
-
-        _fullInventoryWarning.DOFade(0, 0.1f);
-
-        yield return null;
-
-        StopCoroutine(FullInventoryException());
-    } 
+    private void ScrollSlots(float value) => _slots.DOLocalMoveX(_slots.localPosition.x + (_scrollSensivity * value), _scrollDuration);
 
     private void OnEnable()
     {
