@@ -8,19 +8,21 @@ public class InventoryController : MonoBehaviour
 {
     [SerializeField] private Transform _slotsPanal;
     [SerializeField] private Transform _slots;
-    private Vector2 _slotsShakingDiraction;
-    private bool _isInventoryOpen;
 
     [Header("Audio")]
-    [SerializeField] private TMP_Text _fullInventoryWarning;
-    [SerializeField] AudioManager _audioManager;
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] private AudioClip _close;
     [SerializeField] private AudioClip _open;
+    [SerializeField] private TMP_Text _fullInventoryWarning;
 
-    [SerializeField] private float _scrollDuration;
+    [Header("DOTweenSettings")]
     [SerializeField] private float _scrollSensivity;
+    [SerializeField] private float _scrollDuration;
+    [SerializeField] private float _slotsShakingDuration;
+    [SerializeField] private float _openInventorySpeed;
 
     private PlayerInput _playerInput;
+    private bool _isInventoryOpen;
 
     [Inject]
     private void Construct(PlayerInput input) => _playerInput = input;
@@ -35,11 +37,8 @@ public class InventoryController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_isInventoryOpen) return;
-
-        Vector2 input = _playerInput.Player.LookInput.ReadValue<Vector2>();
-        _slotsShakingDiraction = input;
-        _slotsPanal.DOLocalMove(_slotsShakingDiraction, 1);
+        Vector2 slotsShakingDiraction = _playerInput.Player.LookInput.ReadValue<Vector2>();
+        _slotsPanal.DOLocalMove(slotsShakingDiraction, _slotsShakingDuration);
     }
 
     private void CloseOpenPanal(InputAction.CallbackContext context)
@@ -50,11 +49,15 @@ public class InventoryController : MonoBehaviour
         int finalyScale = _isInventoryOpen ? 1 : 0;
         AudioClip clip = _isInventoryOpen ? _open : _close;
 
-        _slotsPanal.DOScaleX(finalyScale, 0.1f);
+        _slotsPanal.DOScaleX(finalyScale, _openInventorySpeed);
         _audioManager.PlaySound(clip, SoundType.UI);
     }
-
-    private void ScrollSlots(float value) => _slots.DOLocalMoveX(_slots.localPosition.x + (_scrollSensivity * value), _scrollDuration);
+    
+    private void ScrollSlots(float value)
+    {
+        if (!_isInventoryOpen) return;
+        _slots.DOLocalMoveX(_slots.localPosition.x + (_scrollSensivity * value), _scrollDuration);
+    }
 
     private void OnEnable()
     {

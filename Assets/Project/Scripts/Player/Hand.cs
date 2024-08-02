@@ -23,8 +23,8 @@ public class Hand : MonoBehaviour
         {
             if (_interactionObject is PickUpObject pickUpObject && _inventoryProvider.HasEmptySlot())
             {
-                _inventoryProvider.AddItemToSlot(pickUpObject.Item);
                 _interactionObject.Interaction();
+                _inventoryProvider.AddItemToSlot(pickUpObject.Item);
                 _audioManager.PlaySound(_interactionObject.InteractionSound, SoundType.Interaction);
                 _interactionObject = null;
 

@@ -1,21 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InventoryController))]
 public class InventoryProvider : MonoBehaviour
 {
     [SerializeField] private InventorySlotViewe[] _viewe;
+    private List<InventorySlot> _slots = new();
+
     [SerializeField] private WarningController _warningController;
     [SerializeField] private string _fullInventoryWarning;
-
-    private List<InventorySlot> _slots = new();
+    [SerializeField] private string _newItemWarning;
 
     private void Awake()
     {
-        for (int i = 0; i < _viewe.Length; i++)
+        foreach (var viewe in _viewe)
         {
             var slot = new InventorySlot();
-            slot.Initialize(_viewe[i]);
+            slot.Initialize(viewe);
             _slots.Add(slot);
         }
     }
@@ -40,6 +40,7 @@ public class InventoryProvider : MonoBehaviour
             if (!slot.Item)
             {
                 slot.AddItem(item);
+                _warningController.InvokeWarning(_newItemWarning + item.Name, WarningType.NewItem);
                 break;
             }
         }

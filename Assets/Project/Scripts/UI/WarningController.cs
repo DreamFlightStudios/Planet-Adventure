@@ -6,12 +6,13 @@ using UnityEngine;
 public class WarningController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _warningText;
+
+    [Header("Audio")]
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] private AudioClip _fullInventoryWarning;
 
-    [SerializeField] private AudioManager _audioManager;
-
     [SerializeField] private float _fadeSpeed;
-    [SerializeField] private float _fadeAwait;
+    [SerializeField] private float _fadePause;
 
     public void InvokeWarning(string massage, WarningType type)
     {
@@ -23,13 +24,17 @@ public class WarningController : MonoBehaviour
                 StartCoroutine(FadeText());
                 _audioManager.PlaySound(_fullInventoryWarning, SoundType.Dispatcher);
                 break;
+
+            case WarningType.NewItem :
+                StartCoroutine(FadeText());
+                break;
         }
     }
 
     private IEnumerator FadeText()
     {
         _warningText.DOFade(1, _fadeSpeed);
-        yield return new WaitForSecondsRealtime(_fadeAwait);
+        yield return new WaitForSecondsRealtime(_fadePause);
 
         _warningText.DOFade(0, _fadeSpeed);
         StopCoroutine(FadeText());
@@ -38,5 +43,6 @@ public class WarningController : MonoBehaviour
 
 public enum WarningType
 {
-    FullInventory
+    FullInventory,
+    NewItem
 }
