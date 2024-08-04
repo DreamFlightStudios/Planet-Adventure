@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InventoryProvider : MonoBehaviour
 {
-    [SerializeField] private InventorySlotViewe[] _viewe;
+    [SerializeField] private InventorySlotView[] _view;
     private List<InventorySlot> _slots = new();
 
     [SerializeField] private WarningController _warningController;
@@ -12,10 +12,10 @@ public class InventoryProvider : MonoBehaviour
 
     private void Awake()
     {
-        foreach (var viewe in _viewe)
+        foreach (var view in _view)
         {
             var slot = new InventorySlot();
-            slot.Initialize(viewe);
+            slot.Initialize(view);
             _slots.Add(slot);
         }
     }

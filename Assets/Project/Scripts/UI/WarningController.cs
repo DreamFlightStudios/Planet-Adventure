@@ -14,9 +14,9 @@ public class WarningController : MonoBehaviour
     [SerializeField] private float _fadeSpeed;
     [SerializeField] private float _fadePause;
 
-    public void InvokeWarning(string massage, WarningType type)
+    public void InvokeWarning(string message, WarningType type)
     {
-        _warningText.text = massage;
+        _warningText.text = message;
 
         switch (type)
         {

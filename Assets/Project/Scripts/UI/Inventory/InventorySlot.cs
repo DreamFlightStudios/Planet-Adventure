@@ -11,7 +11,7 @@ public class InventorySlot
     public event Action<ItemInfo> SlotChanged;
     private readonly InventorySlotData _data = new();
 
-    public void Initialize(InventorySlotViewe view) => SlotChanged += view.UpdateViewe;
+    public void Initialize(InventorySlotView view) => SlotChanged += view.UpdateViewe;
 
     public void AddItem(ItemInfo item)
     {

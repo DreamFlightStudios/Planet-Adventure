@@ -2,33 +2,33 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource _defoultSourse;
-    [SerializeField] private AudioSource _uiSourse;
-    [SerializeField] private AudioSource _dispatherSourse;
-    [SerializeField] private AudioSource _interactionSourse;
+    [SerializeField] private AudioSource _defaultSource;
+    [SerializeField] private AudioSource _uiSoursce;
+    [SerializeField] private AudioSource _dispatherSource;
+    [SerializeField] private AudioSource _interactionSource;
 
     public void PlaySound(AudioClip clip, SoundType type)
     {
-        AudioSource calledSourse;
+        AudioSource calledSource;
         switch (type)
         {
             case SoundType.UI :
-                calledSourse = _uiSourse;
+                calledSource = _uiSoursce;
                 break;
 
             case SoundType.Interaction :
-                calledSourse = _interactionSourse;
+                calledSource = _interactionSource;
                 break;
 
             case SoundType.Dispatcher :
-                calledSourse = _dispatherSourse;
+                calledSource = _dispatherSource;
                 break;
 
             default : 
-                calledSourse = _defoultSourse;
+                calledSource = _defaultSource;
                 break;
         }
-        calledSourse.PlayOneShot(clip);
+        calledSource.PlayOneShot(clip);
     }
 }
 

@@ -3,11 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlotViewe : MonoBehaviour
+public class InventorySlotView : MonoBehaviour
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _name;
-
     [SerializeField] private float _fadeInIconSpeed;
 
     public void UpdateViewe(ItemInfo item)
