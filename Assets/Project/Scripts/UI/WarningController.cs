@@ -37,7 +37,6 @@ public class WarningController : MonoBehaviour
         yield return new WaitForSecondsRealtime(_fadePause);
 
         _warningText.DOFade(0, _fadeSpeed);
-        StopCoroutine(FadeText());
     }
 }
 
