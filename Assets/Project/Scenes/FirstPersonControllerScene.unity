@@ -3847,7 +3847,7 @@ GameObject:
   - component: {fileID: 1104215743}
   - component: {fileID: 1104215742}
   - component: {fileID: 1104215746}
-  - component: {fileID: 1104215745}
+  - component: {fileID: 1104215747}
   m_Layer: 3
   m_Name: InventoryCanvas
   m_TagString: Untagged
@@ -3938,31 +3938,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1104215745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104215740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68595fb5bbe7fc4a99a0f0fe6d6deec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slots:
-  - {fileID: 1211903054}
-  - {fileID: 1768281125}
-  - {fileID: 863907595}
-  - {fileID: 1871914460}
-  - {fileID: 694085377}
-  - {fileID: 1850419895}
-  - {fileID: 1179179751}
-  - {fileID: 1943938700}
-  - {fileID: 2044467274}
-  _warningController: {fileID: 242758068}
-  _fullInventoryWarning: The inventory is full
-  _newItemWarning: 'New item in the backpack: '
 --- !u!114 &1104215746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3984,6 +3959,31 @@ MonoBehaviour:
   _scrollDuration: 0
   _slotsShakingDuration: 1
   _openInventorySpeed: 0.1
+--- !u!114 &1104215747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104215740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9c70444edb78b4cb65d8f2e3139dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slots:
+  - {fileID: 1211903054}
+  - {fileID: 1768281125}
+  - {fileID: 863907595}
+  - {fileID: 1871914460}
+  - {fileID: 694085377}
+  - {fileID: 1850419895}
+  - {fileID: 1179179751}
+  - {fileID: 1943938700}
+  - {fileID: 2044467274}
+  _warningController: {fileID: 242758068}
+  _fullInventoryWarning: Inventory is full
+  _newItemWarning: 'New item:'
 --- !u!1 &1113122186
 GameObject:
   m_ObjectHideFlags: 0
@@ -5159,7 +5159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1838299dd986f8342bcc670343a7e73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryProvider: {fileID: 1104215745}
+  _inventoryProvider: {fileID: 1104215747}
   _audioManager: {fileID: 1648171778}
 --- !u!1 &1389652032
 GameObject:

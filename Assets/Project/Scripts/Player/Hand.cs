@@ -5,7 +5,7 @@ using Zenject;
 
 public class Hand : MonoBehaviour
 {
-    [SerializeField] private InventoryProvider _inventoryProvider;
+    [SerializeField] private InventoryHandler _inventoryProvider;
     [SerializeField] private AudioManager _audioManager;
 
     public event Action<bool> ObjectDetected;

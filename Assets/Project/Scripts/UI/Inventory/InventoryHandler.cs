@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InventoryProvider : MonoBehaviour
+public class InventoryHandler : MonoBehaviour
 {
     [SerializeField] private InventorySlotHandler[] _slots;
 
