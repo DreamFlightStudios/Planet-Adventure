@@ -1,15 +1,23 @@
 using DG.Tweening;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlotView : MonoBehaviour
+public class InventorySlotView
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private TMP_Text _name;
-    [SerializeField] private float _fadeInIconSpeed;
+    private readonly Image _icon;
+    private readonly TMP_Text _name;
+    private readonly float _fadeInIconSpeed;
 
-    public void UpdateViewe(ItemInfo item)
+    public InventorySlotView(Image icon, TMP_Text name, float fadeInIconSpeed, InventorySlotHandler handler)
+    {
+        _icon = icon;
+        _name = name;
+        _fadeInIconSpeed = fadeInIconSpeed;
+
+        handler.SlotChanged += UpdateViewe;
+    }
+
+    private void UpdateViewe(ItemInfo item)
     {
         if (item == null)
             _icon.DOFade(0, 0);
