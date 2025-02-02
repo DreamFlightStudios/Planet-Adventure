@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class MainMenuEnteryPoint : MonoBehaviour
+public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private MainMenuUI _mainMenuPrefab;
 

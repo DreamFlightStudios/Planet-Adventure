@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class GameEnteryPoint : MonoBehaviour
+public class GameEntryPoint : MonoBehaviour
 {
     [SerializeField] private GameObject _rootObjects;
 

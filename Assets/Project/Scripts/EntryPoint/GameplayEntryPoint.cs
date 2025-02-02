@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class GameplayEnteryPoint : MonoBehaviour
+public class GameplayEntryPoint : MonoBehaviour
 {
     [SerializeField] private PauseMenuUI _pauseMenuPrefab;
 
