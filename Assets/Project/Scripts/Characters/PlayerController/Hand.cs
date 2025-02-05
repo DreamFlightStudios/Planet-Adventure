@@ -8,7 +8,8 @@ public class Hand : MonoBehaviour
     public event Action<bool, string> ObjectDetected;
     public event Action Interacted;
 
-    private IInteractive _interactionObject;
+    [SerializeField] private AgentView _view;
+    private IInteractive _interactiveObject;
     private InputSystem _input;
 
     [Inject]
@@ -16,13 +17,14 @@ public class Hand : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext context)
     {
-        if (_interactionObject != null)
+        if (_interactiveObject != null)
         {
-            _interactionObject.Interaction();
+            _interactiveObject.Interaction();
+            _view.InvokeTrigger(AgentAnimationKey.Interaction);
 
-            if (!_interactionObject.CanInteract)
+            if (!_interactiveObject.CanInteract)
             {
-                _interactionObject = null;
+                _interactiveObject = null;
                 Interacted?.Invoke();
             }
         }
@@ -34,7 +36,7 @@ public class Hand : MonoBehaviour
         {
             if (interactionObject.CanInteract)
             {
-                _interactionObject = interactionObject;
+                _interactiveObject = interactionObject;
                 ObjectDetected?.Invoke(true, interactionObject.Context);
             }
         }
@@ -42,11 +44,11 @@ public class Hand : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_interactionObject == null)
+        if (_interactiveObject == null)
             return;
 
-        ObjectDetected?.Invoke(false, _interactionObject.Context);
-        _interactionObject = null;
+        ObjectDetected?.Invoke(false, _interactiveObject.Context);
+        _interactiveObject = null;
     }
 
     private void OnEnable() => _input.Player.Interact.performed += Interaction;
