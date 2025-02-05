@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class StateMachine : IStateSwitcher
 {
@@ -22,8 +21,6 @@ public class StateMachine : IStateSwitcher
         _currentState.Exit();
         _currentState = state;
         _currentState.Enter();
-
-        Debug.Log(_currentState.ToString());
     }
 
     public void Update() => _currentState.Update();

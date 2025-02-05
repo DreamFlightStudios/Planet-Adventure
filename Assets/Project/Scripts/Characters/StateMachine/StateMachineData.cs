@@ -3,27 +3,24 @@ using UnityEngine;
 
 public class StateMachineData
 {
-    public float Speed
+    public float CurrentSpeed
     {
-        get => _speed;
+        get => _currentSpeed;
         set
         {
             if (value < 0) 
                 throw new ArgumentOutOfRangeException(nameof(value));
 
-            _speed = value;
+            _currentSpeed = value;
         }
     }
 
-    public Vector3 Velocity;
     public Vector2 SmoothInput;
-
-    public bool IsRunning;
+    public bool IsSprinting;
     public bool IsWalking;
-    public bool IsIdling;
     public bool IsJumping;
     public bool IsFalling;
     public bool IsCrouching;
 
-    private float _speed;
+    private float _currentSpeed;
 }

@@ -6,18 +6,18 @@ public class SprintingState : GroundedState
     {
         base.Enter();
 
-        Data.IsRunning = true;
-        Data.Speed = Config.RuningSpeed;
+        Data.IsSprinting = true;
+        Data.CurrentSpeed = Config.MovementInfo.RuningSpeed;
 
-        View.OnRunning(true);
+        View.SetBoolParametrValue(AgentAnimationKey.Sprinting, true);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        Data.IsRunning = false;
-        View.OnRunning(false);
+        Data.IsSprinting = false;
+        View.SetBoolParametrValue(AgentAnimationKey.Sprinting, false);
     }
 
     public override void Update()

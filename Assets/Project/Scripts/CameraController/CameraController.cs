@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
         _xRotation -= input.y;
         _yRotation += input.x;
 
-        _xRotation = Mathf.Clamp(_xRotation, _config._minMaxRotationX.x, _config._minMaxRotationX.y);
+        _xRotation = Mathf.Clamp(_xRotation, _config.MinMaxRotationX.x, _config.MinMaxRotationX.y);
         transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
     }
 }

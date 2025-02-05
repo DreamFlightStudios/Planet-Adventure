@@ -10,9 +10,8 @@ public class PlayerInput : MonoBehaviour, IAgentMovementInput
 
     public event Action<bool> SprintInput;
     public event Action<bool> JumpInput;
-    public event Action<bool> CrouchingInput;
+    public event Action<bool> CrouchInput;
 
-    [SerializeField] private AgentConfig _config;
     private InputSystem _input;
 
     [Inject]
@@ -21,17 +20,14 @@ public class PlayerInput : MonoBehaviour, IAgentMovementInput
     private void OnLook(InputAction.CallbackContext context) 
         => LookInput = context.ReadValue<Vector2>();
 
-    private void FixedUpdate()
-    {
-        MovementInput = _input.Player.Move.ReadValue<Vector2>();
-    }
+    private void OnMove(InputAction.CallbackContext context) 
+        => MovementInput = context.ReadValue<Vector2>();
 
     private void OnSprint(InputAction.CallbackContext context) 
         => SprintInput?.Invoke(context.ReadValueAsButton());
 
     private void OnCrouch(InputAction.CallbackContext context)
-        => CrouchingInput?.Invoke(context.ReadValueAsButton());
-
+        => CrouchInput?.Invoke(context.ReadValueAsButton());
 
     private void OnJump(InputAction.CallbackContext context)
         => JumpInput?.Invoke(context.ReadValueAsButton());
@@ -39,25 +35,29 @@ public class PlayerInput : MonoBehaviour, IAgentMovementInput
 
     private void OnEnable()
     {
+        _input.Player.Move.performed += OnMove;
         _input.Player.Sprint.performed += OnSprint;
         _input.Player.Look.performed += OnLook;
-        _input.Player.Crouch.performed += OnCrouch;
 
+        _input.Player.Move.canceled += OnMove;
         _input.Player.Sprint.canceled += OnSprint;
         _input.Player.Look.canceled += OnLook;
 
+        _input.Player.Crouch.performed += OnCrouch;
         _input.Player.Jump.performed += OnJump;
     }
 
     private void OnDisable()
     {
+        _input.Player.Move.performed -= OnMove;
         _input.Player.Sprint.performed -= OnSprint;
         _input.Player.Look.performed -= OnLook;
-        _input.Player.Crouch.performed -= OnCrouch;
 
+        _input.Player.Move.canceled -= OnMove;
         _input.Player.Sprint.canceled -= OnSprint;
         _input.Player.Look.canceled -= OnLook;
 
+        _input.Player.Crouch.performed -= OnCrouch;
         _input.Player.Jump.performed -= OnJump;
     }
 }

@@ -1,20 +1,21 @@
 using UnityEngine;
+
 public class AgentController : MonoBehaviour
 {
-    [field: SerializeField] public AgentView View { get; private set; }
     [field: SerializeField] public AgentConfig Config { get; private set; }
     [field: SerializeField] public GroundChecker GroundChecker { get; private set; }
+    [field: SerializeField] public AgentView View { get; private set; }
 
     public AgentRoatationStrategy RotationStrategy { get; private set; }
+    public IAgentMover AgentMover { get; private set; }
     public IAgentMovementInput Input { get; private set; }
-    public Rigidbody CharacterController { get; private set; }
 
     private StateMachine _stateMachine;
 
     private void Awake()
     {
-        CharacterController = GetComponent<Rigidbody>();
         RotationStrategy = GetComponent<AgentRoatationStrategy>();
+        AgentMover = GetComponent<IAgentMover>();
         Input = GetComponent<IAgentMovementInput>();
     }
 

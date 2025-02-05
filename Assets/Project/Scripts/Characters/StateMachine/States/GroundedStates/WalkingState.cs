@@ -7,7 +7,7 @@ public class WalkingState : GroundedState
         base.Enter();
 
         Data.IsWalking = true;
-        Data.Speed = Config.WalkingSpeed;
+        Data.CurrentSpeed = Config.MovementInfo.WalkingSpeed;
     }
 
     public override void Exit()

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdd8d50afc4a17498e96bcda0f3c19a, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  <WalkingSpeed>k__BackingField: 150
-  <RuningSpeed>k__BackingField: 600
-  <CrouchingSpeed>k__BackingField: 100
-  <JumpForce>k__BackingField: 600
-  <RotationSpeed>k__BackingField: 0.25
-  <AnimationAccelerationAcceleration>k__BackingField: 0
-  <Acceleration>k__BackingField: 6
+  MovementInfo:
+    <WalkingSpeed>k__BackingField: 150
+    <RuningSpeed>k__BackingField: 300
+    <CrouchingSpeed>k__BackingField: 100
+    <RotationSpeed>k__BackingField: 0.3
+    <Acceleration>k__BackingField: 5
+    <JumpForce>k__BackingField: 400

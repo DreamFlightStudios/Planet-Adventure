@@ -7,9 +7,9 @@ public class CrouchingState : GroundedState
         base.Enter();
 
         Data.IsCrouching = true;
-        Data.Speed = Config.CrouchingSpeed;
+        Data.CurrentSpeed = Config.MovementInfo.CrouchingSpeed;
 
-        View.OnCrouching(true);
+        View.SetBoolParametrValue(AgentAnimationKey.Crouching, true);
     }
 
     public override void Exit()
@@ -17,6 +17,6 @@ public class CrouchingState : GroundedState
         base.Exit();
 
         Data.IsCrouching = false;
-        View.OnCrouching(false);
+        View.SetBoolParametrValue(AgentAnimationKey.Crouching, false);
     }
 }

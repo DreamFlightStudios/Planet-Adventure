@@ -7,7 +7,7 @@ public class FallingState : AirbornState
         base.Enter();
 
         Data.IsFalling = true;
-        View.OnFalling(true);
+        View.SetBoolParametrValue(AgentAnimationKey.Falling, true);
     }
 
     public override void Exit()
@@ -15,7 +15,7 @@ public class FallingState : AirbornState
         base.Exit();
 
         Data.IsFalling = false;
-        View.OnFalling(false);
+        View.SetBoolParametrValue(AgentAnimationKey.Falling, false);
     }
 
     public override void Update()
@@ -23,8 +23,6 @@ public class FallingState : AirbornState
         base.Update();
 
         if (IsGrounded)
-        {
             StateSwitcher.SwitchState<WalkingState>();
-        }
     }
 }

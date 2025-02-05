@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class JumpingState : GroundedState
 {
     public JumpingState(IStateSwitcher switcher, StateMachineData data, AgentController agent) : base(switcher, data, agent) { }
@@ -7,7 +5,8 @@ public class JumpingState : GroundedState
     public override void Enter()
     {
         base.Enter();
-        CharacterController.AddForce(Transform.up * Config.JumpForce, ForceMode.Impulse);
+
+        AgentMover.Jump(Config.MovementInfo.JumpForce);
         Data.IsJumping = true;
     }
 

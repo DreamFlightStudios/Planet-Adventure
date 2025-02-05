@@ -5,14 +5,14 @@ public abstract class GroundedState : MovementState
     public override void Enter()
     {
         Input.SprintInput += OnSprintKeyPressed;
-        Input.CrouchingInput += OnCrouchKeyPressed;
+        Input.CrouchInput += OnCrouchKeyPressed;
         Input.JumpInput += OnJumpKeyPressed;
     }
 
     public override void Exit()
     {
         Input.SprintInput -= OnSprintKeyPressed;
-        Input.CrouchingInput -= OnCrouchKeyPressed;
+        Input.CrouchInput -= OnCrouchKeyPressed;
         Input.JumpInput -= OnJumpKeyPressed;
     }
 
@@ -20,13 +20,13 @@ public abstract class GroundedState : MovementState
     {
         base.Update();
 
-        if (!IsGrounded)
+        if (IsGrounded == false)
             StateSwitcher.SwitchState<FallingState>();
     }
 
     private void OnSprintKeyPressed(bool isPressed)
     {
-        if (isPressed && Data.IsRunning == false && Input.MovementInput.sqrMagnitude > 0.0f)
+        if (isPressed && Data.IsSprinting == false && Input.MovementInput.sqrMagnitude > 0.0f)
             StateSwitcher.SwitchState<SprintingState>();
         else 
             StateSwitcher.SwitchState<WalkingState>();
@@ -34,13 +34,15 @@ public abstract class GroundedState : MovementState
 
     private void OnJumpKeyPressed(bool isPressed)
     {
-        if (isPressed && Data.IsJumping == false)
+        if (isPressed && Data.IsCrouching == true)
+            StateSwitcher.SwitchState<MovementState>();
+        else if (isPressed && Data.IsJumping == false)
             StateSwitcher.SwitchState<JumpingState>();
     }
 
     private void OnCrouchKeyPressed(bool isPressed)
     {
-        if (Data.IsRunning) return;
+        if (Data.IsSprinting) return;
 
         if (isPressed && Data.IsCrouching == false)
             StateSwitcher.SwitchState<CrouchingState>();

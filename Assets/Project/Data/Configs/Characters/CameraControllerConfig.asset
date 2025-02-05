@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a074b74d37e61445bbb0445ec0e5fe8, type: 3}
   m_Name: CameraControllerConfig
   m_EditorClassIdentifier: 
+  <MinMaxRotationX>k__BackingField: {x: -85, y: 85}
   <Sensivity>k__BackingField: 120
-  <_minMaxRotationX>k__BackingField: {x: -85, y: 85}
