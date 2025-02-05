@@ -12,6 +12,9 @@ public class AgentView : MonoBehaviour
 
     public void SetBoolParametrValue(AgentAnimationKey key, bool state) 
         => _animator.SetBool(key.ToString(), state);
+
+    public void InvokeTrigger(AgentAnimationKey key) 
+        => _animator.SetTrigger(key.ToString());
 }
 
 public enum AgentAnimationKey
@@ -21,4 +24,5 @@ public enum AgentAnimationKey
     Crouching,
     Falling,
     MovementVelocity,
+    Interaction,
 }

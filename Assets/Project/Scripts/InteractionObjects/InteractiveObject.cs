@@ -4,9 +4,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
-    [field: SerializeField] public string Context { get; private set; }
-    [field: SerializeField] public AudioClip InteractionSound { get; private set; }
     [field: SerializeField] public UnityEvent Interacted { get; private set; }
+    [field: SerializeField] public string Context { get; private set; }
     [field: SerializeField] public bool CanInteract { get; protected set; }
 
     [SerializeField] private bool _disableOnInteraction;
