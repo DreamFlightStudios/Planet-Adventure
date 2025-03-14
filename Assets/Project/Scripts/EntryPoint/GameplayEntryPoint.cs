@@ -12,5 +12,8 @@ public class GameplayEntryPoint : MonoBehaviour
         gameplayUI.Initialize(sceneLoader, input);
 
         rootUI.AttachSceneUI(gameplayUI.gameObject);
+
+        Debug.Log(FindAnyObjectByType<StorableContainer>());
+
     }
 }

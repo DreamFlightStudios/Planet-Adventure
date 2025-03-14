@@ -7,6 +7,7 @@ public class PauseMenuUI : MonoBehaviour
     [SerializeField] private Button _backMenuButton;
     [SerializeField] private GameObject _pauseMenu;
 
+    private SceneLoader _sceneLoader;
     private InputSystem _input;
 
     private void Awake() 
@@ -15,8 +16,10 @@ public class PauseMenuUI : MonoBehaviour
     public void Initialize(SceneLoader sceneLoader, InputSystem input)
     {
         _input = input;
+        _sceneLoader = sceneLoader;
+
         _input.UI.Pause.performed += Show;
-        _backMenuButton.onClick.AddListener(sceneLoader.LoadMainMenu);
+        _backMenuButton.onClick.AddListener(OnBackMenuButonClicked);
     }
 
     private void Show(InputAction.CallbackContext context)
@@ -26,6 +29,12 @@ public class PauseMenuUI : MonoBehaviour
         _pauseMenu.SetActive(isPaused);
         Cursor.visible = isPaused;
         Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
+    private void OnBackMenuButonClicked()
+    {
+        _sceneLoader.SaveGameplayScene();
+        _sceneLoader.LoadMainMenu();
     }
 
     private void OnDestroy() 

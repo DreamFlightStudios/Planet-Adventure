@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenuPrefab: {fileID: 1832489322377204861, guid: 08c231c8dada3b04e865866bf764fd02, type: 3}
+  _createGamePopupPrefab: {fileID: 0}
 --- !u!4 &1878071350
 Transform:
   m_ObjectHideFlags: 0
