@@ -12,6 +12,12 @@ public class SceneLoader : MonoBehaviour
     private SaveLoadController _saveLoadController;
     private StorableContainer _stororableContainer;
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Q))
+            StartCoroutine(SaveGameplayData());
+    }
+
     [Inject]
     private void Construct(RootViewUI rootUI, SaveLoadController saveLoadController)
     {
@@ -21,26 +27,55 @@ public class SceneLoader : MonoBehaviour
         _saveLoadController = saveLoadController;
     }
 
-    public void LoadGameplayScene(string saveName = null)
+    public void Initialize(StorableContainer storableContainer)
+    {
+        _stororableContainer = storableContainer;
+        StartCoroutine(LoadGameplayData(_saveLoadController.GetLastGameSave()));
+    }
+
+    public void LoadGameplayScene(LoadType loadType = LoadType.Default, string saveName = null)
     {
         LoadStarted?.Invoke();
 
-        StartCoroutine(LoadScene(SceneID.Scene1));
+        if (loadType == LoadType.CreateGame)
+            _saveLoadController.CreateGameSave();
+        else
+            _saveLoadController.GetGameSave(saveName);
 
-        var data = _saveLoadController.GetGameSave(saveName);
+        StartCoroutine(LoadScene(SceneID.Scene1));
+        LoadFinished?.Invoke();
+    }
+
+    public IEnumerator LoadGameplayData(GameData data)
+    {
+        LoadStarted?.Invoke();
 
         if (data != null)
         {
             foreach (var interactiveObject in _stororableContainer.InteractiveObjects)
             {
-                Debug.Log("JK" + interactiveObject.Id);
                 if (data.InteractiveObjectsData.ContainsKey(interactiveObject.Id))
                 {
                     interactiveObject.SetData(data.InteractiveObjectsData[interactiveObject.Id]);
-                    Debug.Log("Loaded");
+                    yield return null;
                 }
             }
         }
+
+        LoadFinished?.Invoke();
+    }
+
+    public IEnumerator SaveGameplayData()
+    {
+        LoadStarted?.Invoke();
+
+        var data = new GameData();
+        foreach (var interactiveObject in _stororableContainer.InteractiveObjects)
+        {
+            data.InteractiveObjectsData.Add(interactiveObject.Id, interactiveObject.GetData());
+            yield return null;
+        }
+        _saveLoadController.SaveGameData(data);
 
         LoadFinished?.Invoke();
     }
@@ -54,22 +89,15 @@ public class SceneLoader : MonoBehaviour
         LoadFinished?.Invoke();
     }
 
-    public void SaveGameplayScene()
-    {
-        GameData data = new GameData();
-
-        foreach (var interactiveObject in _stororableContainer.InteractiveObjects)
-        {
-            data.InteractiveObjectsData.Add(interactiveObject.Id, interactiveObject.GetData());
-            Debug.Log("Saved");
-        }
-
-        _saveLoadController.SaveGameData(data);
-    }
-
     private IEnumerator LoadScene(SceneID id)
     {
         yield return SceneManager.LoadSceneAsync((int)id);
         yield return new WaitForSecondsRealtime(1f);
     }
+}
+
+public enum LoadType
+{
+    CreateGame,
+    Default
 }

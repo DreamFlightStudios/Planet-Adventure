@@ -1,4 +1,6 @@
-﻿public class SaveLoadController
+﻿using System;
+
+public class SaveLoadController
 {
     private const string UserDataPath = "UserData";
 
@@ -15,43 +17,31 @@
         UserData = Service.Load<UserData>(UserDataPath);
     }
 
-    public void SaveUserData()
-        => Service.Save(UserDataPath, UserData);
+    public void SaveUserData() => Service.Save(UserDataPath, UserData);
 
-    public GameData GetGameSave(string saveName = null)
+    public GameData CreateGameSave()
     {
-        if (saveName != null)
-        {
-            UserData.LastSaveName = saveName;
-            SaveUserData();
+        var saveName = DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss");
 
-            return 
-                Service.Load<GameData>(saveName);
-        }
-        else
-        {
-            if (UserData.LastSaveName != null)
-                return Service.Load<GameData>(UserData.LastSaveName);
+        var data = new GameData();
+        Service.Save(saveName, data);
 
-            return null;
-        }
+        UserData.LastSaveName = saveName;
+        SaveUserData();
+
+        return data;
     }
 
-    public void SaveGameData(GameData data, string saveName = null)
+    public GameData GetGameSave(string saveName)
     {
-        if (saveName != null)
-        {
-            UserData.LastSaveName = saveName;
+        UserData.LastSaveName = saveName;
+        SaveUserData();
 
-            Service.Save(saveName, data);
-            SaveUserData();
-        }
-        else
-        {
-            if (UserData.LastSaveName == null)
-                UserData.LastSaveName = "New Save";
-
-            Service.Save(UserData.LastSaveName, data);
-        }
+        return 
+            Service.Load<GameData>(saveName);
     }
+
+    public GameData GetLastGameSave() => Service.Load<GameData>(UserData.LastSaveName);
+
+    public void SaveGameData(GameData data) => Service.Save(UserData.LastSaveName, data);
 }

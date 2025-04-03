@@ -1073,6 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseMenuPrefab: {fileID: 8744468377356060419, guid: 12960f67fc6fe3a428eaa12171c521f2, type: 3}
+  _storableContainer: {fileID: 2048915749}
 --- !u!4 &2045897803
 Transform:
   m_ObjectHideFlags: 0

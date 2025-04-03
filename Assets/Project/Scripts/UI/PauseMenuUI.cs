@@ -31,11 +31,8 @@ public class PauseMenuUI : MonoBehaviour
         Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    private void OnBackMenuButonClicked()
-    {
-        _sceneLoader.SaveGameplayScene();
-        _sceneLoader.LoadMainMenu();
-    }
+    private void OnBackMenuButonClicked() 
+        => _sceneLoader.LoadMainMenu();
 
     private void OnDestroy() 
         => _input.UI.Pause.performed -= Show;

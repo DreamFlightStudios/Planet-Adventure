@@ -10,9 +10,8 @@ public class InteractiveObject : MonoBehaviour, IInteractive, IStorable<Interact
 
     [SerializeField] private bool _disableOnInteraction;
     [SerializeField] private bool _multipleInteractions;
-    private InteractiveObjectData _data;
 
-    private void Awake() => _data = new InteractiveObjectData();
+    private InteractiveObjectData _data = new();
 
     public virtual void Interaction()
     {

@@ -1,10 +1,10 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CreateGamePopup : MonoBehaviour
 {
-    [SerializeField] private string _defaultSaveName = "New Game";
     [SerializeField] private Button _confirmButton;
     [SerializeField] private Button _cancelButton;
     [SerializeField] private TMP_Text _inputField;
@@ -21,11 +21,7 @@ public class CreateGamePopup : MonoBehaviour
         => _sceneLoader = sceneLoader;
 
     private void OnConfirmButtonClicked() 
-        => _sceneLoader.LoadGameplayScene(_inputField.text);
+        => _sceneLoader.LoadGameplayScene(LoadType.CreateGame);
 
-    private void OnCancelButtonClicked()
-    {
-        _inputField.text = _defaultSaveName;
-        gameObject.SetActive(false);
-    }
+    private void OnCancelButtonClicked() => gameObject.SetActive(false);
 }
