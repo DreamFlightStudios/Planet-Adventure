@@ -3,13 +3,13 @@ using UnityEngine;
 public class RootViewUI : MonoBehaviour
 {
     [SerializeField] private Transform _uiSceneContainer;
-    [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private LoadingScreenUI _loadingScreen;
 
     private void Awake() => ShowLoadingScreen();
 
-    public void ShowLoadingScreen() => _loadingScreen.SetActive(true);
+    public void ShowLoadingScreen() => _loadingScreen.OnLoadStarted();
 
-    public void HideLoadingScreen() => _loadingScreen.SetActive(false);
+    public void HideLoadingScreen() => _loadingScreen.OnLoadFinished();
 
     public void AttachSceneUI(GameObject sceneUI)
     {

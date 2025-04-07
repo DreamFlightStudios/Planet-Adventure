@@ -32,7 +32,7 @@ public class PauseMenuUI : MonoBehaviour
     }
 
     private void OnBackMenuButonClicked() 
-        => _sceneLoader.LoadMainMenu();
+        => _sceneLoader.ChangeScene("MainMenu");
 
     private void OnDestroy() 
         => _input.UI.Pause.performed -= Show;

@@ -4,8 +4,8 @@ public class SaveLoadController
 {
     private const string UserDataPath = "UserData";
 
-    public UserData UserData { get; private set; }
     private readonly IStorageService Service;
+    public UserData UserData { get; private set; }
 
     public SaveLoadController()
     {
@@ -19,29 +19,24 @@ public class SaveLoadController
 
     public void SaveUserData() => Service.Save(UserDataPath, UserData);
 
-    public GameData CreateGameSave()
+    public void InitializeGameplayLevel(LevelData data)
     {
-        var saveName = DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss");
+        var levelsData = UserData.LevelsData;
 
-        var data = new GameData();
-        Service.Save(saveName, data);
+        if (levelsData.ContainsKey(data.LevelId))
+            return;
 
-        UserData.LastSaveName = saveName;
-        SaveUserData();
-
-        return data;
+        levelsData.Add(data.LevelId, data.IsUnlocked);
     }
 
-    public GameData GetGameSave(string saveName)
+    public void UnlockGameplayLevel(string LevelId)
     {
-        UserData.LastSaveName = saveName;
-        SaveUserData();
+        var levelsData = UserData.LevelsData;
 
-        return 
-            Service.Load<GameData>(saveName);
+        if (levelsData.ContainsKey(LevelId))
+        {
+            levelsData[LevelId] = true;
+            SaveUserData();
+        }
     }
-
-    public GameData GetLastGameSave() => Service.Load<GameData>(UserData.LastSaveName);
-
-    public void SaveGameData(GameData data) => Service.Save(UserData.LastSaveName, data);
 }

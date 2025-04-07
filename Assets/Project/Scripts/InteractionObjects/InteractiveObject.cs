@@ -1,17 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractiveObject : MonoBehaviour, IInteractive, IStorable<InteractiveObjectData>
+public class InteractiveObject : MonoBehaviour, IInteractive
 {
     [field: SerializeField] public UnityEvent Interacted { get; private set; }
     [field: SerializeField] public string Context { get; private set; }
     [field: SerializeField] public bool CanInteract { get; protected set; }
-    public string Id => gameObject.name.ToString();
 
     [SerializeField] private bool _disableOnInteraction;
     [SerializeField] private bool _multipleInteractions;
-
-    private InteractiveObjectData _data = new();
 
     public virtual void Interaction()
     {
@@ -19,22 +16,8 @@ public class InteractiveObject : MonoBehaviour, IInteractive, IStorable<Interact
             gameObject.SetActive(false);
 
         if (_multipleInteractions == false)
-            _data.CanInteract = CanInteract = false;
+            CanInteract = false;
 
         Interacted?.Invoke();
-    }
-
-    public void SetData(InteractiveObjectData data)
-    {
-        _data.CanInteract = CanInteract = data.CanInteract;
-        _data.IsActive = data.IsActive;
-        gameObject.SetActive(data.IsActive);
-    }
-
-    public InteractiveObjectData GetData()
-    {
-        _data.CanInteract = CanInteract;
-        _data.IsActive = gameObject.activeSelf;
-        return _data;
     }
 }
