@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody))]
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
     [field: SerializeField] public UnityEvent Interacted { get; private set; }

@@ -11,6 +11,6 @@ public class GameEntryPoint : MonoBehaviour
         var rootObjects = Instantiate(_rootObjects);
         DontDestroyOnLoad(rootObjects);
 
-        sceneLoader.LoadMainMenu();
+        sceneLoader.ChangeScene("MainMenu");
     }
 }

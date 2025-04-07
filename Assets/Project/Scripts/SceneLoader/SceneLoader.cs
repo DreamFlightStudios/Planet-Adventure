@@ -6,8 +6,8 @@ using Zenject;
 
 public class SceneLoader : MonoBehaviour
 {
-    private event Action LoadStarted;
-    private event Action LoadFinished;
+    public event Action LoadStarted;
+    public event Action LoadFinished;
 
     [Inject]
     private void Construct(RootViewUI rootUI)
@@ -16,17 +16,14 @@ public class SceneLoader : MonoBehaviour
         LoadFinished += rootUI.HideLoadingScreen;
     }
 
-    public void LoadGameplayScene() => StartCoroutine(LoadScene(SceneID.Scene1));
+    public void ChangeScene(string sceneName) 
+        => StartCoroutine(LoadScene(sceneName));
 
-    public void LoadMainMenu() => StartCoroutine(LoadScene(SceneID.MainMenu));
-
-    private IEnumerator LoadScene(SceneID id)
+    private IEnumerator LoadScene(string sceneName)
     {
         LoadStarted?.Invoke();
-
-        yield return SceneManager.LoadSceneAsync((int)id);
         yield return new WaitForSecondsRealtime(1f);
-
+        yield return SceneManager.LoadSceneAsync(sceneName);
         LoadFinished?.Invoke();
     }
 }

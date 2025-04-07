@@ -16,6 +16,6 @@ MonoBehaviour:
     <WalkingSpeed>k__BackingField: 150
     <RuningSpeed>k__BackingField: 300
     <CrouchingSpeed>k__BackingField: 100
-    <RotationSpeed>k__BackingField: 0.3
+    <RotationSpeed>k__BackingField: 0.2
     <Acceleration>k__BackingField: 5
     <JumpForce>k__BackingField: 400
