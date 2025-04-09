@@ -11,13 +11,15 @@ public class RootViewUI : MonoBehaviour
 
     public void HideLoadingScreen() => _loadingScreen.OnLoadFinished();
 
-    public void AttachSceneUI(GameObject sceneUI)
+    public void AttachSceneUI(GameObject sceneUI, AttachType type = AttachType.Default)
     {
-        ClearSceneUI();
+        if (type == AttachType.AllClear)
+            ClearSceneUI();
+
         sceneUI.transform.SetParent(_uiSceneContainer, false);
     }
 
-    private void ClearSceneUI()
+    public void ClearSceneUI()
     {
         var childCount = _uiSceneContainer.childCount;
 
@@ -26,4 +28,10 @@ public class RootViewUI : MonoBehaviour
             Destroy(_uiSceneContainer.GetChild(i).gameObject);
         }
     }
+}
+
+public enum AttachType
+{
+    Default,
+    AllClear
 }

@@ -11,6 +11,6 @@ public class MainMenuEntryPoint : MonoBehaviour
         var mainMenu = Instantiate(_mainMenuPrefab);
         mainMenu.Initialize(saveLoadController, sceneLoader);
 
-        rootUI.AttachSceneUI(mainMenu.gameObject);
+        rootUI.AttachSceneUI(mainMenu.gameObject, AttachType.AllClear);
     }
 }
