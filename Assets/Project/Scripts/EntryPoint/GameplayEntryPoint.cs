@@ -3,14 +3,14 @@ using Zenject;
 
 public class GameplayEntryPoint : MonoBehaviour
 {
-    [SerializeField] private PauseMenuUI _pauseMenuPrefab;
-
     [Inject]
-    private void Construct(RootViewUI rootUI, SceneLoader sceneLoader, InputSystem input)
+    private void Construct(RootViewUI rootUI, PauseMenuUI pauseMenuUI, WarningIndicator warningIndicatorUI, SceneLoader sceneLoader, InputSystem input)
     {
-        var gameplayUI = Instantiate(_pauseMenuPrefab);
-        gameplayUI.Initialize(sceneLoader, input);
+        pauseMenuUI.Initialize(sceneLoader, input);
+        warningIndicatorUI.Initialize(input);
 
-        rootUI.AttachSceneUI(gameplayUI.gameObject);
+        rootUI.ClearSceneUI();
+        rootUI.AttachSceneUI(pauseMenuUI.gameObject);
+        rootUI.AttachSceneUI(warningIndicatorUI.gameObject);
     }
 }

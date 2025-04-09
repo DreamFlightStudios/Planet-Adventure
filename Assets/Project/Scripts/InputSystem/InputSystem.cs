@@ -207,6 +207,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuestInfo"",
+                    ""type"": ""Button"",
+                    ""id"": ""b29f7ba5-0471-46de-9b39-36ac7ddc8cd2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,6 +227,17 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de6f3877-6cc2-4f3f-8de6-521549bb937a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuestInfo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -237,6 +257,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+        m_UI_QuestInfo = m_UI.FindAction("QuestInfo", throwIfNotFound: true);
     }
 
     ~@InputSystem()
@@ -391,11 +412,13 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Pause;
+    private readonly InputAction m_UI_QuestInfo;
     public struct UIActions
     {
         private @InputSystem m_Wrapper;
         public UIActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
+        public InputAction @QuestInfo => m_Wrapper.m_UI_QuestInfo;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -408,6 +431,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @QuestInfo.started += instance.OnQuestInfo;
+            @QuestInfo.performed += instance.OnQuestInfo;
+            @QuestInfo.canceled += instance.OnQuestInfo;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -415,6 +441,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @QuestInfo.started -= instance.OnQuestInfo;
+            @QuestInfo.performed -= instance.OnQuestInfo;
+            @QuestInfo.canceled -= instance.OnQuestInfo;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -444,5 +473,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnQuestInfo(InputAction.CallbackContext context);
     }
 }

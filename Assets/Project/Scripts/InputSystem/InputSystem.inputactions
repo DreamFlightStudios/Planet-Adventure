@@ -185,6 +185,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "QuestInfo",
+                    "type": "Button",
+                    "id": "b29f7ba5-0471-46de-9b39-36ac7ddc8cd2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -196,6 +205,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de6f3877-6cc2-4f3f-8de6-521549bb937a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuestInfo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
