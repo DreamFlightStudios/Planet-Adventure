@@ -1,7 +1,6 @@
-using UnityEngine;
 using UnityEngine.Events;
 
-public class QuestTaskData : MonoBehaviour
+public class QuestTaskData
 {
     private readonly string Description;
 
