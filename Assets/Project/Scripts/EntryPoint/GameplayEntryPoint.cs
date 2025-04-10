@@ -4,13 +4,14 @@ using Zenject;
 public class GameplayEntryPoint : MonoBehaviour
 {
     [Inject]
-    private void Construct(RootViewUI rootUI, PauseMenuUI pauseMenuUI, WarningIndicator warningIndicatorUI, SceneLoader sceneLoader, InputSystem input)
+    private void Construct(RootViewUI rootUI, PauseMenuUI pauseMenuUI, WarningIndicator warningIndicatorUI, SubtilesUI subtiles, SceneLoader sceneLoader, InputSystem input)
     {
         pauseMenuUI.Initialize(sceneLoader, input);
         warningIndicatorUI.Initialize(input);
 
-        rootUI.ClearSceneUI();
-        rootUI.AttachSceneUI(pauseMenuUI.gameObject);
+        rootUI.ClearSceneUI(); 
         rootUI.AttachSceneUI(warningIndicatorUI.gameObject);
+        rootUI.AttachSceneUI(subtiles.gameObject);
+        rootUI.AttachSceneUI(pauseMenuUI.gameObject);
     }
 }
