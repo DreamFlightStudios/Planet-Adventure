@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PauseMenuUI : MonoBehaviour
 {
     [SerializeField] private Button _backMenuButton;
+    [SerializeField] private Button _settingsButton;
     [SerializeField] private GameObject _pauseMenu;
 
     private SceneLoader _sceneLoader;
@@ -13,13 +14,14 @@ public class PauseMenuUI : MonoBehaviour
     private void Awake() 
         => _pauseMenu.SetActive(false);
 
-    public void Initialize(SceneLoader sceneLoader, InputSystem input)
+    public void Initialize(SceneLoader sceneLoader, InputSystem input, RootViewUI rootViewUI)
     {
         _input = input;
         _sceneLoader = sceneLoader;
 
         _input.UI.Pause.performed += Show;
         _backMenuButton.onClick.AddListener(OnBackMenuButonClicked);
+        _settingsButton.onClick.AddListener(rootViewUI.ShowSettingsMenu);
     }
 
     private void Show(InputAction.CallbackContext context)
@@ -34,6 +36,10 @@ public class PauseMenuUI : MonoBehaviour
     private void OnBackMenuButonClicked() 
         => _sceneLoader.ChangeScene("MainMenu");
 
-    private void OnDestroy() 
-        => _input.UI.Pause.performed -= Show;
+    private void OnDestroy()
+    {
+        _input.UI.Pause.performed -= Show;
+        _backMenuButton.onClick.RemoveAllListeners();
+        _settingsButton.onClick.RemoveAllListeners();
+    }
 }

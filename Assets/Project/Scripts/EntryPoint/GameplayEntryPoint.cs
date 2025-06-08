@@ -6,7 +6,7 @@ public class GameplayEntryPoint : MonoBehaviour
     [Inject]
     private void Construct(RootViewUI rootUI, PauseMenuUI pauseMenuUI, WarningIndicator warningIndicatorUI, SubtilesUI subtiles, SceneLoader sceneLoader, InputSystem input)
     {
-        pauseMenuUI.Initialize(sceneLoader, input);
+        pauseMenuUI.Initialize(sceneLoader, input, rootUI);
         warningIndicatorUI.Initialize(input);
 
         rootUI.ClearSceneUI(); 

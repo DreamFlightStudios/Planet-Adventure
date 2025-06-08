@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 674082237248766846}
   - component: {fileID: 4103405716922052464}
   m_Layer: 5
-  m_Name: Value
+  m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -734,6 +734,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3955071726347157139}
   - component: {fileID: 4962823217499951901}
+  - component: {fileID: 6828740560038066179}
   m_Layer: 5
   m_Name: SettingsValueParametrPrefab
   m_TagString: Untagged
@@ -769,3 +770,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8615849054753757936}
   m_CullTransparentMesh: 1
+--- !u!114 &6828740560038066179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615849054753757936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7e34bf31d16a3499cb87ec3a06e03f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 3754785546314251626}
+  _counter: {fileID: 4103405716922052464}

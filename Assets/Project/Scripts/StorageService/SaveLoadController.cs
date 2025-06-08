@@ -1,6 +1,4 @@
-﻿using System;
-
-public class SaveLoadController
+﻿public class SaveLoadController
 {
     private const string UserDataPath = "UserData";
 

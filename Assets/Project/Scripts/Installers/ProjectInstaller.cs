@@ -10,11 +10,11 @@ public class ProjectInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        var rootViewUI = Container.InstantiatePrefabForComponent<RootViewUI>(_rootUI);
-        Container.Bind<RootViewUI>().FromInstance(rootViewUI).AsSingle();
-
         var saveLoadController = new SaveLoadController();
         Container.Bind<SaveLoadController>().FromInstance(saveLoadController).AsSingle();
+
+        var rootViewUI = Container.InstantiatePrefabForComponent<RootViewUI>(_rootUI);
+        Container.Bind<RootViewUI>().FromInstance(rootViewUI).AsSingle();
 
         var sceneLoader = Container.InstantiatePrefabForComponent<SceneLoader>(_sceneLoader);
         Container.Bind<SceneLoader>().FromInstance(sceneLoader).AsSingle();
