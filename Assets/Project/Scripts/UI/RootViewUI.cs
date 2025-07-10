@@ -16,9 +16,15 @@ public class RootViewUI : MonoBehaviour
 
     public void HideLoadingScreen() => _loadingScreen.OnLoadFinished();
 
-    public void ShowSettingsMenu() => _settingsMenu.OnShowButtonClicked();
+    public void ShowSettingsMenu()
+    {
+        //_settingsMenu.OnShowButtonClicked();
+    }
 
-    public void HideSettingsMenu() => _settingsMenu.OnShowButtonClicked();
+    public void HideSettingsMenu()
+    {
+        //_settingsMenu.OnShowButtonClicked();
+    }
 
     public void AttachSceneUI(GameObject sceneUI, AttachType type = AttachType.Default)
     {

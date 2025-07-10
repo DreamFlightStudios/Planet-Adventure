@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164b278c9af76f140aef4e0b904637dc, type: 3}
   m_Name: DefaultConfigurationConfig
   m_EditorClassIdentifier: 
-  _sensivity: 120
-  _ambientVolume: 100
-  _dialoguesVolume: 100
-  _interfaceVolume: 100
-  _environmentVolume: 100
-  _musicVolume: 100
-  _graphics: 2
-  _subtitles: 1
+  <Sensivity>k__BackingField: 120
+  <AmbientVolume>k__BackingField: 100
+  <DialoguesVolume>k__BackingField: 80
+  <InterfaceVolume>k__BackingField: 60
+  <EnvironmentVolume>k__BackingField: 68
+  <MusicVolume>k__BackingField: 98
+  <GraphicsQuality>k__BackingField: 2
+  <IsSubtitlesOn>k__BackingField: 1
+  <IsFullScreenOn>k__BackingField: 1

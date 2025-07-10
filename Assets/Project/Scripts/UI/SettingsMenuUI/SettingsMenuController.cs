@@ -94,6 +94,8 @@ public class SettingsMenuController : MonoBehaviour
 
         Screen.fullScreen = userSetingsData.FullScreen;
         QualitySettings.SetQualityLevel((int)userSetingsData.Graphics);
+
+        Debug.Log("Parametrs");
     }
 
     private void ResetParametrs()
@@ -107,6 +109,8 @@ public class SettingsMenuController : MonoBehaviour
         _fullScreen.isOn = _defaultConfiguration.IsFullScreenOn;
         _subtitles.isOn = _defaultConfiguration.IsSubtitlesOn;
         SaveParametrs();
+
+        Debug.Log("ResetParametrs");
     }
 
     private void OnEnable() 
