@@ -10,20 +10,23 @@ public class PauseMenuUI : MonoBehaviour
     [SerializeField] private GameObject _pauseMenu;
 
     private SceneLoader _sceneLoader;
+    private RootContainerUI _rootUI;
     private InputSystem _input;
+
     private bool _isPaused;
 
     private void Awake() 
         => _pauseMenu.SetActive(false);
 
-    public void Initialize(SceneLoader sceneLoader, InputSystem input, RootViewUI rootViewUI)
+    public void Initialize(SceneLoader sceneLoader, InputSystem input, RootContainerUI rootUI)
     {
         _input = input;
         _sceneLoader = sceneLoader;
+        _rootUI = rootUI;
 
         _continueButton.onClick.AddListener(Show);
         _backMenuButton.onClick.AddListener(OnBackMenuButonClicked);
-        _settingsButton.onClick.AddListener(rootViewUI.ShowSettingsMenu);
+        _settingsButton.onClick.AddListener(rootUI.ShowSettingsMenu);
 
         _input.UI.Pause.performed += OnPausePerformed;
     }
@@ -35,12 +38,17 @@ public class PauseMenuUI : MonoBehaviour
         _pauseMenu.SetActive(_isPaused);
         Cursor.visible = _isPaused;
         Cursor.lockState = _isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+
+        Time.timeScale = _isPaused ? 0.0f : 1.0f;
     }
 
     private void OnPausePerformed(InputAction.CallbackContext context)
     {
-        if (_isPaused)
+        if (_isPaused && _rootUI.SettingsMenu.gameObject.activeSelf)
+        {
+            _rootUI.HideSettingsMenu();
             return;
+        }
 
         Show();
     }
@@ -48,11 +56,11 @@ public class PauseMenuUI : MonoBehaviour
     private void OnBackMenuButonClicked()
     {
         _sceneLoader.ChangeScene("MainMenu");
+        Time.timeScale = 1.0f;
 
         _continueButton.onClick.RemoveAllListeners();
         _backMenuButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.RemoveAllListeners();
-
         _input.UI.Pause.performed -= OnPausePerformed;
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Sensivity>k__BackingField: 120
   <AmbientVolume>k__BackingField: 100
-  <DialoguesVolume>k__BackingField: 80
+  <DialoguesVolume>k__BackingField: 30
   <InterfaceVolume>k__BackingField: 60
   <EnvironmentVolume>k__BackingField: 68
   <MusicVolume>k__BackingField: 98

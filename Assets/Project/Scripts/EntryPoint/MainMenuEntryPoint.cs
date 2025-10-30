@@ -6,7 +6,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     [SerializeField] private MainMenuUI _mainMenuPrefab;
 
     [Inject]
-    private void Construct(RootViewUI rootUI, SaveLoadController saveLoadController, SceneLoader sceneLoader)
+    private void Construct(RootContainerUI rootUI, SaveLoadController saveLoadController, SceneLoader sceneLoader)
     {
         var mainMenu = Instantiate(_mainMenuPrefab);
         mainMenu.Initialize(saveLoadController, sceneLoader, rootUI.SettingsMenu);

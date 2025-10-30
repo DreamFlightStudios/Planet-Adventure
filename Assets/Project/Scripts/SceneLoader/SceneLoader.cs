@@ -10,7 +10,7 @@ public class SceneLoader : MonoBehaviour
     public event Action LoadFinished;
 
     [Inject]
-    private void Construct(RootViewUI rootUI)
+    private void Construct(RootContainerUI rootUI)
     {
         LoadStarted += rootUI.ShowLoadingScreen;
         LoadFinished += rootUI.HideLoadingScreen;

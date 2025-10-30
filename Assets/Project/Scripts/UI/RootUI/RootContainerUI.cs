@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RootViewUI : MonoBehaviour
+public class RootContainerUI : MonoBehaviour
 {
     [SerializeField] private Transform _uiSceneContainer;
     [SerializeField] private LoadingScreenUI _loadingScreen;
@@ -17,6 +17,9 @@ public class RootViewUI : MonoBehaviour
 
     public void ShowSettingsMenu() 
         => SettingsMenu.OnShowButtonClicked();
+
+    public void HideSettingsMenu()
+        => SettingsMenu.OnHideButtonClicked();
 
     public void AttachSceneUI(GameObject sceneUI, AttachType type = AttachType.Default)
     {

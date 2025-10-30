@@ -62,6 +62,9 @@ public class SettingsMenuController : MonoBehaviour
     public void OnShowButtonClicked()
         => _view.ChangeState(true);
 
+    public void OnHideButtonClicked()
+    => _view.ChangeState(false);
+
     public void OnSaveButtonClicked()
     {
         _saveLoadController.UserData.SettingsData = new UserSettingsData(

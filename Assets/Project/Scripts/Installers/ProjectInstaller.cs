@@ -4,7 +4,7 @@ using Zenject;
 public class ProjectInstaller : MonoInstaller
 {
     [Header("Dependencies")]
-    [SerializeField] private RootViewUI _rootUI;
+    [SerializeField] private RootContainerUI _rootUI;
     [SerializeField] private Coroutines _coroutines;
     [SerializeField] private SceneLoader _sceneLoader;
 
@@ -13,8 +13,8 @@ public class ProjectInstaller : MonoInstaller
         var saveLoadController = new SaveLoadController();
         Container.Bind<SaveLoadController>().FromInstance(saveLoadController).AsSingle();
 
-        var rootViewUI = Container.InstantiatePrefabForComponent<RootViewUI>(_rootUI);
-        Container.Bind<RootViewUI>().FromInstance(rootViewUI).AsSingle();
+        var rootViewUI = Container.InstantiatePrefabForComponent<RootContainerUI>(_rootUI);
+        Container.Bind<RootContainerUI>().FromInstance(rootViewUI).AsSingle();
 
         var sceneLoader = Container.InstantiatePrefabForComponent<SceneLoader>(_sceneLoader);
         Container.Bind<SceneLoader>().FromInstance(sceneLoader).AsSingle();
