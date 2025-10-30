@@ -30,7 +30,7 @@ public class SettingsMenuView
     }
 
     public void ChangeState(bool isOpen) 
-        => Panel.gameObject.SetActive(isOpen);
+        => Panel.SetActive(isOpen);
 
     public void UpdateView(UserSettingsData userSetingsData)
     {

@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiSceneContainer: {fileID: 267625615757536509}
   _loadingScreen: {fileID: 4534297623157014676}
-  _settingsMenu: {fileID: 5670126888833683384}
+  <SettingsMenu>k__BackingField: {fileID: 5670126888833683384}
 --- !u!1 &9102059778416199243
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +553,10 @@ PrefabInstance:
     - target: {fileID: 34803698732877742, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 39784865101884750, guid: 4a1486641287868438ada30d00f627ae, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 59760306487892358, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -882,6 +886,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3122923981636335888, guid: 4a1486641287868438ada30d00f627ae, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 3290482218906168176, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_Name
       value: SettingsMenuUI
@@ -973,6 +981,14 @@ PrefabInstance:
     - target: {fileID: 4332195380525134590, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722635960238338464, guid: 4a1486641287868438ada30d00f627ae, type: 3}
+      propertyPath: m_Size
+      value: 0.55234027
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722635960238338464, guid: 4a1486641287868438ada30d00f627ae, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4727727344836688467, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1345,6 +1361,10 @@ PrefabInstance:
     - target: {fileID: 8683796120713563022, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822405220394646743, guid: 4a1486641287868438ada30d00f627ae, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 9029797267966493748, guid: 4a1486641287868438ada30d00f627ae, type: 3}
       propertyPath: m_AnchorMax.y

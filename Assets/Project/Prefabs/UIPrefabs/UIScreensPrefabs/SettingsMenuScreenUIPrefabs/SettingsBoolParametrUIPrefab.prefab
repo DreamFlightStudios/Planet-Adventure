@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8461007872678904373}
   - component: {fileID: 8391894708393714068}
   m_Layer: 5
-  m_Name: SettingsBoolParametrPrefab
+  m_Name: SettingsBoolParametrUIPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

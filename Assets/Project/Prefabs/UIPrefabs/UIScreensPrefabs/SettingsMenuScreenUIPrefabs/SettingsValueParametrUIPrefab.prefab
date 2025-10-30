@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 4962823217499951901}
   - component: {fileID: 6828740560038066179}
   m_Layer: 5
-  m_Name: SettingsValueParametrPrefab
+  m_Name: SettingsValueParametrUIPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

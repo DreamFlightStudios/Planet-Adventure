@@ -4,17 +4,31 @@ using UnityEngine.UI;
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button _choiceGameSaveButton;
+    [SerializeField] private Button _settingMenuButton;
     [SerializeField] private LaunchLevelsPanel _launchLevelsPanel;
-    
-    private void Start()
+
+    private SettingsMenuController _settingsMenu;
+
+    public void Initialize(SaveLoadController saveLoadController, SceneLoader sceneLoader, SettingsMenuController settingsMenu)
     {
-        _launchLevelsPanel.SwitchPanel();
-        _choiceGameSaveButton.onClick.AddListener(OnChoiceLevelButtonPressed);
+        _launchLevelsPanel.Initialize(saveLoadController, sceneLoader);
+        _settingsMenu = settingsMenu;
     }
 
-    public void Initialize(SaveLoadController saveLoadController, SceneLoader sceneLoader) 
-        => _launchLevelsPanel.Initialize(saveLoadController, sceneLoader);
+    private void Start()
+    {
+        _choiceGameSaveButton.onClick.AddListener(OnChoiceLevelButtonPressed);
+        _settingMenuButton.onClick.AddListener(OnSettingsMenuButtonPressed);
+    }
 
-    public void OnChoiceLevelButtonPressed() 
+    private void OnChoiceLevelButtonPressed() 
         => _launchLevelsPanel.SwitchPanel();
+
+    private void OnSettingsMenuButtonPressed()
+    {
+        _settingsMenu.OnShowButtonClicked();
+
+        if (_launchLevelsPanel.IsOpen)
+            _launchLevelsPanel.SwitchPanel();
+    }
 }

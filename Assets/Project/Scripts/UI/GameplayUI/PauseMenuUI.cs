@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class PauseMenuUI : MonoBehaviour
 {
+    [SerializeField] private Button _continueButton;
     [SerializeField] private Button _backMenuButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private GameObject _pauseMenu;
 
     private SceneLoader _sceneLoader;
     private InputSystem _input;
+    private bool _isPaused;
 
     private void Awake() 
         => _pauseMenu.SetActive(false);
@@ -19,27 +21,38 @@ public class PauseMenuUI : MonoBehaviour
         _input = input;
         _sceneLoader = sceneLoader;
 
-        _input.UI.Pause.performed += Show;
+        _continueButton.onClick.AddListener(Show);
         _backMenuButton.onClick.AddListener(OnBackMenuButonClicked);
         _settingsButton.onClick.AddListener(rootViewUI.ShowSettingsMenu);
+
+        _input.UI.Pause.performed += OnPausePerformed;
     }
 
-    private void Show(InputAction.CallbackContext context)
+    private void Show()
     {
-        bool isPaused = !_pauseMenu.activeSelf;
+        _isPaused = !_pauseMenu.activeSelf;
 
-        _pauseMenu.SetActive(isPaused);
-        Cursor.visible = isPaused;
-        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        _pauseMenu.SetActive(_isPaused);
+        Cursor.visible = _isPaused;
+        Cursor.lockState = _isPaused ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    private void OnBackMenuButonClicked() 
-        => _sceneLoader.ChangeScene("MainMenu");
-
-    private void OnDestroy()
+    private void OnPausePerformed(InputAction.CallbackContext context)
     {
-        _input.UI.Pause.performed -= Show;
+        if (_isPaused)
+            return;
+
+        Show();
+    }
+
+    private void OnBackMenuButonClicked()
+    {
+        _sceneLoader.ChangeScene("MainMenu");
+
+        _continueButton.onClick.RemoveAllListeners();
         _backMenuButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.RemoveAllListeners();
+
+        _input.UI.Pause.performed -= OnPausePerformed;
     }
 }

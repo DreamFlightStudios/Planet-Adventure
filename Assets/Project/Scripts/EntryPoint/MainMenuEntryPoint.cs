@@ -9,7 +9,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void Construct(RootViewUI rootUI, SaveLoadController saveLoadController, SceneLoader sceneLoader)
     {
         var mainMenu = Instantiate(_mainMenuPrefab);
-        mainMenu.Initialize(saveLoadController, sceneLoader);
+        mainMenu.Initialize(saveLoadController, sceneLoader, rootUI.SettingsMenu);
 
         rootUI.AttachSceneUI(mainMenu.gameObject, AttachType.AllClear);
     }

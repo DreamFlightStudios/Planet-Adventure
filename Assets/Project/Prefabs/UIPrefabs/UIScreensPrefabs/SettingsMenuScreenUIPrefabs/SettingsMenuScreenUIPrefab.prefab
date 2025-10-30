@@ -352,8 +352,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2103636842623237051}
   - component: {fileID: 7550964905994037619}
+  - component: {fileID: 101475118177723212}
+  - component: {fileID: 5758932674755109372}
   m_Layer: 5
-  m_Name: SettingsMenuUI
+  m_Name: SettingsMenuScreenUIPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,22 +396,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultConfiguration: {fileID: 11400000, guid: ebe5f5489ff15124d88b431667271cf3, type: 2}
-  _sensivity: {fileID: 7133095603591892087}
-  _resolution: {fileID: 4345299293454800088}
-  _fullScreen: {fileID: 3742249873910600082}
-  _graphics: {fileID: 8130938321218927432}
-  _ambient: {fileID: 5050297802890103709}
-  _dialogues: {fileID: 2786312146966587331}
-  _interface: {fileID: 4856239053465205162}
-  _environment: {fileID: 1319243948929271975}
-  _music: {fileID: 6611854036978274890}
-  _subtitles: {fileID: 8838039392460571311}
+  _sensivityParameter: {fileID: 7133095603591892087}
+  _resolutionParameter: {fileID: 4345299293454800088}
+  _graphicsParameter: {fileID: 8130938321218927432}
+  _fullScreenParameter: {fileID: 3742249873910600082}
+  _ambientVolumeParameter: {fileID: 5050297802890103709}
+  _dialoguesVolumeParameter: {fileID: 2786312146966587331}
+  _interfaceVolumeParameter: {fileID: 4856239053465205162}
+  _environmentVolumeParameter: {fileID: 1319243948929271975}
+  _musicVolumeParameter: {fileID: 6611854036978274890}
+  _subtitlesParameter: {fileID: 8838039392460571311}
   _mixer: {fileID: 24100000, guid: 1bda03ed4a593f8498c8dfd2d511643a, type: 2}
   _ambientMixerKey: Ambient
   _dialoguesMixerKey: Dialogues
   _interfaceMixerKey: UI
   _environmentMixerKey: Environment
   _musicMixerKey: Music
+--- !u!222 &101475118177723212
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290482218906168176}
+  m_CullTransparentMesh: 1
+--- !u!114 &5758932674755109372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290482218906168176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6698113, g: 0.4053655, b: 0.31910822, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4641652255743859580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,8 +1075,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3275071120014500706}
-  - component: {fileID: 7865983028197166791}
-  - component: {fileID: 6497055229486187674}
   - component: {fileID: 5672655398601910945}
   m_Layer: 5
   m_Name: Scroll View
@@ -1066,44 +1104,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -16.237244}
   m_SizeDelta: {x: 0, y: -252.475}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &7865983028197166791
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497637979862052830}
-  m_CullTransparentMesh: 1
---- !u!114 &6497055229486187674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497637979862052830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.09803922}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5672655398601910945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,8 +1520,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8620408573097097234}
   m_HandleRect: {fileID: 8113323260944984608}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.55224735
+  m_Value: 1.0000001
+  m_Size: 0.1687223
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1768,6 +1768,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2410387956552063708, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Name
+      value: DialoguesVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1944,6 +1952,10 @@ PrefabInstance:
     - target: {fileID: 1050474575479787109, guid: aee01489156a4d547bad37b4d05d9bb0, type: 3}
       propertyPath: m_fontSize
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157393911991434317, guid: aee01489156a4d547bad37b4d05d9bb0, type: 3}
+      propertyPath: m_Name
+      value: FullScreenToggle
       objectReference: {fileID: 0}
     - target: {fileID: 4308688708954848484, guid: aee01489156a4d547bad37b4d05d9bb0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2264,6 +2276,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2410387956552063708, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Name
+      value: InteractionVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2431,19 +2451,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1145961046787263775, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1145961046787263775, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1145961046787263775, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 462.773
       objectReference: {fileID: 0}
     - target: {fileID: 1145961046787263775, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 1721967076296898280, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_Colors.m_ColorMultiplier
@@ -2467,19 +2487,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4827618808029822594, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4827618808029822594, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4827618808029822594, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 224.8865
       objectReference: {fileID: 0}
     - target: {fileID: 4827618808029822594, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5267208689954503379, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2492,6 +2512,10 @@ PrefabInstance:
     - target: {fileID: 6683432364890565779, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_Name
       value: (ScreenResolution) SettingsDropdownPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683432364890565779, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_Pivot.x
@@ -2507,7 +2531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2515,11 +2539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 848
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2555,11 +2579,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 424
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -478.07898
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2576,6 +2600,10 @@ PrefabInstance:
     - target: {fileID: 8697318769864855080, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070688521370691825, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_Name
+      value: ScreenResolutionDropdown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2854,13 +2882,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2410387956552063708, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Name
+      value: SensitivitySlider
+      objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Value
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Colors.m_ColorMultiplier
@@ -3047,6 +3079,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1721967076296898280, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: Low
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721967076296898280, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: Medium
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721967076296898280, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: High
+      objectReference: {fileID: 0}
     - target: {fileID: 2024478452269625794, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_text
       value: Graphics
@@ -3070,6 +3114,10 @@ PrefabInstance:
     - target: {fileID: 6683432364890565779, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_Name
       value: (Graphics) SettingsDropdownPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982219272321254530, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_text
+      value: Low
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_Pivot.x
@@ -3151,6 +3199,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9070688521370691825, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
+      propertyPath: m_Name
+      value: GraphicsDropdown
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3191,6 +3243,10 @@ PrefabInstance:
     - target: {fileID: 1050474575479787109, guid: aee01489156a4d547bad37b4d05d9bb0, type: 3}
       propertyPath: m_fontSize
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157393911991434317, guid: aee01489156a4d547bad37b4d05d9bb0, type: 3}
+      propertyPath: m_Name
+      value: SubtitlesToggle
       objectReference: {fileID: 0}
     - target: {fileID: 4308688708954848484, guid: aee01489156a4d547bad37b4d05d9bb0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3364,6 +3420,14 @@ PrefabInstance:
     - target: {fileID: 1682834606330111150, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410387956552063708, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Name
+      value: MusicVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
@@ -3562,6 +3626,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2410387956552063708, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Name
+      value: AmbientVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3758,6 +3834,14 @@ PrefabInstance:
     - target: {fileID: 1682834606330111150, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410387956552063708, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Name
+      value: InterfaceVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x

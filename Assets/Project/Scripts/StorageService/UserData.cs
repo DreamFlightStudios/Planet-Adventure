@@ -11,16 +11,28 @@ public class UserData
 [Serializable]
 public class UserSettingsData
 {
-    public float Sensivity;
-    public GraphicsQualityType Graphics;
-    public int Resolution;
-    public float Dialogues;
-    public float Ambient;
-    public float Interface;
-    public float Environment;
-    public float Music;
-    public bool Subtitles;
-    public bool FullScreen;
+    public readonly float Sensivity;
+    public readonly GraphicsQualityType Graphics;
+    public readonly float Dialogues;
+    public readonly float Ambient;
+    public readonly float Interface;
+    public readonly float Environment;
+    public readonly float Music;
+    public readonly bool Subtitles;
+    public readonly bool FullScreen;
+
+    public UserSettingsData(float sensivity, GraphicsQualityType graphics, float dialogues, float ambient, float interfaceVolume, float environmentVolume, float musicVolume, bool subtitles, bool fullScreen)
+    {
+        Sensivity = sensivity;
+        Graphics = graphics;
+        Dialogues = dialogues;
+        Ambient = ambient;
+        Interface = interfaceVolume;
+        Environment = environmentVolume;
+        Music = musicVolume;
+        Subtitles = subtitles;
+        FullScreen = fullScreen;
+    }
 }
 
 [Serializable]

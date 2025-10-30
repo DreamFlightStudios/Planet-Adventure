@@ -9,9 +9,14 @@ public class CameraController : MonoBehaviour
     private float _yRotation;
 
     private InputSystem _input;
+    private UserData _userData;
 
     [Inject]
-    private void Construct(InputSystem input) => _input = input;
+    private void Construct(InputSystem input, SaveLoadController saveLoadController)
+    {
+        _input = input;
+        _userData = saveLoadController.UserData;
+    }
 
     private void Awake()
     {
@@ -23,7 +28,7 @@ public class CameraController : MonoBehaviour
 
     private void RotateCamera()
     {
-        Vector2 input = _input.Player.Look.ReadValue<Vector2>() * _config.Sensivity * Time.deltaTime;
+        Vector2 input = _input.Player.Look.ReadValue<Vector2>() * _userData.SettingsData.Sensivity * Time.deltaTime;
 
         _xRotation -= input.y;
         _yRotation += input.x;

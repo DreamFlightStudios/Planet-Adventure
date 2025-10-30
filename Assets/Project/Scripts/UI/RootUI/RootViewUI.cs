@@ -4,27 +4,19 @@ public class RootViewUI : MonoBehaviour
 {
     [SerializeField] private Transform _uiSceneContainer;
     [SerializeField] private LoadingScreenUI _loadingScreen;
-    [SerializeField] private SettingsMenuController _settingsMenu;
+    [field: SerializeField] public SettingsMenuController SettingsMenu {  get; private set; }
 
-    private void Awake()
-    {
-        HideSettingsMenu();
-        ShowLoadingScreen();
-    }
+    private void Awake() 
+        => ShowLoadingScreen();
 
-    public void ShowLoadingScreen() => _loadingScreen.OnLoadStarted();
+    public void ShowLoadingScreen() 
+        => _loadingScreen.OnLoadStarted();
 
-    public void HideLoadingScreen() => _loadingScreen.OnLoadFinished();
+    public void HideLoadingScreen() 
+        => _loadingScreen.OnLoadFinished();
 
-    public void ShowSettingsMenu()
-    {
-        //_settingsMenu.OnShowButtonClicked();
-    }
-
-    public void HideSettingsMenu()
-    {
-        //_settingsMenu.OnShowButtonClicked();
-    }
+    public void ShowSettingsMenu() 
+        => SettingsMenu.OnShowButtonClicked();
 
     public void AttachSceneUI(GameObject sceneUI, AttachType type = AttachType.Default)
     {
