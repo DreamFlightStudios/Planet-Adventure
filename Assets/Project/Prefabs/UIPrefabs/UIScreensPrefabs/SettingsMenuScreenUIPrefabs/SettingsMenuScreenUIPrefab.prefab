@@ -395,6 +395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bdc42085095fc4c89291fc3767e20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsDeactivatedByTrigger>k__BackingField: 1
+  <IsActivatedByTrigger>k__BackingField: 0
+  <LayerPriority>k__BackingField: 5
   _defaultConfiguration: {fileID: 11400000, guid: ebe5f5489ff15124d88b431667271cf3, type: 2}
   _sensivityParameter: {fileID: 7133095603591892087}
   _resolutionParameter: {fileID: 4345299293454800088}
@@ -1390,8 +1393,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7550964905994037619}
         m_TargetAssemblyTypeName: SettingsMenuController, Assembly-CSharp
-        m_MethodName: OnBackButtonClicked
-        m_Mode: 1
+        m_MethodName: SwitchState
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1520,8 +1523,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8620408573097097234}
   m_HandleRect: {fileID: 8113323260944984608}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.034909915
+  m_Value: 1.0000001
+  m_Size: 0.18311073
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using Zenject;
 
-public class SettingsMenuController : MonoBehaviour
+public class SettingsMenuController : RootUI
 {
     [SerializeField] private SettingsConfigurationConfig _defaultConfiguration;
 
@@ -35,8 +35,8 @@ public class SettingsMenuController : MonoBehaviour
     [SerializeField] private string _musicMixerKey;
 
     private SaveLoadController _saveLoadController;
-    private SettingsMenuView _view;
     private SettingsMenuModel _model;
+    private SettingsMenuView _view;
 
     [Inject]
     private void Construct(SaveLoadController saveLoadController)
@@ -52,18 +52,20 @@ public class SettingsMenuController : MonoBehaviour
             _saveLoadController.UserData.SettingsData = settings;
         }
 
-        _view = new SettingsMenuView(transform.gameObject, _ambientVolumeParameter, _dialoguesVolumeParameter, _interfaceVolumeParameter, _environmentVolumeParameter, _musicVolumeParameter, _sensivityParameter, _subtitlesParameter, _fullScreenParameter, _graphicsParameter);
+        _view = new SettingsMenuView(_ambientVolumeParameter, _dialoguesVolumeParameter, _interfaceVolumeParameter, _environmentVolumeParameter, _musicVolumeParameter, _sensivityParameter, _subtitlesParameter, _fullScreenParameter, _graphicsParameter);
         _model = new SettingsMenuModel(_sensivityParameter, _ambientVolumeParameter, _dialoguesVolumeParameter, _interfaceVolumeParameter, _environmentVolumeParameter, _musicVolumeParameter, _fullScreenParameter, _subtitlesParameter, _graphicsParameter);
 
         ApplyParametrs();
-        _view.ChangeState(false);
+        SwitchState(false);
     }
 
-    public void OnShowButtonClicked()
-        => _view.ChangeState(true);
+    public override void SwitchState(bool state)
+    {
+        base.SwitchState(state);
 
-    public void OnHideButtonClicked()
-    => _view.ChangeState(false);
+        if (state == false)
+            ApplyParametrs();
+    }
 
     public void OnSaveButtonClicked()
     {
@@ -85,12 +87,6 @@ public class SettingsMenuController : MonoBehaviour
     public void OnResetButtonClicked()
     {
         _saveLoadController.UserData.SettingsData = CreateDefaultSettings();
-        ApplyParametrs();
-    }
-
-    public void OnBackButtonClicked()
-    {
-        gameObject.SetActive(false);
         ApplyParametrs();
     }
 

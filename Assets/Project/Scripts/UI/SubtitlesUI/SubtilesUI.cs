@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class SubtilesUI : MonoBehaviour
+public class SubtilesUI : AttachableContainerUI
 {
     [SerializeField] private SubtitlesField _fieldPrefab;
     [SerializeField] private Transform _container;

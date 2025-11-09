@@ -653,6 +653,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2877931e135b794ab575aa643bc18fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsDeactivatedByTrigger>k__BackingField: 1
+  <IsActivatedByTrigger>k__BackingField: 1
+  <LayerPriority>k__BackingField: 4
   _continueButton: {fileID: 4032281901020953736}
   _backMenuButton: {fileID: 1843292095443346962}
   _settingsButton: {fileID: 1760190665615505700}

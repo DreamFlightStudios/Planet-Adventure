@@ -1,10 +1,8 @@
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsMenuView
 {
-    private readonly GameObject Panel;
     private readonly Slider AmbientVolumeSlider;
     private readonly Slider DialoguesVolumeSlider;
     private readonly Slider InterfacesVolumeSlider;
@@ -15,9 +13,8 @@ public class SettingsMenuView
     private readonly Toggle FullScreenToggle;
     private readonly TMP_Dropdown GraphicsDropdown;
 
-    public SettingsMenuView(GameObject panel, Slider ambientVolumeSlider, Slider dialoguesVolumeSlider, Slider interfacesVolumeSlider, Slider environmentVolumeSlider, Slider musicVolumeSlider, Slider sensivitySlider, Toggle subtitlesToggle, Toggle fullScreenToggle, TMP_Dropdown graphicsDropdown)
+    public SettingsMenuView(Slider ambientVolumeSlider, Slider dialoguesVolumeSlider, Slider interfacesVolumeSlider, Slider environmentVolumeSlider, Slider musicVolumeSlider, Slider sensivitySlider, Toggle subtitlesToggle, Toggle fullScreenToggle, TMP_Dropdown graphicsDropdown)
     {
-        Panel = panel;
         AmbientVolumeSlider = ambientVolumeSlider;
         DialoguesVolumeSlider = dialoguesVolumeSlider;
         InterfacesVolumeSlider = interfacesVolumeSlider;
@@ -28,9 +25,6 @@ public class SettingsMenuView
         FullScreenToggle = fullScreenToggle;
         GraphicsDropdown = graphicsDropdown;
     }
-
-    public void ChangeState(bool isOpen) 
-        => Panel.SetActive(isOpen);
 
     public void UpdateView(UserSettingsData userSetingsData)
     {

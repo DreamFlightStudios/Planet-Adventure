@@ -1,56 +1,34 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PauseMenuUI : MonoBehaviour
+public class PauseMenuUI : AttachableContainerUI
 {
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _backMenuButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private GameObject _pauseMenu;
-
     private SceneLoader _sceneLoader;
-    private RootContainerUI _rootUI;
-    private InputSystem _input;
-
-    private bool _isPaused;
 
     private void Awake() 
         => _pauseMenu.SetActive(false);
 
-    public void Initialize(SceneLoader sceneLoader, InputSystem input, RootContainerUI rootUI)
+    public void Initialize(SceneLoader sceneLoader, RootControllerUI rootUI)
     {
-        _input = input;
         _sceneLoader = sceneLoader;
-        _rootUI = rootUI;
 
-        _continueButton.onClick.AddListener(Show);
+        _continueButton.onClick.AddListener(() => SwitchState(false));
         _backMenuButton.onClick.AddListener(OnBackMenuButonClicked);
         _settingsButton.onClick.AddListener(rootUI.ShowSettingsMenu);
-
-        _input.UI.Pause.performed += OnPausePerformed;
     }
 
-    private void Show()
+    public override void SwitchStateByContainer(bool state, GameObject container)
     {
-        _isPaused = !_pauseMenu.activeSelf;
+        base.SwitchStateByContainer(state, _pauseMenu);
 
-        _pauseMenu.SetActive(_isPaused);
-        Cursor.visible = _isPaused;
-        Cursor.lockState = _isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = IsActive;
+        Cursor.lockState = IsActive ? CursorLockMode.None : CursorLockMode.Locked;
 
-        Time.timeScale = _isPaused ? 0.0f : 1.0f;
-    }
-
-    private void OnPausePerformed(InputAction.CallbackContext context)
-    {
-        if (_isPaused && _rootUI.SettingsMenu.gameObject.activeSelf)
-        {
-            _rootUI.HideSettingsMenu();
-            return;
-        }
-
-        Show();
+        Time.timeScale = IsActive ? 0.0f : 1.0f;
     }
 
     private void OnBackMenuButonClicked()
@@ -61,6 +39,5 @@ public class PauseMenuUI : MonoBehaviour
         _continueButton.onClick.RemoveAllListeners();
         _backMenuButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.RemoveAllListeners();
-        _input.UI.Pause.performed -= OnPausePerformed;
     }
 }

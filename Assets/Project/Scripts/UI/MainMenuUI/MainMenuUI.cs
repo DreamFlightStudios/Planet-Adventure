@@ -1,24 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuUI : MonoBehaviour
+public class MainMenuUI : AttachableContainerUI
 {
+    [field: SerializeField] public Button SettingMenuButton { get; private set; }
+
     [SerializeField] private Button _choiceGameSaveButton;
-    [SerializeField] private Button _settingMenuButton;
     [SerializeField] private LaunchLevelsPanel _launchLevelsPanel;
 
-    private SettingsMenuController _settingsMenu;
-
-    public void Initialize(SaveLoadController saveLoadController, SceneLoader sceneLoader, SettingsMenuController settingsMenu)
-    {
-        _launchLevelsPanel.Initialize(saveLoadController, sceneLoader);
-        _settingsMenu = settingsMenu;
-    }
+    public void Initialize(SaveLoadController saveLoadController, SceneLoader sceneLoader) 
+        => _launchLevelsPanel.Initialize(saveLoadController, sceneLoader);
 
     private void Start()
     {
         _choiceGameSaveButton.onClick.AddListener(OnChoiceLevelButtonPressed);
-        _settingMenuButton.onClick.AddListener(OnSettingsMenuButtonPressed);
+        SettingMenuButton.onClick.AddListener(OnSettingsMenuButtonPressed);
     }
 
     private void OnChoiceLevelButtonPressed() 
@@ -26,9 +22,13 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnSettingsMenuButtonPressed()
     {
-        _settingsMenu.OnShowButtonClicked();
-
         if (_launchLevelsPanel.IsOpen)
             _launchLevelsPanel.SwitchPanel();
+    }
+
+    private void OnDestroy()
+    {
+        SettingMenuButton.onClick.RemoveAllListeners();
+        _choiceGameSaveButton.onClick.RemoveAllListeners();
     }
 }
