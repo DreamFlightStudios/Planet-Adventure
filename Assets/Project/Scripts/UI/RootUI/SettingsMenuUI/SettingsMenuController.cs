@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 using Zenject;
 
