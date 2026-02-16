@@ -1,8 +1,11 @@
-﻿public class SaveLoadController
+﻿using System;
+
+public class SaveLoadController
 {
     private const string UserDataPath = "UserData";
-
     private readonly IStorageService Service;
+
+    public event Action<UserData> Loaded;
     public UserData UserData { get; private set; }
 
     public SaveLoadController()
@@ -15,7 +18,11 @@
         UserData = Service.Load<UserData>(UserDataPath);
     }
 
-    public void SaveUserData() => Service.Save(UserDataPath, UserData);
+    public void UpdateUserData()
+    {
+        Service.Save(UserDataPath, UserData);
+        Loaded?.Invoke(UserData);
+    }
 
     public void InitializeGameplayLevel(LevelData data)
     {
@@ -34,7 +41,7 @@
         if (levelsData.ContainsKey(LevelId))
         {
             levelsData[LevelId] = true;
-            SaveUserData();
+            UpdateUserData();
         }
     }
 }

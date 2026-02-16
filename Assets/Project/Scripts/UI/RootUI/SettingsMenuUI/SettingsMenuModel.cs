@@ -35,4 +35,18 @@ public class SettingsMenuModel
         SubtitlesParameter = subtitlesParameter;
         GraphicsParameter = graphicsParameter;
     }
+
+    public UserSettingsData GetUserSettingsData()
+    {
+        return new UserSettingsData(
+        Sensivity,
+        Graphics,
+        DialoguesVolume,
+        AmbientVolume,
+        InterfaceVolume,
+        EnvironmentVolume,
+        MusicVolume,
+        Subtitles,
+        FullScreen);
+    }
 }

@@ -1,12 +1,16 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 using Zenject;
 
 public class SettingsMenuController : RootUI
 {
     [SerializeField] private SettingsConfigurationConfig _defaultConfiguration;
+
+    [Header("Components")]
+    [SerializeField] private Transform _container;
 
     [Header("Control Setup")]
     [SerializeField] private Slider _sensivityParameter;
@@ -45,17 +49,17 @@ public class SettingsMenuController : RootUI
     private void Awake()
     {
         var settings = _saveLoadController.UserData?.SettingsData;
-
+        
         if (settings == null)
         {
             settings = CreateDefaultSettings();
             _saveLoadController.UserData.SettingsData = settings;
         }
 
-        _view = new SettingsMenuView(_ambientVolumeParameter, _dialoguesVolumeParameter, _interfaceVolumeParameter, _environmentVolumeParameter, _musicVolumeParameter, _sensivityParameter, _subtitlesParameter, _fullScreenParameter, _graphicsParameter);
+        _view = new SettingsMenuView(_container, _ambientVolumeParameter, _dialoguesVolumeParameter, _interfaceVolumeParameter, _environmentVolumeParameter, _musicVolumeParameter, _sensivityParameter, _subtitlesParameter, _fullScreenParameter, _graphicsParameter);
         _model = new SettingsMenuModel(_sensivityParameter, _ambientVolumeParameter, _dialoguesVolumeParameter, _interfaceVolumeParameter, _environmentVolumeParameter, _musicVolumeParameter, _fullScreenParameter, _subtitlesParameter, _graphicsParameter);
 
-        ApplyParametrs();
+        ApplyParametrs(settings);
         SwitchState(false);
     }
 
@@ -64,35 +68,19 @@ public class SettingsMenuController : RootUI
         base.SwitchState(state);
 
         if (state == false)
-            ApplyParametrs();
+        {
+            _view.ResetPosition();
+            ApplyParametrs(_saveLoadController.UserData.SettingsData);
+        }
     }
 
-    public void OnSaveButtonClicked()
-    {
-        _saveLoadController.UserData.SettingsData = new UserSettingsData(
-        _model.Sensivity,
-        _model.Graphics,
-        _model.DialoguesVolume,
-        _model.AmbientVolume,
-        _model.InterfaceVolume,
-        _model.EnvironmentVolume,
-        _model.MusicVolume,
-        _model.Subtitles,
-        _model.FullScreen);
+    public void OnSaveButtonClicked() => ApplyParametrs(_model.GetUserSettingsData());
 
-        _saveLoadController.SaveUserData();
-        ApplyParametrs();
-    }
+    public void OnResetButtonClicked() => ApplyParametrs(CreateDefaultSettings());
 
-    public void OnResetButtonClicked()
+    private void ApplyParametrs(UserSettingsData settings)
     {
-        _saveLoadController.UserData.SettingsData = CreateDefaultSettings();
-        ApplyParametrs();
-    }
-
-    private void ApplyParametrs()
-    {
-        var settings = _saveLoadController.UserData.SettingsData;
+        _saveLoadController.UserData.SettingsData = settings;
 
         _mixer.SetFloat(_ambientMixerKey, settings.Ambient);
         _mixer.SetFloat(_dialoguesMixerKey, settings.Dialogues);
@@ -103,6 +91,7 @@ public class SettingsMenuController : RootUI
         Screen.fullScreen = settings.FullScreen;
         QualitySettings.SetQualityLevel((int)settings.Graphics);
 
+        _saveLoadController.UpdateUserData();
         _view.UpdateView(settings);
     }
 

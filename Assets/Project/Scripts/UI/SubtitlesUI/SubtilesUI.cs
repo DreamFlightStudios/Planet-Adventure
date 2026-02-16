@@ -8,17 +8,9 @@ public class SubtilesUI : AttachableContainerUI
     [SerializeField] private Transform _container;
 
     private Dictionary<PhraseInfo, SubtitlesField> _subtitles = new();
-    private UserData _userData;
-
-    [Inject]
-    private void Construct(SaveLoadController saveLoadController) 
-        => _userData = saveLoadController.UserData;
 
     public void OnSpeakStarted(PhraseInfo phrase)
     {
-        if (_userData.SettingsData.Subtitles == false)
-            return;
-
         var field = Instantiate(_fieldPrefab, _container);
         field.Initialize(phrase);
 
@@ -33,4 +25,6 @@ public class SubtilesUI : AttachableContainerUI
             _subtitles.Remove(phrase);
         }
     }
+    protected override void OnConfigurated(UserData data) 
+        => _container.gameObject.SetActive(data.SettingsData.Subtitles);
 }

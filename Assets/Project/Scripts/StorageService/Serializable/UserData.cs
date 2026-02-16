@@ -2,10 +2,35 @@ using System.Collections.Generic;
 using System;
 
 [Serializable]
-public class UserData
+public class UserData : IReadonlyUserData
 {
-    public Dictionary<string, bool> LevelsData = new();
-    public UserSettingsData SettingsData;
+    public Dictionary<string, bool> LevelsData
+    {
+        get
+        {
+            return _levelsData;
+        }
+        set
+        {
+            if (value != null && value != _levelsData)
+                _levelsData = value;
+        }
+    }
+    public UserSettingsData SettingsData
+    {
+        get
+        {
+            return _settingsData;
+        }
+        set
+        {
+            if (value != null && value != _settingsData)
+                _settingsData = value;
+        }
+    }
+
+    private Dictionary<string, bool> _levelsData = new();
+    private UserSettingsData _settingsData;
 }
 
 [Serializable]

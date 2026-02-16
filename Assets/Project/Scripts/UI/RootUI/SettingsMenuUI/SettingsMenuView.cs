@@ -1,8 +1,11 @@
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class SettingsMenuView
 {
+    private readonly Transform Container;
     private readonly Slider AmbientVolumeSlider;
     private readonly Slider DialoguesVolumeSlider;
     private readonly Slider InterfacesVolumeSlider;
@@ -13,8 +16,9 @@ public class SettingsMenuView
     private readonly Toggle FullScreenToggle;
     private readonly TMP_Dropdown GraphicsDropdown;
 
-    public SettingsMenuView(Slider ambientVolumeSlider, Slider dialoguesVolumeSlider, Slider interfacesVolumeSlider, Slider environmentVolumeSlider, Slider musicVolumeSlider, Slider sensivitySlider, Toggle subtitlesToggle, Toggle fullScreenToggle, TMP_Dropdown graphicsDropdown)
+    public SettingsMenuView(Transform container, Slider ambientVolumeSlider, Slider dialoguesVolumeSlider, Slider interfacesVolumeSlider, Slider environmentVolumeSlider, Slider musicVolumeSlider, Slider sensivitySlider, Toggle subtitlesToggle, Toggle fullScreenToggle, TMP_Dropdown graphicsDropdown)
     {
+        Container = container;
         AmbientVolumeSlider = ambientVolumeSlider;
         DialoguesVolumeSlider = dialoguesVolumeSlider;
         InterfacesVolumeSlider = interfacesVolumeSlider;
@@ -38,4 +42,7 @@ public class SettingsMenuView
         FullScreenToggle.isOn = userSetingsData.FullScreen;
         GraphicsDropdown.value = (int)userSetingsData.Graphics;
     }
+
+    public void ResetPosition() 
+        => Container.position = new Vector2(Container.position.x, 0.0f);
 }

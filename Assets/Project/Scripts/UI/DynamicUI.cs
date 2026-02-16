@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class DynamicUI : MonoBehaviour
+public abstract class DynamicUI : Configurable
 {
     [field: SerializeField] public bool IsDeactivatedByTrigger { get; private set; }
     [field: SerializeField] public bool IsActivatedByTrigger { get; private set; }
