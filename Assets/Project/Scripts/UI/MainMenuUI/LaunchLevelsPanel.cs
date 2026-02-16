@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class LaunchLevelsPanel : MonoBehaviour
 {
+    public bool IsOpen {  get; private set; }
+
     [SerializeField] private LaunchLevelButton[] _launchLevelButtons;
     [SerializeField] private float _switchDuration;
-    [SerializeField] private bool _isOpen;
     private SceneLoader _sceneLoader;
+
+    private void Awake() 
+        => transform.DOScaleX(0.0f, 0.0f);
 
     public void Initialize(SaveLoadController saveLoadController, SceneLoader sceneLoader)
     {
@@ -30,8 +34,8 @@ public class LaunchLevelsPanel : MonoBehaviour
 
     public void SwitchPanel()
     {
-        int scale = _isOpen ? 0 : 1;
-        _isOpen = !_isOpen;
+        int scale = IsOpen ? 0 : 1;
+        IsOpen = !IsOpen;
 
         transform.DOScaleX(scale, _switchDuration);
     }

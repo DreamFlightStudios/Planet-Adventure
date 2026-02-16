@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5528100590809961666}
   - component: {fileID: 8706240931787503104}
   m_Layer: 3
-  m_Name: WarningIndicatorUI
+  m_Name: WarningIndicatorUIPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,5 +4,4 @@ using UnityEngine;
 public class GameplayCameraConfig : ScriptableObject
 {
     [field: SerializeField] public Vector2Int MinMaxRotationX { get; private set; }
-    [field: SerializeField] public float Sensivity { get; private set; }
 }

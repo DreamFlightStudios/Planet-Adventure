@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubtilesUI : MonoBehaviour
+public class SubtilesUI : AttachableContainerUI
 {
     [SerializeField] private SubtitlesField _fieldPrefab;
     [SerializeField] private Transform _container;
@@ -24,4 +24,6 @@ public class SubtilesUI : MonoBehaviour
             _subtitles.Remove(phrase);
         }
     }
+    protected override void OnConfigurated(UserData data) 
+        => _container.gameObject.SetActive(data.SettingsData.Subtitles);
 }

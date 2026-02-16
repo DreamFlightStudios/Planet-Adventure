@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6890642126275076429}
   - component: {fileID: 1922805264823509454}
   m_Layer: 5
-  m_Name: SubtitlesField
+  m_Name: SubtitlesFieldUIPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

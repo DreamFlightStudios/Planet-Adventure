@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WarningIndicator : MonoBehaviour
+public class WarningIndicator : AttachableContainerUI
 {
     [SerializeField] private TMP_Text _indicator;
     private string _taskInfo;
