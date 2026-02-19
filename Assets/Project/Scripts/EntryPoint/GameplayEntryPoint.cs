@@ -4,7 +4,7 @@ using Zenject;
 public class GameplayEntryPoint : MonoBehaviour
 {
     [Inject]
-    private void Construct(SaveLoadController saveLoadController, RootControllerUI rootUI, PauseMenuUI pauseMenuUI, WarningIndicator warningIndicatorUI, SubtilesUI subtiles, SceneLoader sceneLoader, InputSystem input)
+    private void Construct(SaveLoadController saveLoadController, RootControllerUI rootUI, PauseMenuControllerUI pauseMenuUI, WarningIndicator warningIndicatorUI, SubtilesUI subtiles, SceneLoader sceneLoader, InputSystem input)
     {
         pauseMenuUI.Initialize(sceneLoader, rootUI);
         warningIndicatorUI.Initialize(input);

@@ -1,6 +1,7 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Animator))]
+[RequireComponent(typeof(AnimationPauseController))]
+[RequireComponent(typeof(Animator))]
 public class AgentView : MonoBehaviour
 {
     private Animator _animator;

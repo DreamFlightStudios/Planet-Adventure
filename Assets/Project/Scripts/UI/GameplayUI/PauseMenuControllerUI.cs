@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenuUI : AttachableContainerUI
+public class PauseMenuControllerUI : AttachableContainerUI
 {
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _backMenuButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private GameObject _pauseMenu;
+
+    public event Action<bool> Paused;
     private SceneLoader _sceneLoader;
 
     private void Awake() 
@@ -28,7 +31,7 @@ public class PauseMenuUI : AttachableContainerUI
         Cursor.visible = IsActive;
         Cursor.lockState = IsActive ? CursorLockMode.None : CursorLockMode.Locked;
 
-        Time.timeScale = IsActive ? 0.0f : 1.0f;
+        Paused?.Invoke(IsActive);
     }
 
     private void OnBackMenuButonClicked()

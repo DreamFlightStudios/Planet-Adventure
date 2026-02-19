@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3489058544986680895}
   - component: {fileID: 2476309266476531882}
   - component: {fileID: 816090043211533265}
+  - component: {fileID: 184287794273975275}
   m_Layer: 6
   m_Name: RigidbodyDoor
   m_TagString: Untagged
@@ -176,3 +177,15 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &184287794273975275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747253785296591728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

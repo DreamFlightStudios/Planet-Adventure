@@ -3,7 +3,7 @@ using Zenject;
 
 public class MainMenuEntryPoint : MonoBehaviour
 {
-    [SerializeField] private MainMenuUI _mainMenuPrefab;
+    [SerializeField] private MainMenuControllerUI _mainMenuPrefab;
 
     [Inject]
     private void Construct(RootControllerUI rootUI, SaveLoadController saveLoadController, SceneLoader sceneLoader)

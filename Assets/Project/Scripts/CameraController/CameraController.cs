@@ -1,8 +1,11 @@
 using UnityEngine;
 using Zenject;
 
-public class CameraController : Configurable
+[RequireComponent(typeof(PauseController))]
+public class CameraController : Configurable, IPausable
 {
+    public bool IsPause {  get; private set; }
+
     [SerializeField] private GameplayCameraConfig _config;
     private InputSystem _input;
 
@@ -20,7 +23,23 @@ public class CameraController : Configurable
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update() => RotateCamera();
+    public void OnPause() 
+        => IsPause = true;
+
+    public void OnResume() 
+        => IsPause = false;
+
+    protected override void OnConfigurated(UserData data)
+    {
+        base.OnConfigurated(data);
+        _sensivity = data.SettingsData.Sensivity;
+    }
+
+    private void Update()
+    {
+        if (IsPause == false)
+            RotateCamera();
+    }
 
     private void RotateCamera()
     {
@@ -31,11 +50,5 @@ public class CameraController : Configurable
 
         _xRotation = Mathf.Clamp(_xRotation, _config.MinMaxRotationX.x, _config.MinMaxRotationX.y);
         transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-    }
-
-    protected override void OnConfigurated(UserData data)
-    {
-        base.OnConfigurated(data);
-        _sensivity = data.SettingsData.Sensivity;
     }
 }

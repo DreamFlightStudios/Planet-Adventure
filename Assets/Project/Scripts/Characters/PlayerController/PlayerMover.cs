@@ -1,8 +1,9 @@
     using UnityEngine;
 
-public class PlayerMover : MonoBehaviour, IAgentMover
+public class PlayerMover : MonoBehaviour, IAgentMover, IPausable
 {
     public Vector3 CurrentVelocity { get; private set; }
+    public bool IsPause { get; private set; }
 
     [SerializeField] private AgentConfig _config;
     [SerializeField] private AgentRoatationStrategy _roatationStrategy;
@@ -16,7 +17,7 @@ public class PlayerMover : MonoBehaviour, IAgentMover
 
     public void Move(Vector2 input, float speed)
     {
-        if (input != Vector2.zero)
+        if (input != Vector2.zero && IsPause == false)
         {
             _targetRotation = _roatationStrategy.RotationCalculation(input, transform,
                 ref _smoothRotationVelocity, _config.MovementInfo.RotationSpeed, _targetRotation);
@@ -29,6 +30,13 @@ public class PlayerMover : MonoBehaviour, IAgentMover
         }
     }
 
-    public void Jump(float force) 
-        => _rigidbody.AddForce(transform.up * force, ForceMode.Impulse);
+    public void Jump(float force)
+    {
+        if (IsPause == false)
+            _rigidbody.AddForce(transform.up * force, ForceMode.Impulse);
+    }
+
+    public void OnPause() => IsPause = true;
+
+    public void OnResume() => IsPause = false;
 }
