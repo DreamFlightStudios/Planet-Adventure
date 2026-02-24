@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58282c883d1ddbf4ab150faf0194281f, type: 3}
+  m_Name: TestAmbientInfo
+  m_EditorClassIdentifier: 
+  _startDelayRange:
+    Min: 2
+    Max: 4
+  _delayRange:
+    Min: 1
+    Max: 10
+  _clips:
+  - {fileID: 8300000, guid: dce895cc80f65bb4ea113f3e8e5e402f, type: 3}
+  - {fileID: 8300000, guid: a4e2b07e5cd88084d99e50466ce3aa3e, type: 3}
+  - {fileID: 8300000, guid: a4e2b07e5cd88084d99e50466ce3aa3e, type: 3}

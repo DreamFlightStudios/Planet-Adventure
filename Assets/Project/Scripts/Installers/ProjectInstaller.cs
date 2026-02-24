@@ -5,6 +5,7 @@ public class ProjectInstaller : MonoInstaller
 {
     [Header("Dependencies")]
     [SerializeField] private RootControllerUI _rootUI;
+    [SerializeField] private AudioController _audioController;
     [SerializeField] private Coroutines _coroutines;
     [SerializeField] private SceneLoader _sceneLoader;
 
@@ -26,5 +27,8 @@ public class ProjectInstaller : MonoInstaller
 
         var coroutines = Container.InstantiatePrefabForComponent<Coroutines>(_coroutines);
         Container.Bind<Coroutines>().FromInstance(coroutines).AsSingle();
+
+        var audioController = Container.InstantiatePrefabForComponent<AudioController>(_audioController);
+        Container.Bind<AudioController>().FromInstance(audioController).AsSingle();
     }
 }
