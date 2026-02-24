@@ -36,11 +36,10 @@ public class PauseMenuControllerUI : AttachableContainerUI
 
     private void OnBackMenuButonClicked()
     {
-        _sceneLoader.ChangeScene("MainMenu");
-        Time.timeScale = 1.0f;
-
         _continueButton.onClick.RemoveAllListeners();
         _backMenuButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.RemoveAllListeners();
+
+        _sceneLoader.ChangeScene("MainMenu");
     }
 }

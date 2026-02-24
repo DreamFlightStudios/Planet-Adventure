@@ -8282,9 +8282,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2504063733397685567, guid: 7060f69bc7bdeab46928e4160a275d78, type: 3}
+      propertyPath: _info
+      value: 
+      objectReference: {fileID: 11400000, guid: 7319da391c710204bba5102e5ce30f80, type: 2}
     - target: {fileID: 4867433119076966413, guid: 7060f69bc7bdeab46928e4160a275d78, type: 3}
       propertyPath: m_Name
       value: AmbientZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250111314779653209, guid: 7060f69bc7bdeab46928e4160a275d78, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6250111314779653209, guid: 7060f69bc7bdeab46928e4160a275d78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8296,7 +8304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250111314779653209, guid: 7060f69bc7bdeab46928e4160a275d78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 6250111314779653209, guid: 7060f69bc7bdeab46928e4160a275d78, type: 3}
       propertyPath: m_LocalRotation.w

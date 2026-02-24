@@ -1,42 +1,22 @@
-using System.Collections;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(BoxCollider))]
-public class AmbientTrigger : MonoBehaviour
+public class AmbientTrigger : AmbientController
 {
-    [SerializeField] private AmbientInfo _info;
-
-    private AudioController _controller;
     private bool _isInside;
-
-    [Inject]
-    private void Construct(AudioController controller) 
-        => _controller = controller;
-
-    private IEnumerator PlayAmbient()
-    {
-        while (_isInside)
-        {
-            yield return new WaitForSecondsRealtime(_info.GetStartRandomDelay());
-
-            _controller.Play(_info.GetRandomClip(), SourceType.Ambient);
-            yield return new WaitForSecondsRealtime(_info.GetRandomDelay());
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         _isInside = true;
-        StartCoroutine(PlayAmbient());
+        StartCoroutine(Play());
     }
 
     private void OnTriggerExit(Collider other)
     {
         _isInside = false;
 
-        _controller.Stop(SourceType.Ambient);
-        StopCoroutine(PlayAmbient());
+        _controller.Stop(SourceType.Ambient, _currentAmbient.FadeOutDelay);
+        StopCoroutine(Play());
     }
 
     private void OnDrawGizmosSelected()
@@ -44,6 +24,9 @@ public class AmbientTrigger : MonoBehaviour
         var collider = GetComponent<BoxCollider>();
 
         Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = new Color(0, 1, 0, 0.3f);
         Gizmos.DrawCube(collider.center, collider.size);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(collider.center, collider.size);
     }
 }

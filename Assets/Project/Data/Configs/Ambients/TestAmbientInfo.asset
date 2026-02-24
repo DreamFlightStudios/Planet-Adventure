@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58282c883d1ddbf4ab150faf0194281f, type: 3}
   m_Name: TestAmbientInfo
   m_EditorClassIdentifier: 
-  _startDelayRange:
-    Min: 2
-    Max: 4
-  _delayRange:
-    Min: 1
-    Max: 10
-  _clips:
-  - {fileID: 8300000, guid: dce895cc80f65bb4ea113f3e8e5e402f, type: 3}
-  - {fileID: 8300000, guid: a4e2b07e5cd88084d99e50466ce3aa3e, type: 3}
-  - {fileID: 8300000, guid: a4e2b07e5cd88084d99e50466ce3aa3e, type: 3}
+  _ambient:
+  - Clip: {fileID: 8300000, guid: ae3142efec232174bae66c7bd3c4d8ac, type: 3}
+    FadeInDelay: 5
+    FadeOutDelay: 5
+  - Clip: {fileID: 8300000, guid: 27b62974f64a772428620a92c715cbfb, type: 3}
+    FadeInDelay: 0
+    FadeOutDelay: 0
+  - Clip: {fileID: 8300000, guid: 7978664b6868e404dab25a8b5d6d699f, type: 3}
+    FadeInDelay: 2
+    FadeOutDelay: 2
+  - Clip: {fileID: 8300000, guid: baa30b3606b746647b65d6ecb21b2140, type: 3}
+    FadeInDelay: 4
+    FadeOutDelay: 1
+  - Clip: {fileID: 8300000, guid: baa30b3606b746647b65d6ecb21b2140, type: 3}
+    FadeInDelay: 3
+    FadeOutDelay: 11

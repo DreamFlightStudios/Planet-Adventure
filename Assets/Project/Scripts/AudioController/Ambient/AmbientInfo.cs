@@ -5,14 +5,22 @@ public class AmbientInfo : ScriptableObject
 {
     [SerializeField] private IntRange _startDelayRange;
     [SerializeField] private IntRange _delayRange;
-    [SerializeField] private AudioClip[] _clips;
+    [SerializeField] private AmbientItem[] _ambient;
 
-    public AudioClip GetRandomClip() 
-        => _clips[Random.Range(0, _clips.Length)];
+    public AmbientItem GetRandomAmbientItem() 
+        => _ambient[Random.Range(0, _ambient.Length)];
 
-    public int GetStartRandomDelay()
-    => Random.Range(_startDelayRange.Min, _startDelayRange.Max);
+    public float GetStartRandomDelay()
+        => Random.Range(_startDelayRange.Min, _startDelayRange.Max);
 
-    public int GetRandomDelay() 
-        => Random.Range(_delayRange.Min, _delayRange.Max);
+    public float GetRandomDelayFromAmbientItem(AmbientItem item) 
+        => Random.Range(_delayRange.Min, _delayRange.Max) + item.Clip.length;
+}
+
+[System.Serializable]
+public struct AmbientItem
+{
+    [field: SerializeField] public AudioClip Clip {  get; private set; }
+    [field: SerializeField] public float FadeInDelay { get; private set; }
+    [field: SerializeField] public float FadeOutDelay { get; private set; }
 }
