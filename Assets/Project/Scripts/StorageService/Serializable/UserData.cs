@@ -38,11 +38,13 @@ public class UserSettingsData
 {
     public readonly float Sensivity;
     public readonly GraphicsQualityType Graphics;
-    public readonly float Dialogues;
+
     public readonly float Ambient;
+    public readonly float Dialogues;
     public readonly float Interface;
     public readonly float Environment;
     public readonly float Music;
+
     public readonly bool Subtitles;
     public readonly bool FullScreen;
 

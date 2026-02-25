@@ -18,6 +18,9 @@ public class ProjectInstaller : MonoInstaller
         var saveLoadController = new SaveLoadController();
         Container.Bind<SaveLoadController>().FromInstance(saveLoadController).AsSingle();
 
+        var audioController = Container.InstantiatePrefabForComponent<AudioController>(_audioController);
+        Container.Bind<AudioController>().FromInstance(audioController).AsSingle();
+
         var rootControllerUI = Container.InstantiatePrefabForComponent<RootControllerUI>(_rootUI);
         Container.Bind<RootControllerUI>().FromInstance(rootControllerUI).AsSingle();
         rootControllerUI.Initialize(input);
@@ -27,8 +30,5 @@ public class ProjectInstaller : MonoInstaller
 
         var coroutines = Container.InstantiatePrefabForComponent<Coroutines>(_coroutines);
         Container.Bind<Coroutines>().FromInstance(coroutines).AsSingle();
-
-        var audioController = Container.InstantiatePrefabForComponent<AudioController>(_audioController);
-        Container.Bind<AudioController>().FromInstance(audioController).AsSingle();
     }
 }

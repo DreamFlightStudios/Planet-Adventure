@@ -1,7 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class AudioController : MonoBehaviour
+public class AudioController : Configurable
 {
     [Header("Sources")]
     [SerializeField] private AudioSource _ambient;
@@ -10,10 +11,18 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource _ui;
     [SerializeField] private AudioSource _default;
 
+    [Header("Audio Mixer Setup")]
+    [SerializeField] private AudioMixer _mixer;
+    [SerializeField] private string _ambientMixerKey;
+    [SerializeField] private string _dialoguesMixerKey;
+    [SerializeField] private string _interfaceMixerKey;
+    [SerializeField] private string _environmentMixerKey;
+    [SerializeField] private string _musicMixerKey;
+
     public void Play(AudioClip clip, SourceType type, float fadeDuration = 0.0f)
     {
         var source = GetSource(type);
-
+        
         if (source.isPlaying)
             CrossFade(clip, type, fadeDuration);
         else
@@ -24,7 +33,7 @@ public class AudioController : MonoBehaviour
     {
         var source = GetSource(type);
 
-        if (source.isPlaying == false) 
+        if (source.isPlaying == false)
             return;
 
         source.DOFade(0, fadeDuration).OnComplete(() =>
@@ -53,6 +62,18 @@ public class AudioController : MonoBehaviour
         Stop(SourceType.Music, fadeDuration);
         Stop(SourceType.UI, fadeDuration);
         Stop(SourceType.Default, fadeDuration);
+    }
+
+    protected override void OnConfigurated(UserData data)
+    {
+        base.OnConfigurated(data);
+        var settingsData = data.SettingsData;
+
+        _mixer.SetFloat(_ambientMixerKey, settingsData.Ambient);
+        _mixer.SetFloat(_dialoguesMixerKey, settingsData.Dialogues);
+        _mixer.SetFloat(_interfaceMixerKey, settingsData.Interface);
+        _mixer.SetFloat(_environmentMixerKey, settingsData.Environment);
+        _mixer.SetFloat(_musicMixerKey, settingsData.Music);
     }
 
     private AudioSource GetSource(SourceType type)

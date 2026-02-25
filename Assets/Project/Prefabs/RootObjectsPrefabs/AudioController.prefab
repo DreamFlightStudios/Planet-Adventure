@@ -54,6 +54,12 @@ MonoBehaviour:
   _music: {fileID: 6053793839377693587}
   _ui: {fileID: 401963634599204196}
   _default: {fileID: 6381084744884182971}
+  _mixer: {fileID: 24100000, guid: 1bda03ed4a593f8498c8dfd2d511643a, type: 2}
+  _ambientMixerKey: Ambient
+  _dialoguesMixerKey: Dialogues
+  _interfaceMixerKey: UI
+  _environmentMixerKey: Environment
+  _musicMixerKey: Music
 --- !u!1 &3554870345033416379
 GameObject:
   m_ObjectHideFlags: 0

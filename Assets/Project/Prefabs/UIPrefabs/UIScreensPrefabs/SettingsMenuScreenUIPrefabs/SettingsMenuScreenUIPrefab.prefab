@@ -410,12 +410,6 @@ MonoBehaviour:
   _environmentVolumeParameter: {fileID: 1319243948929271975}
   _musicVolumeParameter: {fileID: 6611854036978274890}
   _subtitlesParameter: {fileID: 8838039392460571311}
-  _mixer: {fileID: 24100000, guid: 1bda03ed4a593f8498c8dfd2d511643a, type: 2}
-  _ambientMixerKey: Ambient
-  _dialoguesMixerKey: Dialogues
-  _interfaceMixerKey: UI
-  _environmentMixerKey: Environment
-  _musicMixerKey: Music
 --- !u!222 &101475118177723212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2547,7 +2541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 848
+      value: 1903
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2583,7 +2577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 424
+      value: 951.5
       objectReference: {fileID: 0}
     - target: {fileID: 8470655896313932110, guid: c277492adbac0a54c970ade20a4c1be6, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3636,7 +3630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue

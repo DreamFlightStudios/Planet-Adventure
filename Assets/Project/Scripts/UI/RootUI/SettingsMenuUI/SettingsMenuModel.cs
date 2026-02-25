@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsMenuModel
@@ -41,12 +42,15 @@ public class SettingsMenuModel
         return new UserSettingsData(
         Sensivity,
         Graphics,
-        DialoguesVolume,
-        AmbientVolume,
-        InterfaceVolume,
-        EnvironmentVolume,
-        MusicVolume,
+        PercentToDB(DialoguesVolume),
+        PercentToDB(AmbientVolume),
+        PercentToDB(InterfaceVolume),
+        PercentToDB(EnvironmentVolume),
+        PercentToDB(MusicVolume),
         Subtitles,
         FullScreen);
     }
+
+    private float PercentToDB(float percent) 
+        => percent <= 0 ? -80f : Mathf.Log10(percent / 100) * 20;
 }

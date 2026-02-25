@@ -4,25 +4,44 @@ using Zenject;
 
 public class AmbientController : MonoBehaviour
 {
-    [SerializeField] private AmbientInfo _info;
+    protected AmbientItem CurrentAmbient { get; private set; }
 
+    [SerializeField] private bool _playOnStart;
+    [SerializeField] private AmbientInfo _info;
     private AudioController _controller;
-    private AmbientItem _currentAmbient;
 
     [Inject]
     private void Construct(AudioController controller)
         => _controller = controller;
 
-    private IEnumerator Play()
+    protected virtual void Start()
+    {
+        if (_playOnStart)
+            StartPlaying();
+    }
+
+    public void StartPlaying() 
+        => StartCoroutine(PlayLoop());
+
+    protected IEnumerator PlayLoop()
     {
         while (true)
         {
             yield return new WaitForSecondsRealtime(_info.GetStartRandomDelay());
 
-            _currentAmbient = _info.GetRandomAmbientItem();
-            _controller.Play(_currentAmbient.Clip, SourceType.Ambient, _currentAmbient.FadeInDelay);
+            CurrentAmbient = _info.GetRandomAmbientItem();
+            _controller.Play(CurrentAmbient.Clip, SourceType.Ambient, CurrentAmbient.FadeInDelay);
 
-            yield return new WaitForSecondsRealtime(_info.GetRandomDelayFromAmbientItem(_currentAmbient));
+            yield return new WaitForSecondsRealtime(_info.GetRandomDelayFromAmbientItem(CurrentAmbient));
         }
     }
+
+    public void StopPlaying()
+    {
+        StopCoroutine(PlayLoop());
+        _controller.Stop(SourceType.Ambient, CurrentAmbient.FadeOutDelay);
+    }
+
+    private void OnDestroy() 
+        => StopPlaying();
 }

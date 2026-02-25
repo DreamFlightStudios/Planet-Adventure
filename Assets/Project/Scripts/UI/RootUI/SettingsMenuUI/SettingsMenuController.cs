@@ -29,14 +29,6 @@ public class SettingsMenuController : RootUI
     [Header("Language Setup")]
     [SerializeField] private Toggle _subtitlesParameter;
 
-    [Header("Audio Mixer Setup")]
-    [SerializeField] private AudioMixer _mixer;
-    [SerializeField] private string _ambientMixerKey;
-    [SerializeField] private string _dialoguesMixerKey;
-    [SerializeField] private string _interfaceMixerKey;
-    [SerializeField] private string _environmentMixerKey;
-    [SerializeField] private string _musicMixerKey;
-
     private SaveLoadController _saveLoadController;
     private SettingsMenuModel _model;
     private SettingsMenuView _view;
@@ -80,12 +72,6 @@ public class SettingsMenuController : RootUI
     private void ApplyParametrs(UserSettingsData settings)
     {
         _saveLoadController.UserData.SettingsData = settings;
-
-        _mixer.SetFloat(_ambientMixerKey, settings.Ambient);
-        _mixer.SetFloat(_dialoguesMixerKey, settings.Dialogues);
-        _mixer.SetFloat(_interfaceMixerKey, settings.Interface);
-        _mixer.SetFloat(_environmentMixerKey, settings.Environment);
-        _mixer.SetFloat(_musicMixerKey, settings.Music);
 
         Screen.fullScreen = settings.FullScreen;
         QualitySettings.SetQualityLevel((int)settings.Graphics);
