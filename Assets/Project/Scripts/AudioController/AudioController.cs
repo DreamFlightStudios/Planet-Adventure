@@ -1,4 +1,6 @@
 using DG.Tweening;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -19,49 +21,98 @@ public class AudioController : Configurable
     [SerializeField] private string _environmentMixerKey;
     [SerializeField] private string _musicMixerKey;
 
-    public void Play(AudioClip clip, SourceType type, float fadeDuration = 0.0f)
+    private Dictionary<SourceType, Tween> _activeFades = new Dictionary<SourceType, Tween>();
+
+    public void Play(AudioClip clip, SourceType type, float fadeDuration = 0f)
     {
+        if (clip == null)
+        {
+            Debug.LogWarning($"Attempted to play null clip on {type}");
+            return;
+        }
+
         var source = GetSource(type);
-        
-        if (source.isPlaying)
+        if (source == null)
+        {
+            Debug.LogWarning($"No AudioSource found for type: {type}");
+            return;
+        }
+
+        KillActiveFade(type);
+
+        if (source.isPlaying && fadeDuration > 0)
+        {
             CrossFade(clip, type, fadeDuration);
-        else
-            source.PlayOneShot(clip);
+            return;
+        }
+
+        source.clip = clip;
+        source.volume = fadeDuration > 0 ? 0f : 1f;
+        source.Play();
+
+        if (fadeDuration > 0)
+        {
+            var fade = source.DOFade(1f, fadeDuration)
+                .SetId($"AudioFade_{type}")
+                .OnComplete(() => _activeFades.Remove(type));
+            _activeFades[type] = fade;
+        }
     }
 
-    public void Stop(SourceType type, float fadeDuration = 0.0f)
+    public void Stop(SourceType type, float fadeDuration = 0f)
     {
         var source = GetSource(type);
-
-        if (source.isPlaying == false)
+        if (source == null || source.isPlaying == false)
             return;
 
-        source.DOFade(0, fadeDuration).OnComplete(() =>
+        KillActiveFade(type);
+
+        if (fadeDuration <= 0)
         {
             source.Stop();
-            source.volume = 1.0f;
-        });
+            return;
+        }
+
+        var fade = source.DOFade(0f, fadeDuration)
+            .SetId($"AudioFade_{type}")
+            .OnComplete(() =>
+            {
+                source.Stop();
+                source.volume = 1f;
+                _activeFades.Remove(type);
+            });
+
+        _activeFades[type] = fade;
     }
 
-    public void CrossFade(AudioClip newClip, SourceType type, float fadeDuration = 0.0f)
+    private void CrossFade(AudioClip newClip, SourceType type, float fadeDuration)
     {
         var source = GetSource(type);
+        var halfFade = fadeDuration / 2f;
 
-        source.DOFade(0, fadeDuration / 2.0f).OnComplete(() =>
-        {
-            source.clip = newClip;
-            source.Play();
-            source.DOFade(1.0f, fadeDuration / 2.0f);
-        });
+        var fadeOut = source.DOFade(0, halfFade)
+            .SetId($"AudioFade_{type}_out")
+            .OnComplete(() =>
+            {
+                source.clip = newClip;
+                source.volume = 0f;
+                source.Play();
+
+                var fadeIn = source.DOFade(1f, halfFade)
+                    .SetId($"AudioFade_{type}_in")
+                    .OnComplete(() => _activeFades.Remove(type));
+                _activeFades[type] = fadeIn;
+            });
+
+        _activeFades[type] = fadeOut;
     }
 
-    public void StopAll(float fadeDuration = 0.0f)
+    public void StopAll(float fadeDuration = 0f)
     {
-        Stop(SourceType.Ambient, fadeDuration);
-        Stop(SourceType.Interaction, fadeDuration);
-        Stop(SourceType.Music, fadeDuration);
-        Stop(SourceType.UI, fadeDuration);
-        Stop(SourceType.Default, fadeDuration);
+        foreach (SourceType type in Enum.GetValues(typeof(SourceType)))
+        {
+            Stop(type, fadeDuration);
+        }
     }
 
     protected override void OnConfigurated(UserData data)
@@ -86,5 +137,25 @@ public class AudioController : Configurable
             SourceType.Interaction => _interaction,
             _ => _default
         };
+    }
+
+    private void KillActiveFade(SourceType type)
+    {
+        if (_activeFades.TryGetValue(type, out var tween) && tween.IsActive())
+        {
+            tween.Kill();
+            _activeFades.Remove(type);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var tween in _activeFades.Values)
+        {
+            if (tween.IsActive())
+                tween.Kill();
+        }
+
+        _activeFades.Clear();
     }
 }

@@ -1771,8 +1771,16 @@ PrefabInstance:
       value: DialoguesVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MinValue
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
@@ -2279,8 +2287,16 @@ PrefabInstance:
       value: InteractionVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MinValue
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
@@ -3424,8 +3440,16 @@ PrefabInstance:
       value: MusicVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MinValue
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
@@ -3630,11 +3654,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Value
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MinValue
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Colors.m_FadeDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x
@@ -3838,8 +3870,16 @@ PrefabInstance:
       value: InterfaceVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_MaxValue
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754785546314251626, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
+      propertyPath: m_MinValue
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3955071726347157139, guid: e7d848489e56ed9469b994aa66a8e2d7, type: 3}
       propertyPath: m_Pivot.x

@@ -42,15 +42,12 @@ public class SettingsMenuModel
         return new UserSettingsData(
         Sensivity,
         Graphics,
-        PercentToDB(DialoguesVolume),
-        PercentToDB(AmbientVolume),
-        PercentToDB(InterfaceVolume),
-        PercentToDB(EnvironmentVolume),
-        PercentToDB(MusicVolume),
+        DialoguesVolume,
+        AmbientVolume,
+        InterfaceVolume,
+        EnvironmentVolume,
+        MusicVolume,
         Subtitles,
         FullScreen);
     }
-
-    private float PercentToDB(float percent) 
-        => percent <= 0 ? -80f : Mathf.Log10(percent / 100) * 20;
 }

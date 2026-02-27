@@ -8,7 +8,10 @@ public class AmbientController : MonoBehaviour
 
     [SerializeField] private bool _playOnStart;
     [SerializeField] private AmbientInfo _info;
+
     private AudioController _controller;
+    private Coroutine _ambientCoroutine;
+    private bool _isPlaying;
 
     [Inject]
     private void Construct(AudioController controller)
@@ -20,16 +23,34 @@ public class AmbientController : MonoBehaviour
             StartPlaying();
     }
 
-    public void StartPlaying() 
-        => StartCoroutine(PlayLoop());
+    public void StartPlaying()
+    {
+        Debug.Log("Play");
+        if (_isPlaying || _ambientCoroutine != null)
+            return;
+
+        _isPlaying = true;
+        _ambientCoroutine = StartCoroutine(PlayLoop());
+    }
 
     protected IEnumerator PlayLoop()
     {
-        while (true)
+        Debug.Log("PlayLoop");
+        while (_isPlaying)
         {
             yield return new WaitForSecondsRealtime(_info.GetStartRandomDelay());
 
+            Debug.Log(_isPlaying);
+            if (!_isPlaying) 
+                yield break;
+
             CurrentAmbient = _info.GetRandomAmbientItem();
+            if (CurrentAmbient.Clip == null)
+            {
+                Debug.LogWarning("Ambient item has null clip, skipping...");
+                continue;
+            }
+
             _controller.Play(CurrentAmbient.Clip, SourceType.Ambient, CurrentAmbient.FadeInDelay);
 
             yield return new WaitForSecondsRealtime(_info.GetRandomDelayFromAmbientItem(CurrentAmbient));
@@ -38,8 +59,16 @@ public class AmbientController : MonoBehaviour
 
     public void StopPlaying()
     {
-        StopCoroutine(PlayLoop());
-        _controller.Stop(SourceType.Ambient, CurrentAmbient.FadeOutDelay);
+        _isPlaying = false;
+
+        if (_ambientCoroutine != null)
+        {
+            StopCoroutine(_ambientCoroutine);
+            _ambientCoroutine = null;
+        }
+
+        if (_controller != null && CurrentAmbient.Clip != null)
+            _controller.Stop(SourceType.Ambient, CurrentAmbient.FadeOutDelay);
     }
 
     private void OnDestroy() 

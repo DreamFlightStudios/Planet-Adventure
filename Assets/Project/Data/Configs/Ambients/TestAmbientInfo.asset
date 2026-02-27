@@ -13,15 +13,6 @@ MonoBehaviour:
   m_Name: TestAmbientInfo
   m_EditorClassIdentifier: 
   _ambient:
-  - <Clip>k__BackingField: {fileID: 8300000, guid: baa30b3606b746647b65d6ecb21b2140, type: 3}
-    <FadeInDelay>k__BackingField: 23
-    <FadeOutDelay>k__BackingField: 1
   - <Clip>k__BackingField: {fileID: 8300000, guid: 7978664b6868e404dab25a8b5d6d699f, type: 3}
-    <FadeInDelay>k__BackingField: 123
-    <FadeOutDelay>k__BackingField: 1
-  - <Clip>k__BackingField: {fileID: 8300000, guid: 27b62974f64a772428620a92c715cbfb, type: 3}
-    <FadeInDelay>k__BackingField: 33
-    <FadeOutDelay>k__BackingField: 111
-  - <Clip>k__BackingField: {fileID: 8300000, guid: ae3142efec232174bae66c7bd3c4d8ac, type: 3}
-    <FadeInDelay>k__BackingField: 11
-    <FadeOutDelay>k__BackingField: 4
+    <FadeInDelay>k__BackingField: 2
+    <FadeOutDelay>k__BackingField: 2
