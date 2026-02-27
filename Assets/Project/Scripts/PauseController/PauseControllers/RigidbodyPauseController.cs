@@ -27,7 +27,6 @@ public class RigidbodyPauseController : PauseController
         _savedKinematic = _rigidbody.isKinematic;
         _savedGravity = _rigidbody.useGravity;
 
-        _rigidbody.isKinematic = true;
         _rigidbody.useGravity = false;
     }
 

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: DefaultConfigurationConfig
   m_EditorClassIdentifier: 
   <Sensivity>k__BackingField: 120
-  <AmbientVolume>k__BackingField: 100
-  <DialoguesVolume>k__BackingField: 30
-  <InterfaceVolume>k__BackingField: 60
-  <EnvironmentVolume>k__BackingField: 68
-  <MusicVolume>k__BackingField: 98
+  <AmbientVolume>k__BackingField: -50
+  <DialoguesVolume>k__BackingField: -25
+  <InterfaceVolume>k__BackingField: -30
+  <EnvironmentVolume>k__BackingField: -25
+  <MusicVolume>k__BackingField: -40
   <GraphicsQuality>k__BackingField: 2
   <IsSubtitlesOn>k__BackingField: 1
   <IsFullScreenOn>k__BackingField: 1
