@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "37ffe763-a18a-4894-8836-7f0a2c46c173",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "29ff083c-10a1-4ce3-ace9-4082f14105a3",
@@ -43,11 +34,11 @@
                 },
                 {
                     "name": "Sprint",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "9323f0db-c7a8-42e7-a3aa-0244c9c270cf",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -129,17 +120,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a5deed60-8947-479d-a273-1f32482181a0",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d8eea086-beb7-4060-a477-7bd6b4fad1ac",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -151,8 +131,8 @@
                 },
                 {
                     "name": "",
-                    "id": "727d5fc0-89f5-4139-ab79-db5817558f3a",
-                    "path": "<Keyboard>/shift",
+                    "id": "4a6cb71f-9cb0-437f-8a56-578940a69868",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
