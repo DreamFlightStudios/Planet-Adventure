@@ -1,4 +1,4 @@
-public class AgentCrouchingState : AgentGroundedState
+public class AgentFlyingState : AgentAirbornState
 {
     public override void Enter()
     {

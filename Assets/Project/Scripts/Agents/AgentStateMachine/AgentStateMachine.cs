@@ -6,6 +6,7 @@ public class AgentStateMachine : MonoBehaviour, IAgentStateMachine
     public IReadonlyAgentStateMachineData Data => _data;
 
     [SerializeField] private string _defaultStateName;
+    [SerializeField] private AgentView _view;
     [SerializeField] private AgentMovementInfo _config;
     
     private AgentStateMachineData _data = new();
@@ -102,7 +103,7 @@ public class AgentStateMachine : MonoBehaviour, IAgentStateMachine
             if (!_data.States.ContainsKey(state.Data.StateName))
             {
                 _data.AddState(state.Data.StateName, state);
-                state.Initialize(_data, _config);
+                state.Initialize(_data, _view, _config);
             }
             else
             {

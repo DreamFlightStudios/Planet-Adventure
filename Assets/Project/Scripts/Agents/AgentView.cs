@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class AgentView : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Rigidbody[] _hips;
+    private Animator _animator;
+
+    private void Awake() 
+        => _animator = GetComponent<Animator>();
 
     public void SetFloatParametrValue(AgentAnimationKey key, float value) 
         => _animator.SetFloat(key.ToString(), value);
@@ -12,4 +16,14 @@ public class AgentView : MonoBehaviour
 
     public void InvokeTrigger(AgentAnimationKey key) 
         => _animator.SetTrigger(key.ToString());
+
+    public void SwitchRagDoll(bool state)
+    {
+        _animator.enabled = false;
+
+        foreach (var hip in _hips)
+        {
+            hip.isKinematic = !state;
+        }
+    }
 }

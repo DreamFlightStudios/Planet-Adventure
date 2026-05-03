@@ -18,14 +18,14 @@ public abstract class AgentState : MonoBehaviour, IAgentState
         StateMachine = GetComponent<IAgentStateMachine>();
         MovementInput = GetComponent<IAgentInput>();
         Mover = GetComponent<IAgentMover>();
-        View = GetComponent<AgentView>();
 
         Data = new AgentStateData(StateName);
     }
 
-    public virtual void Initialize(AgentStateMachineData stateMachineData, AgentMovementInfo config)
+    public virtual void Initialize(AgentStateMachineData stateMachineData, AgentView view, AgentMovementInfo config)
     {
         StateMachineData = stateMachineData;
+        View = view;
         Config = config;
     }
     

@@ -3,12 +3,12 @@ public class AgentFallingState : AgentAirbornState
     public override void Enter()
     {
         base.Enter();
-        View.SetBoolParametrValue(AgentAnimationKey.Falling, true);
+        View.SwitchRagDoll(true);
     }
 
     public override void Exit()
     {
         base.Exit();
-        View.SetBoolParametrValue(AgentAnimationKey.Falling, false);
+        View.SwitchRagDoll(false);
     }
 }
