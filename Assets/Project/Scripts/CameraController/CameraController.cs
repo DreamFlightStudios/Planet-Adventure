@@ -4,7 +4,7 @@ using Zenject;
 [RequireComponent(typeof(PauseController))]
 public class CameraController : Configurable, IPausable
 {
-    public bool IsPause {  get; private set; }
+    public bool IsPause { get; private set; }
 
     [SerializeField] private GameplayCameraConfig _config;
     private InputSystem _input;
@@ -14,7 +14,7 @@ public class CameraController : Configurable, IPausable
     private float _sensivity;
 
     [Inject]
-    private void Construct(InputSystem input, SaveLoadController saveLoadController) 
+    private void Construct(InputSystem input, SaveLoadController saveLoadController)
         => _input = input;
 
     private void Awake()
@@ -23,10 +23,10 @@ public class CameraController : Configurable, IPausable
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void OnPause() 
+    public void OnPause()
         => IsPause = true;
 
-    public void OnResume() 
+    public void OnResume()
         => IsPause = false;
 
     protected override void OnConfigurated(UserData data)

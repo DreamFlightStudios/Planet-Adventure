@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AgentView : MonoBehaviour
 {
-    [SerializeField] private Rigidbody[] _hips;
     private Animator _animator;
 
     private void Awake() 
@@ -16,14 +15,4 @@ public class AgentView : MonoBehaviour
 
     public void InvokeTrigger(AgentAnimationKey key) 
         => _animator.SetTrigger(key.ToString());
-
-    public void SwitchRagDoll(bool state)
-    {
-        _animator.enabled = false;
-
-        foreach (var hip in _hips)
-        {
-            hip.isKinematic = !state;
-        }
-    }
 }

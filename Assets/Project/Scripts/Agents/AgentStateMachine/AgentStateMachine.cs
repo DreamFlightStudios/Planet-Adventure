@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AgentStateMachine : MonoBehaviour, IAgentStateMachine
@@ -25,9 +26,7 @@ public class AgentStateMachine : MonoBehaviour, IAgentStateMachine
     private void FixedUpdate()
     {
         if (_data.CurrentState != null && !_data.IsTransitioning)
-        {
             _data.CurrentState.UpdateState();
-        }
     }
     
     public void SwitchState<T>() where T : IAgentState
@@ -46,6 +45,12 @@ public class AgentStateMachine : MonoBehaviour, IAgentStateMachine
     
     public void SwitchState(string stateName)
     {
+        if (_data.HasForbiddenStates && _data.ForbiddenStates.Contains(stateName))
+        {
+            Debug.LogWarning($"State {stateName} is forbidden in current zone!");
+            return;
+        }
+
         if (_data.IsTransitioning)
         {
             Debug.LogWarning($"Already transitioning, ignoring switch to {stateName}");
@@ -69,7 +74,19 @@ public class AgentStateMachine : MonoBehaviour, IAgentStateMachine
         
         _transitionCoroutine = StartCoroutine(TransitionToState(newState));
     }
-    
+
+    public void SetStatesRestrictions(string defaultState, HashSet<string> forbiddenStates, bool isActive)
+    {
+        _data.HasForbiddenStates = isActive;
+
+        if (isActive)
+            _data.ForbiddenStates = forbiddenStates;
+        else
+            _data.ForbiddenStates.Clear();
+
+        SwitchState(defaultState);
+    }
+
     private IEnumerator TransitionToState(IAgentState newState)
     {
         _data.IsTransitioning = true;

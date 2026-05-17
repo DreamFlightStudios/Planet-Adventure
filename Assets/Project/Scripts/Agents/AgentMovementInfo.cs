@@ -8,8 +8,9 @@ public class AgentMovementInfo : ScriptableObject
     [field: SerializeField] public float SprintingSpeed { get; private set; }
     [field: SerializeField] public float CrouchingSpeed { get; private set; }
 
-    [Header("Movemet Speed")]
+    [Header("")]
     [field: SerializeField] public float RotationSpeed { get; private set; }
     [field: SerializeField] public float Acceleration { get; private set; }
     [field: SerializeField] public float Deceleration { get; private set; }
+    [field: SerializeField] public float RotationInputDeadzone { get; private set; }
 }

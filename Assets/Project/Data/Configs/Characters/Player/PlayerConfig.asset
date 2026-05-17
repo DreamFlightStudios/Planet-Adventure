@@ -18,3 +18,4 @@ MonoBehaviour:
   <RotationSpeed>k__BackingField: 0.3
   <Acceleration>k__BackingField: 0.2
   <Deceleration>k__BackingField: 0.2
+  <RotationInputDeadzone>k__BackingField: 0.1
