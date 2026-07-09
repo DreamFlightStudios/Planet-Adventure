@@ -231,6 +231,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 1512c7c7596523f45a8e3d0d6d666d2b, type: 2}
   _camera: {fileID: 3466738958761317293}
+  _playerTransform: {fileID: 6334269042844576525}
+  _rotationSpeed: 240
+  _rotationLag: 0.055
+  _wallCheckRadius: 0.9
+  _wallCheckHeight: 1
+  _wallLayers:
+    serializedVersion: 2
+    m_Bits: 119
 --- !u!54 &4870397819939517366
 Rigidbody:
   m_ObjectHideFlags: 0
