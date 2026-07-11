@@ -13,6 +13,7 @@ public class PlayerMover : MonoBehaviour, IAgentMover, IPausable
 
     private Rigidbody _rigidbody;
     private AgentRoatationStrategy _rotationStrategy;
+
     private float _targetRotation;
     private float _smoothRotationVelocity;
 
@@ -45,11 +46,7 @@ public class PlayerMover : MonoBehaviour, IAgentMover, IPausable
         Vector3 moveDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
         float currentSpeed = speed * direction.magnitude;
 
-        Velocity = new Vector3(
-            moveDirection.x * currentSpeed,
-            _rigidbody.linearVelocity.y,
-            moveDirection.z * currentSpeed
-        );
+        Velocity = new Vector3(moveDirection.x * currentSpeed, _rigidbody.linearVelocity.y, moveDirection.z * currentSpeed);
 
         _rigidbody.linearVelocity = Velocity;
         Velocity = Velocity;

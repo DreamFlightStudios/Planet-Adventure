@@ -17,5 +17,5 @@ MonoBehaviour:
   <CrouchingSpeed>k__BackingField: 1.5
   <RotationSpeed>k__BackingField: 0.3
   <Acceleration>k__BackingField: 0.2
-  <Deceleration>k__BackingField: 0.2
+  <Deceleration>k__BackingField: 0.3
   <RotationInputDeadzone>k__BackingField: 0.1

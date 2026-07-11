@@ -9,6 +9,8 @@ public class Hand : MonoBehaviour
     public event Action Interacted;
 
     [SerializeField] private AgentView _view;
+    [SerializeField] private IKHandsController _iKHand;
+
     private IInteractive _interactiveObject;
     private InputSystem _input;
 
