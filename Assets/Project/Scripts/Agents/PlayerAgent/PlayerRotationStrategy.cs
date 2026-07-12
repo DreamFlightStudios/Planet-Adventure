@@ -13,6 +13,10 @@ public class PlayerRotationStrategy : AgentRoatationStrategy
     [SerializeField] private float _wallCheckHeight;
     [SerializeField] private LayerMask _wallLayers;
 
+    [Header("Turn Settings")]
+    [SerializeField] private float _instantTurnThreshold;
+    [SerializeField] private float _oppositeTurnAngle;
+
     private float _currentRotation;
     private float _rotationVelocity;
     private Vector2 _lastInput;
@@ -27,15 +31,15 @@ public class PlayerRotationStrategy : AgentRoatationStrategy
 
         float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + _camera.eulerAngles.y;
 
-        if (IsInstantTurn(input))
+        if (IsInstantTurn(input) || IsOppositeDirection(targetAngle))
         {
             _currentRotation = targetAngle;
-            _rotationVelocity = 0;
+            _rotationVelocity = 0f;
         }
         else if (IsWallNearby())
         {
             _currentRotation = targetAngle;
-            _rotationVelocity = 0;
+            _rotationVelocity = 0f;
         }
         else
         {
@@ -48,20 +52,28 @@ public class PlayerRotationStrategy : AgentRoatationStrategy
 
     private bool IsInstantTurn(Vector2 input)
     {
-        if (_lastInput == Vector2.zero) return false;
+        if (_lastInput == Vector2.zero) 
+            return false;
 
         float dot = Vector2.Dot(_lastInput.normalized, input.normalized);
-        return dot < -0.3f;
+        return dot < _instantTurnThreshold;
+    }
+
+    private bool IsOppositeDirection(float targetAngle)
+    {
+        float angleDifference = Mathf.DeltaAngle(_currentRotation, targetAngle);
+        return Mathf.Abs(angleDifference) > _oppositeTurnAngle;
     }
 
     private bool IsWallNearby()
     {
-        if (_playerTransform == null) return false;
+        if (_playerTransform == null)
+            return false;
 
         Vector3 spherePosition = _playerTransform.position + Vector3.up * _wallCheckHeight;
         Collider[] colliders = Physics.OverlapSphere(spherePosition, _wallCheckRadius, _wallLayers);
 
-        return colliders.Length > 0;
+        return colliders.Length > 0f;
     }
 
     private float SmoothTurn(float targetAngle, float magnitude)
