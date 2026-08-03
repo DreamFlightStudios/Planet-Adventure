@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2476309266476531882}
   - component: {fileID: 816090043211533265}
   - component: {fileID: 184287794273975275}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RigidbodyDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 1b0d73861eed4a84c85a86a8f728a955, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 1690978005878978807}
   - component: {fileID: 6184088141235138537}
   m_Layer: 7
-  m_Name: TouchableObject  (1)
+  m_Name: TouchablePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 7702342843845041073}
   - component: {fileID: 125199331194397219}
   m_Layer: 7
-  m_Name: 'TouchableObject '
+  m_Name: TouchablePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AgentView : MonoBehaviour
 {
+    [SerializeField] private AgentMovementInfo _config;
     private Animator _animator;
 
     private void Awake() 

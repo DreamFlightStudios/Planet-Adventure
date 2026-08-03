@@ -10,7 +10,6 @@ public class IKHandsController : MonoBehaviour
 
     private TouchableObject _target;
     private float _weight;
-    private Vector3 _targetPos;
 
     private void Update()
     {
@@ -25,9 +24,8 @@ public class IKHandsController : MonoBehaviour
         _weight = Mathf.Lerp(_weight, 1f, Time.deltaTime * _speed);
         _ik.weight = _weight;
 
-        _targetPos = _target.GetClosestPoint(_shoulder.position);
-        _hand.position = Vector3.Lerp(_hand.position, _targetPos, Time.deltaTime * _speed);
-        _hand.rotation = Quaternion.Lerp(_hand.rotation, _target.HandRotation, Time.deltaTime * _speed);
+        _hand.position = _target.GetClosestPoint(_shoulder.position);
+        _hand.rotation = _target.HandRotation;
     }
 
     private void OnTriggerEnter(Collider other)
