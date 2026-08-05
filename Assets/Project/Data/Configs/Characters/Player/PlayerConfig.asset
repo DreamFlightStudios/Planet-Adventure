@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bdd8d50afc4a17498e96bcda0f3c19a, type: 3}
+  m_Script: {fileID: 11500000, guid: 02e52998413b6dd448d399a06342358e, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  MovementInfo:
-    <WalkingSpeed>k__BackingField: 150
-    <RuningSpeed>k__BackingField: 300
-    <CrouchingSpeed>k__BackingField: 100
-    <RotationSpeed>k__BackingField: 0.2
-    <Acceleration>k__BackingField: 5
-    <JumpForce>k__BackingField: 400
+  <WalkingSpeed>k__BackingField: 3
+  <SprintingSpeed>k__BackingField: 5
+  <CrouchingSpeed>k__BackingField: 1.5
+  <RotationSpeed>k__BackingField: 0.3
+  <RotationInputDeadzone>k__BackingField: 0.1
+  <Acceleration>k__BackingField: 0.2
+  <Deceleration>k__BackingField: 0.3
+  <CrouchColliderHeight>k__BackingField: 0.72
+  <CrouchTransitionTime>k__BackingField: 0.5

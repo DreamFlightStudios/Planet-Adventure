@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: CameraControllerConfig
   m_EditorClassIdentifier: 
   <MinMaxRotationX>k__BackingField: {x: -85, y: 85}
-  <Sensivity>k__BackingField: 120
