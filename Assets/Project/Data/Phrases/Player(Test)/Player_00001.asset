@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player_00001
   m_EditorClassIdentifier: 
   SpeakerInfo: {fileID: 11400000, guid: 4f6c130ea37c8854082cb0ff033157da, type: 2}
-  AudioClip: {fileID: 8300000, guid: 18c01f75109ab7a47babb9fa4aecac98, type: 3}
-  Text: "\u042F \u043B\u043E\u0445"
+  AudioClip: {fileID: 8300000, guid: 16d5b43b70cb20d4c9c0668c0b5db7b7, type: 3}
+  Text: "\u041F\u0440\u0438\u0432\u0435\u0442!"

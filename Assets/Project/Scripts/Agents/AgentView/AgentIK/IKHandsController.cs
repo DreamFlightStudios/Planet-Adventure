@@ -3,10 +3,14 @@ using UnityEngine.Animations.Rigging;
 
 public class IKHandsController : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private Transform _shoulder;
     [SerializeField] private Transform _hand;
     [SerializeField] private TwoBoneIKConstraint _ik;
-    [SerializeField] private float _speed;
+
+    [Header("Settings")]
+    [SerializeField] private float _weightSpeed;
+    [SerializeField] private float _followSpeed;
 
     private TouchableObject _target;
     private float _weight;
@@ -15,16 +19,23 @@ public class IKHandsController : MonoBehaviour
     {
         if (_target == null)
         {
-            _weight = Mathf.Lerp(_weight, 0f, Time.deltaTime * _speed);
+            _weight = Mathf.Lerp(_weight, 0f, Time.deltaTime * _weightSpeed);
             _ik.weight = _weight;
 
             return;
         }
 
-        _weight = Mathf.Lerp(_weight, 1f, Time.deltaTime * _speed);
+        _weight = Mathf.Lerp(_weight, 1f, Time.deltaTime * _weightSpeed);
         _ik.weight = _weight;
 
-        _hand.position = _target.GetClosestPoint(_shoulder.position);
+        Vector3 targetLocalPos = _hand.parent.InverseTransformPoint(_target.GetClosestPoint(_shoulder.position));
+        Vector3 localPos = _hand.localPosition;
+
+        localPos.x = targetLocalPos.x;
+        localPos.z = Mathf.Lerp(localPos.z, targetLocalPos.z, Time.deltaTime * _weightSpeed);
+        localPos.y = Mathf.Lerp(localPos.y, targetLocalPos.y, Time.deltaTime * _weightSpeed);
+
+        _hand.localPosition = localPos;
         _hand.rotation = _target.HandRotation;
     }
 

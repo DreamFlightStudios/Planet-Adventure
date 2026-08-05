@@ -1760,7 +1760,8 @@ MonoBehaviour:
   _shoulder: {fileID: 6626758182093449888}
   _hand: {fileID: 481795941644027463}
   _ik: {fileID: 4470463480657514577}
-  _speed: 4
+  _weightSpeed: 2
+  _followSpeed: 3
 --- !u!64 &3787001846332863025
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3546,7 +3547,8 @@ MonoBehaviour:
   _shoulder: {fileID: 1387469846522202280}
   _hand: {fileID: 2611911670471021451}
   _ik: {fileID: 7423026540470739146}
-  _speed: 4
+  _weightSpeed: 2
+  _followSpeed: 3
 --- !u!64 &5164660381494227027
 MeshCollider:
   m_ObjectHideFlags: 0
