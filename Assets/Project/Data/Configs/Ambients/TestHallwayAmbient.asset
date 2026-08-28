@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ambient:
   - <Clip>k__BackingField: {fileID: 8300000, guid: c4b7d56ef3dc9bb4cb9f0a771e25aa51, type: 3}
-    <FadeInDelay>k__BackingField: 2
-    <FadeOutDelay>k__BackingField: 10
+    <FadeInDelay>k__BackingField: 0.5
+    <FadeOutDelay>k__BackingField: 0.5
