@@ -386,7 +386,7 @@ MonoBehaviour:
   _camera: {fileID: 3466738958761317293}
   _playerTransform: {fileID: 6334269042844576525}
   _rotationSpeed: 240
-  _rotationLag: 0.055
+  _rotationLag: 0.02
   _wallCheckRadius: 1.2
   _wallCheckHeight: 1.3
   _wallLayers:

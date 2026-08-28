@@ -25,7 +25,6 @@ public class AmbientController : MonoBehaviour
 
     public void StartPlaying()
     {
-        Debug.Log("Play");
         if (_isPlaying || _ambientCoroutine != null)
             return;
 
@@ -35,7 +34,6 @@ public class AmbientController : MonoBehaviour
 
     protected IEnumerator PlayLoop()
     {
-        Debug.Log("PlayLoop");
         while (_isPlaying)
         {
             yield return new WaitForSecondsRealtime(_info.GetStartRandomDelay());

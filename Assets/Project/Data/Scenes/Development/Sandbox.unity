@@ -6061,6 +6061,7 @@ MonoBehaviour:
   _forbiddenStates:
   - Sprinting
   - Crouching
+  _drawGizmosColor: {r: 0, g: 0.8523679, b: 1, a: 0.47058824}
 --- !u!4 &1128515222
 Transform:
   m_ObjectHideFlags: 0
@@ -6356,9 +6357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2a6dcc9f1e4ee4396afb88842cc08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 1
+  _playOnStart: 0
   _info: {fileID: 11400000, guid: e99abb322a463a84cb5c4bf135f602cc, type: 2}
-  _drawGizmosColor: {r: 1, g: 0, b: 0.027940273, a: 0.59607846}
+  _drawGizmosColor: {r: 1, g: 0.96862745, b: 0, a: 0.59607846}
 --- !u!65 &1275139589
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6369,10 +6370,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -6389,8 +6390,8 @@ Transform:
   m_GameObject: {fileID: 1275139587}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.016288519, y: 1.0798998, z: 0.07999992}
-  m_LocalScale: {x: 2, y: 2.180995, z: 7.768522}
+  m_LocalPosition: {x: 0.016288519, y: 0.99989986, z: -0.95}
+  m_LocalScale: {x: 2, y: 2.180995, z: 7.3419967}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 107116512}
@@ -6489,7 +6490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2a6dcc9f1e4ee4396afb88842cc08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 1
+  _playOnStart: 0
   _info: {fileID: 11400000, guid: 7319da391c710204bba5102e5ce30f80, type: 2}
   _drawGizmosColor: {r: 1, g: 0.96840537, b: 0, a: 0.59607846}
 --- !u!65 &1400922356
@@ -6502,10 +6503,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

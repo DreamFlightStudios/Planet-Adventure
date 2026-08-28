@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public class AmbientZoneController : AmbientController
 {
     [SerializeField] private Color _drawGizmosColor;
@@ -11,7 +10,22 @@ public class AmbientZoneController : AmbientController
     private void OnTriggerExit(Collider other) 
         => StopPlaying();
 
-    private void OnDrawGizmosSelected()
+    private void Reset()
+    {
+        if (TryGetComponent(out BoxCollider collider) == false)
+        {
+            collider = gameObject.AddComponent<BoxCollider>();
+            collider.isTrigger = true;
+
+            int playerLayer = LayerMask.NameToLayer("Player");
+            LayerMask playerLayerMask = 1 << playerLayer;
+
+            collider.includeLayers = playerLayerMask;
+            collider.excludeLayers = ~playerLayerMask;
+        }
+    }
+
+    private void OnDrawGizmos()
     {
         var collider = GetComponent<BoxCollider>();
 

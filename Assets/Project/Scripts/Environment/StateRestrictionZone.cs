@@ -6,6 +6,7 @@ public class StateRestrictionZone : MonoBehaviour
     [Header("Zone Settings")]
     [SerializeField] private string _defaultState;
     [SerializeField] private List<string> _forbiddenStates = new List<string>();
+    [SerializeField] private Color _drawGizmosColor;
 
     private HashSet<string> _forbiddenStatesSet;
     private HashSet<IAgentStateMachine> _agentsInside = new HashSet<IAgentStateMachine>();
@@ -40,32 +41,29 @@ public class StateRestrictionZone : MonoBehaviour
         stateMachine.SetStatesRestrictions(_defaultState, restrictions, isEntering);
     }
 
-    private void OnDrawGizmos()
+    private void Reset()
     {
-        Collider zoneCollider = GetComponent<Collider>();
-        if (zoneCollider == null) return;
+        if (TryGetComponent(out BoxCollider collider) == false)
+        {
+            collider = gameObject.AddComponent<BoxCollider>();
+            collider.isTrigger = true;
 
-        Gizmos.color = GetGizmoColor();
-        Gizmos.matrix = transform.localToWorldMatrix;
+            int playerLayer = LayerMask.NameToLayer("Player");
+            LayerMask playerLayerMask = 1 << playerLayer;
 
-        Vector3 center = zoneCollider.bounds.center - transform.position;
-        Vector3 size = zoneCollider.bounds.size;
-
-        Gizmos.DrawWireCube(center, size);
-
-        Color transparentColor = GetGizmoColor();
-        transparentColor.a = 0.3f;
-        Gizmos.color = transparentColor;
-        Gizmos.DrawCube(center, size);
-
-        Gizmos.matrix = Matrix4x4.identity;
+            collider.includeLayers = playerLayerMask;
+            collider.excludeLayers = ~playerLayerMask;
+        }
     }
 
-    private Color GetGizmoColor()
+    private void OnDrawGizmos()
     {
-        if (_forbiddenStates == null || _forbiddenStates.Count == 0)
-            return Color.green;
+        var collider = GetComponent<BoxCollider>();
 
-        return _forbiddenStatesSet?.Count > 0 ? Color.red : Color.yellow;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = _drawGizmosColor;
+        Gizmos.DrawCube(collider.center, collider.size);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(collider.center, collider.size);
     }
 }
