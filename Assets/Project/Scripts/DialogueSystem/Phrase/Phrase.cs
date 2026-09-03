@@ -5,5 +5,5 @@ using UnityEngine;
 public struct Phrase
 {
     [field: SerializeField] public PhraseInfo Info;
-    [field: SerializeField] public int Delay;
+    [field: SerializeField] public float Delay;
 }
