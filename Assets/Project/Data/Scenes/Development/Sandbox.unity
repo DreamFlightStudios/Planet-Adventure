@@ -11963,18 +11963,18 @@ MonoBehaviour:
   - Info: {fileID: 11400000, guid: 533083ae0e5d7f444877693c3f36b7d3, type: 2}
     Delay: 1
   - Info: {fileID: 11400000, guid: 26731102dbc75b24a947caf35671ff79, type: 2}
-    Delay: 0
+    Delay: 1
   - Info: {fileID: 11400000, guid: 5bd4321f47557dd49b945134d2890747, type: 2}
-    Delay: 0
+    Delay: 1
   - Info: {fileID: 11400000, guid: c552ae3219e517a4192645df5d6a3534, type: 2}
-    Delay: 0
+    Delay: 1
   Activated:
     m_PersistentCalls:
       m_Calls: []
   Completed:
     m_PersistentCalls:
       m_Calls: []
-  _perceptionRate: 1.2
+  _perceptionRate: 2
   _activateOnStart: 1
 --- !u!114 &1801795916
 MonoBehaviour:
