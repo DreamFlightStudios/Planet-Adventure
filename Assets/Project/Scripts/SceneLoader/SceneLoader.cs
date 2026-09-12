@@ -11,10 +11,10 @@ public class SceneLoader : MonoBehaviour
     public event Action LoadFinished;
 
     [Inject]
-    private void Construct(RootControllerUI rootUI)
+    private void Construct(RootControllerUI uiScreens)
     {
-        LoadStarted += rootUI.ShowLoadingScreen;
-        LoadFinished += rootUI.HideLoadingScreen;
+        LoadStarted += () => uiScreens.Show(ScreenId.Loading);
+        LoadFinished += () => uiScreens.Hide(ScreenId.Loading);
     }
 
     public void ChangeScene(string sceneName) 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubtilesUI : AttachableContainerUI
+public class SubtilesUI : UIScreen
 {
     [SerializeField] private SubtitlesField _fieldPrefab;
     [SerializeField] private Transform _container;

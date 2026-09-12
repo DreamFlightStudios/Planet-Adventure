@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GamePopUp : MonoBehaviour
+public class GamePopUp : UIScreen
 {
     [field: SerializeField] public Button CancelButton;
     [field: SerializeField] public Button ApplyButton;

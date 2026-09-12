@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuControllerUI : AttachableContainerUI
+public class MainMenuControllerUI : UIScreen
 {
     [field: SerializeField] public Button SettingMenuButton { get; private set; }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class SettingsMenuController : RootUI
+public class SettingsMenuController : UIScreen
 {
     [SerializeField] private SettingsConfigurationConfig _defaultConfiguration;
 

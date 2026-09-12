@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenuControllerUI : AttachableContainerUI
+public class PauseMenuControllerUI : UIScreen
 {
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _backMenuButton;
@@ -12,26 +12,35 @@ public class PauseMenuControllerUI : AttachableContainerUI
     public event Action<bool> Paused;
     private SceneLoader _sceneLoader;
 
-    private void Awake() 
+    private void Awake()
         => _pauseMenu.SetActive(false);
 
-    public void Initialize(SceneLoader sceneLoader, RootControllerUI rootUI)
+    public void Initialize(SceneLoader sceneLoader, RootControllerUI uiScreens)
     {
         _sceneLoader = sceneLoader;
 
         _continueButton.onClick.AddListener(() => SwitchState(false));
         _backMenuButton.onClick.AddListener(OnBackMenuButonClicked);
-        _settingsButton.onClick.AddListener(rootUI.ShowSettingsMenu);
+        _settingsButton.onClick.AddListener(() => uiScreens.Show(ScreenId.Settings));
     }
 
-    public override void SwitchStateByContainer(bool state, GameObject container)
+    public override void SwitchState(bool state)
+        => SwitchStateByContainer(state, _pauseMenu);
+
+    protected override void OnShow()
     {
-        base.SwitchStateByContainer(state, _pauseMenu);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
-        Cursor.visible = IsActive;
-        Cursor.lockState = IsActive ? CursorLockMode.None : CursorLockMode.Locked;
+        Paused?.Invoke(true);
+    }
 
-        Paused?.Invoke(IsActive);
+    protected override void OnHide()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Paused?.Invoke(false);
     }
 
     private void OnBackMenuButonClicked()

@@ -5,78 +5,119 @@ using UnityEngine;
 public class RootControllerUI : MonoBehaviour
 {
     [Header("RootUI")]
-    [SerializeField] private Transform _sceneUIContainer;
+    [SerializeField] private Transform _canvasRoot;
+    [SerializeField] private Transform _sceneContainer;
 
-    [Header("RootUI")]
-    [SerializeField] private RootUI _loadingScreen;
-    [SerializeField] public RootUI _settingsMenu;
+    [Header("Predefined Screens")]
+    [SerializeField] private UIScreen _loadingScreen;
+    [SerializeField] private UIScreen _settingsMenu;
 
-    private List<AttachableContainerUI> _addedUIÑontainers = new List<AttachableContainerUI>();
-    private Dictionary<DynamicUI, int> _dynamicUI = new Dictionary<DynamicUI, int>();
+    private readonly Dictionary<ScreenId, UIScreen> _registry = new();
+    private readonly List<UIScreen> _popupStack = new();
 
     public void Initialize(InputSystem input)
     {
-        input.UI.Pause.performed += context => OnTrigerInvoke();
-        _dynamicUI.Add(_settingsMenu, _settingsMenu.LayerPriority);
+        input.UI.Pause.performed += context => OnTriggerInvoke();
+
+        AddScreen(ScreenId.Loading, _loadingScreen, _canvasRoot);
+        AddScreen(ScreenId.Settings, _settingsMenu, _canvasRoot);
     }
 
-    public void ShowLoadingScreen() 
-        => _loadingScreen.SwitchState(true);
+    public void Register(ScreenId id, UIScreen screen)
+        => AddScreen(id, screen, _sceneContainer);
 
-    public void HideLoadingScreen() 
-        => _loadingScreen.SwitchState(false);
-
-    public void ShowSettingsMenu() 
-        => _settingsMenu.SwitchState(true);
-
-    public void AttachSceneUI(AttachableContainerUI sceneUI, AttachType type = AttachType.Default)
+    public void Unregister(ScreenId id)
     {
-        if (type == AttachType.AllClear)
-            ClearSceneUI();
+        if (!_registry.TryGetValue(id, out var screen))
+            return;
 
-        if (sceneUI.IsDeactivatedByTrigger || sceneUI.IsActivatedByTrigger)
-        {
-            _dynamicUI.Add(sceneUI, sceneUI.LayerPriority);
-            _dynamicUI.OrderByDescending(key => key.Value);
-        }
+        _registry.Remove(id);
+        _popupStack.Remove(screen);
 
-        sceneUI.Attach(_sceneUIContainer);
-        _addedUIÑontainers.Add(sceneUI);
+        screen.DisposeScreen();
+        Destroy(screen.gameObject);
     }
 
-    public void ClearSceneUI()
+    public void Show(ScreenId id)
     {
-        foreach (var container in _addedUIÑontainers)
-        {
-            _dynamicUI.Remove(container);
-            Destroy(container.gameObject);
-        }
+        var screen = _registry[id];
 
-        _addedUIÑontainers.Clear();
+        if (screen.IsModal && !_popupStack.Contains(screen))
+            _popupStack.Add(screen);
+
+        screen.SwitchState(true);
+        RefreshOrdering();
     }
 
-    private void OnTrigerInvoke()
+    public void Hide(ScreenId id)
     {
-        var uiToActivate = _dynamicUI.Keys.FirstOrDefault(ui => ui.IsActivatedByTrigger && !ui.IsActive);
+        var screen = _registry[id];
+        _popupStack.Remove(screen);
+        screen.SwitchState(false);
+    }
 
-        if (uiToActivate)
+    public bool IsShown(ScreenId id)
+        => _registry.TryGetValue(id, out var screen) && screen.IsActive;
+
+    public void ClearSceneScreens()
+    {
+        foreach (var id in _registry.Where(pair => pair.Value.transform.parent == _sceneContainer).Select(pair => pair.Key).ToArray())
+            Unregister(id);
+
+        _popupStack.Clear();
+    }
+
+    private void AddScreen(ScreenId id, UIScreen screen, Transform container)
+    {
+        if (_registry.ContainsKey(id))
+            Unregister(id);
+
+        screen.Attach(container);
+        screen.CreateScreen();
+
+        _registry[id] = screen;
+    }
+
+    private ScreenId GetId(UIScreen screen)
+        => _registry.First(pair => pair.Value == screen).Key;
+
+    private void CloseTopPopup()
+    {
+        if (_popupStack.Count == 0)
+            return;
+
+        var top = _popupStack[^1];
+        _popupStack.RemoveAt(_popupStack.Count - 1);
+        top.SwitchState(false);
+    }
+
+    private void OnTriggerInvoke()
+    {
+        if (_popupStack.Count > 0)
         {
-            uiToActivate.SwitchState(true);
+            CloseTopPopup();
             return;
         }
 
-        var uiToDeactivate = _dynamicUI.Keys.FirstOrDefault(ui => ui.IsActive);
+        var triggerableScreens = _registry.Values.Where(s => s.IsActivatedByTrigger || s.IsDeactivatedByTrigger);
 
-        if (uiToDeactivate)
+        var screenToActivate = triggerableScreens.FirstOrDefault(s => s.IsActivatedByTrigger && !s.IsActive);
+
+        if (screenToActivate != null)
         {
-            uiToDeactivate.SwitchState(false);
+            Show(GetId(screenToActivate));
             return;
         }
-    }
-}
 
-public enum AttachType
-{
-    Default,
-    AllClear
+        var screenToDeactivate = triggerableScreens.FirstOrDefault(s => s.IsDeactivatedByTrigger && s.IsActive);
+        screenToDeactivate?.SwitchState(false);
+    }
+
+    private void RefreshOrdering()
+    {
+        var ordered = _registry.Values.Where(s => s.IsActive).OrderBy(s => s.Layer).ToList();
+
+        for (var i = 0; i < ordered.Count; i++)
+            ordered[i].transform.SetSiblingIndex(i);
+    }
 }

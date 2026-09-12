@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PauseController))]
-public class WarningIndicator : AttachableContainerUI, IPausable
+public class WarningIndicator : UIScreen, IPausable
 {
     public bool IsPause { get; private set; }
 

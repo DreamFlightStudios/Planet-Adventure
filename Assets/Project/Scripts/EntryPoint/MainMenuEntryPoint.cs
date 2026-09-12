@@ -6,12 +6,16 @@ public class MainMenuEntryPoint : MonoBehaviour
     [SerializeField] private MainMenuControllerUI _mainMenuPrefab;
 
     [Inject]
-    private void Construct(RootControllerUI rootUI, SaveLoadController saveLoadController, SceneLoader sceneLoader)
+    private void Construct(RootControllerUI uiScreens, SaveLoadController saveLoadController, SceneLoader sceneLoader)
     {
+        uiScreens.ClearSceneScreens();
+
         var mainMenu = Instantiate(_mainMenuPrefab);
         mainMenu.Initialize(saveLoadController, sceneLoader);
 
-        mainMenu.SettingMenuButton.onClick.AddListener(rootUI.ShowSettingsMenu);
-        rootUI.AttachSceneUI(mainMenu, AttachType.AllClear);
+        uiScreens.Register(ScreenId.MainMenu, mainMenu);
+        uiScreens.Show(ScreenId.MainMenu);
+
+        mainMenu.SettingMenuButton.onClick.AddListener(() => uiScreens.Show(ScreenId.Settings));
     }
 }

@@ -656,6 +656,7 @@ MonoBehaviour:
   <IsDeactivatedByTrigger>k__BackingField: 0
   <IsActivatedByTrigger>k__BackingField: 0
   <LayerPriority>k__BackingField: 0
+  <Layer>k__BackingField: 1
   <SettingMenuButton>k__BackingField: {fileID: 2289137288432029601}
   _choiceGameSaveButton: {fileID: 3056012543650626384}
   _launchLevelsPanel: {fileID: 4654776874580456706}
