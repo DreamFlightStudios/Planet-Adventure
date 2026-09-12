@@ -115,16 +115,15 @@ public class AudioController : Configurable
         }
     }
 
-    protected override void OnConfigurated(UserData data)
+    protected override void OnConfigurated(UserSettingsData settings)
     {
-        base.OnConfigurated(data);
-        var settingsData = data.SettingsData;
+        base.OnConfigurated(settings);
 
-        _mixer.SetFloat(_ambientMixerKey, settingsData.Ambient);
-        _mixer.SetFloat(_dialoguesMixerKey, settingsData.Dialogues);
-        _mixer.SetFloat(_interfaceMixerKey, settingsData.Interface);
-        _mixer.SetFloat(_environmentMixerKey, settingsData.Environment);
-        _mixer.SetFloat(_musicMixerKey, settingsData.Music);
+        _mixer.SetFloat(_ambientMixerKey, settings.Ambient);
+        _mixer.SetFloat(_dialoguesMixerKey, settings.Dialogues);
+        _mixer.SetFloat(_interfaceMixerKey, settings.Interface);
+        _mixer.SetFloat(_environmentMixerKey, settings.Environment);
+        _mixer.SetFloat(_musicMixerKey, settings.Music);
     }
 
     private AudioSource GetSource(SourceType type)

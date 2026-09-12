@@ -6,11 +6,11 @@ public class GameEntryPoint : MonoBehaviour
     [SerializeField] private GameObject _rootObjects;
 
     [Inject]
-    private void Construct(SceneLoader sceneLoader)
+    private void Construct(SceneLoader sceneLoader, LevelsConfig levelsConfig)
     {
         var rootObjects = Instantiate(_rootObjects);
         DontDestroyOnLoad(rootObjects);
 
-        sceneLoader.ChangeScene("MainMenu");
+        sceneLoader.ChangeScene(levelsConfig.MainMenuSceneName);
     }
 }

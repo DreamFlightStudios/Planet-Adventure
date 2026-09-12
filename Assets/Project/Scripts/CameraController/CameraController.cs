@@ -14,7 +14,7 @@ public class CameraController : Configurable, IPausable
     private float _sensivity;
 
     [Inject]
-    private void Construct(InputSystem input, SaveLoadController saveLoadController)
+    private void Construct(InputSystem input)
         => _input = input;
 
     private void Awake()
@@ -29,10 +29,10 @@ public class CameraController : Configurable, IPausable
     public void OnResume()
         => IsPause = false;
 
-    protected override void OnConfigurated(UserData data)
+    protected override void OnConfigurated(UserSettingsData settings)
     {
-        base.OnConfigurated(data);
-        _sensivity = data.SettingsData.Sensivity;
+        base.OnConfigurated(settings);
+        _sensivity = settings.Sensivity;
     }
 
     private void Update()

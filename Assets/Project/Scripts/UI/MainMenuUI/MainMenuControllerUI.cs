@@ -8,9 +8,6 @@ public class MainMenuControllerUI : UIScreen
     [SerializeField] private Button _choiceGameSaveButton;
     [SerializeField] private LaunchLevelsPanel _launchLevelsPanel;
 
-    public void Initialize(SaveLoadController saveLoadController, SceneLoader sceneLoader) 
-        => _launchLevelsPanel.Initialize(saveLoadController, sceneLoader);
-
     private void Start()
     {
         _choiceGameSaveButton.onClick.AddListener(OnChoiceLevelButtonPressed);

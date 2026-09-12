@@ -3,6 +3,13 @@ using Zenject;
 
 public class ProjectInstaller : MonoInstaller
 {
+    private const string SettingsFileName = "Settings";
+    private const string LevelsProgressFileName = "LevelsProgress";
+
+    [Header("Configs")]
+    [SerializeField] private SettingsConfigurationConfig _defaultSettings;
+    [SerializeField] private LevelsConfig _levelsConfig;
+
     [Header("Dependencies")]
     [SerializeField] private RootControllerUI _rootUI;
     [SerializeField] private AudioController _audioController;
@@ -15,8 +22,23 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<InputSystem>().FromInstance(input).AsSingle();
         input.Enable();
 
-        var saveLoadController = new SaveLoadController();
-        Container.Bind<SaveLoadController>().FromInstance(saveLoadController).AsSingle();
+        Container.Bind<LevelsConfig>().FromInstance(_levelsConfig).AsSingle();
+
+        var storage = new FileStorage();
+        Container.Bind<IFileStorage>().FromInstance(storage).AsSingle();
+
+        var serializer = new JsonSaveSerializer();
+        Container.Bind<ISaveSerializer>().FromInstance(serializer).AsSingle();
+
+        var settingsFile = new SaveFile<UserSettingsData>(SettingsFileName, UserSettingsData.CurrentVersion, storage, serializer, () => SettingsService.CreateDefault(_defaultSettings));
+        var settingsService = new SettingsService(settingsFile, _defaultSettings);
+        Container.Bind<ISettingsService>().FromInstance(settingsService).AsSingle();
+        settingsService.Initialize();
+
+        var progressFile = new SaveFile<LevelsProgressData>(LevelsProgressFileName, LevelsProgressData.CurrentVersion, storage, serializer, () => new LevelsProgressData());
+        var progressService = new LevelProgressService(progressFile, _levelsConfig);
+        Container.Bind<ILevelProgressService>().FromInstance(progressService).AsSingle();
+        progressService.Initialize();
 
         var audioController = Container.InstantiatePrefabForComponent<AudioController>(_audioController);
         Container.Bind<AudioController>().FromInstance(audioController).AsSingle();

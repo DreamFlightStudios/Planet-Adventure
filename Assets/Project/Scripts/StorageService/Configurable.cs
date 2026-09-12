@@ -3,20 +3,22 @@ using Zenject;
 
 public abstract class Configurable : MonoBehaviour
 {
-    private SaveLoadController _saveLoadController;
+    private ISettingsService _settingsService;
 
     [Inject]
-    private void Construct(SaveLoadController saveLoadController)
+    private void Construct(ISettingsService settingsService)
     {
-        _saveLoadController = saveLoadController;
-        _saveLoadController.Loaded += OnConfigurated;
+        _settingsService = settingsService;
+        _settingsService.Subscribe(OnConfigurated);
     }
 
-    protected virtual void OnConfigurated(UserData data) { }
+    // Subscribe applies the current settings immediately, and Zenject injects before Awake,
+    // so OnConfigurated may run earlier than Awake. Rely only on [SerializeField] fields here.
+    protected virtual void OnConfigurated(UserSettingsData settings) { }
 
     private void OnDestroy()
     {
-        if (_saveLoadController != null)
-            _saveLoadController.Loaded -= OnConfigurated;
+        if (_settingsService != null)
+            _settingsService.Unsubscribe(OnConfigurated);
     }
 }

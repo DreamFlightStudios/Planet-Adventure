@@ -24,6 +24,6 @@ public class SubtilesUI : UIScreen
             _subtitles.Remove(phrase);
         }
     }
-    protected override void OnConfigurated(UserData data) 
-        => _container.gameObject.SetActive(data.SettingsData.Subtitles);
+    protected override void OnConfigurated(UserSettingsData settings)
+        => _container.gameObject.SetActive(settings.Subtitles);
 }

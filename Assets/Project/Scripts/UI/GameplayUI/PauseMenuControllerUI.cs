@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class PauseMenuControllerUI : UIScreen
 {
@@ -11,6 +12,11 @@ public class PauseMenuControllerUI : UIScreen
 
     public event Action<bool> Paused;
     private SceneLoader _sceneLoader;
+    private LevelsConfig _levelsConfig;
+
+    [Inject]
+    private void Construct(LevelsConfig levelsConfig)
+        => _levelsConfig = levelsConfig;
 
     private void Awake()
         => _pauseMenu.SetActive(false);
@@ -49,6 +55,6 @@ public class PauseMenuControllerUI : UIScreen
         _backMenuButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.RemoveAllListeners();
 
-        _sceneLoader.ChangeScene("MainMenu");
+        _sceneLoader.ChangeScene(_levelsConfig.MainMenuSceneName);
     }
 }

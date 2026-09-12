@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1637f2ba045b3f4e84d692c3f37211c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultSettings: {fileID: 11400000, guid: ebe5f5489ff15124d88b431667271cf3, type: 2}
+  _levelsConfig: {fileID: 11400000, guid: 54be4f7b2664cb246bbcae33dc7cbadf, type: 2}
   _rootUI: {fileID: 6001226689549178424, guid: 6d906859fb4d25446a2b924f8614088b, type: 3}
   _audioController: {fileID: 7006674937118952478, guid: b97d66914a874db448f15f2733eedee8, type: 3}
   _coroutines: {fileID: 445238464676294973, guid: 786c02544a29aa84b805c9b38f85d589, type: 3}

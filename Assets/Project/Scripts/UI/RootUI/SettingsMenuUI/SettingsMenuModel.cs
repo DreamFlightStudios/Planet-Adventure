@@ -39,15 +39,17 @@ public class SettingsMenuModel
 
     public UserSettingsData GetUserSettingsData()
     {
-        return new UserSettingsData(
-        Sensivity,
-        Graphics,
-        DialoguesVolume,
-        AmbientVolume,
-        InterfaceVolume,
-        EnvironmentVolume,
-        MusicVolume,
-        Subtitles,
-        FullScreen);
+        return new UserSettingsData
+        {
+            Sensivity = Sensivity,
+            Graphics = Graphics,
+            Ambient = AmbientVolume,
+            Dialogues = DialoguesVolume,
+            Interface = InterfaceVolume,
+            Environment = EnvironmentVolume,
+            Music = MusicVolume,
+            Subtitles = Subtitles,
+            FullScreen = FullScreen,
+        };
     }
 }

@@ -4,7 +4,7 @@ using Zenject;
 public class GameplayEntryPoint : MonoBehaviour
 {
     [Inject]
-    private void Construct(SaveLoadController saveLoadController, RootControllerUI uiScreens, PauseMenuControllerUI pauseMenuUI, WarningIndicator warningIndicatorUI, SubtilesUI subtiles, SceneLoader sceneLoader, InputSystem input)
+    private void Construct(RootControllerUI uiScreens, PauseMenuControllerUI pauseMenuUI, WarningIndicator warningIndicatorUI, SubtilesUI subtiles, SceneLoader sceneLoader, InputSystem input)
     {
         uiScreens.ClearSceneScreens();
 
@@ -17,7 +17,5 @@ public class GameplayEntryPoint : MonoBehaviour
 
         uiScreens.Show(ScreenId.WarningIndicator);
         uiScreens.Show(ScreenId.Subtitles);
-
-        saveLoadController.UpdateUserData();
     }
 }
