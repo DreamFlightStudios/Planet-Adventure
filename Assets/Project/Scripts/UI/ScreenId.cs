@@ -6,5 +6,6 @@ public enum ScreenId
     MainMenu,
     Pause,
     WarningIndicator,
-    Subtitles
+    Subtitles,
+    PopUp
 }

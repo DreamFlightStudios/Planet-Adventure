@@ -11,22 +11,27 @@ public class Hand : MonoBehaviour
     [SerializeField] private AgentView _view;
     private IInteractive _interactiveObject;
     private InputSystem _input;
+    private IPauseService _pauseService;
 
     [Inject]
-    private void Construct(InputSystem input) => _input = input;
+    private void Construct(InputSystem input, IPauseService pauseService)
+    {
+        _input = input;
+        _pauseService = pauseService;
+    }
 
     private void Interaction(InputAction.CallbackContext context)
     {
-        if (_interactiveObject != null)
-        {
-            _interactiveObject.Interaction();
-            _view.InvokeTrigger(AgentAnimationKey.Interaction);
+        if (_interactiveObject == null || _pauseService.IsPaused)
+            return;
 
-            if (!_interactiveObject.CanInteract)
-            {
-                _interactiveObject = null;
-                Interacted?.Invoke();
-            }
+        _interactiveObject.Interaction();
+        _view.InvokeTrigger(AgentAnimationKey.Interaction);
+
+        if (!_interactiveObject.CanInteract)
+        {
+            _interactiveObject = null;
+            Interacted?.Invoke();
         }
     }
 

@@ -395,10 +395,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bdc42085095fc4c89291fc3767e20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsDeactivatedByTrigger>k__BackingField: 1
+  <Layer>k__BackingField: 0
+  <IsModal>k__BackingField: 0
   <IsActivatedByTrigger>k__BackingField: 0
+  <IsDeactivatedByTrigger>k__BackingField: 1
   <LayerPriority>k__BackingField: 5
-  _defaultConfiguration: {fileID: 11400000, guid: ebe5f5489ff15124d88b431667271cf3, type: 2}
   _container: {fileID: 4249292816671189704}
   _sensivityParameter: {fileID: 7133095603591892087}
   _resolutionParameter: {fileID: 4345299293454800088}
@@ -410,6 +411,8 @@ MonoBehaviour:
   _environmentVolumeParameter: {fileID: 1319243948929271975}
   _musicVolumeParameter: {fileID: 6611854036978274890}
   _subtitlesParameter: {fileID: 8838039392460571311}
+  _unsavedChangesPopUp: {fileID: 11400000, guid: 5aecbe401496046479a10ff5a8a3608a, type: 2}
+  _resetSettingsPopUp: {fileID: 11400000, guid: 119dd546f15d16049a9f881613463d56, type: 2}
 --- !u!222 &101475118177723212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1388,8 +1391,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7550964905994037619}
         m_TargetAssemblyTypeName: SettingsMenuController, Assembly-CSharp
-        m_MethodName: SwitchState
-        m_Mode: 6
+        m_MethodName: RequestClose
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,13 +9,21 @@ public class PauseMenuControllerUI : UIScreen
     [SerializeField] private Button _settingsButton;
     [SerializeField] private GameObject _pauseMenu;
 
-    public event Action<bool> Paused;
+    [Header("PopUps")]
+    [SerializeField] private PopUpConfig _backMenuPopUp;
+
     private SceneLoader _sceneLoader;
     private LevelsConfig _levelsConfig;
+    private IPauseService _pauseService;
+    private IPopUpService _popUpService;
 
     [Inject]
-    private void Construct(LevelsConfig levelsConfig)
-        => _levelsConfig = levelsConfig;
+    private void Construct(LevelsConfig levelsConfig, IPauseService pauseService, IPopUpService popUpService)
+    {
+        _levelsConfig = levelsConfig;
+        _pauseService = pauseService;
+        _popUpService = popUpService;
+    }
 
     private void Awake()
         => _pauseMenu.SetActive(false);
@@ -34,23 +41,22 @@ public class PauseMenuControllerUI : UIScreen
         => SwitchStateByContainer(state, _pauseMenu);
 
     protected override void OnShow()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
-        Paused?.Invoke(true);
-    }
+        => _pauseService.Pause(this);
 
     protected override void OnHide()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        => _pauseService.Resume(this);
 
-        Paused?.Invoke(false);
-    }
+    protected override void OnDispose()
+        => _pauseService.Resume(this);
 
     private void OnBackMenuButonClicked()
+        => _popUpService.Show(_backMenuPopUp, OnBackMenuPopUpClosed);
+
+    private void OnBackMenuPopUpClosed(PopUpResult result)
     {
+        if (result != PopUpResult.Accepted)
+            return;
+
         _continueButton.onClick.RemoveAllListeners();
         _backMenuButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.RemoveAllListeners();

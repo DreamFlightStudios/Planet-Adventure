@@ -10,10 +10,14 @@ public class RootControllerUI : MonoBehaviour
 
     [Header("Predefined Screens")]
     [SerializeField] private UIScreen _loadingScreen;
-    [SerializeField] private UIScreen _settingsMenu;
+    [SerializeField] private SettingsMenuController _settingsMenu;
+    [SerializeField] private GamePopUp _popUp;
 
     private readonly Dictionary<ScreenId, UIScreen> _registry = new();
     private readonly List<UIScreen> _popupStack = new();
+
+    public GamePopUp PopUp => _popUp;
+    public SettingsMenuController SettingsMenu => _settingsMenu;
 
     public void Initialize(InputSystem input)
     {
@@ -21,6 +25,11 @@ public class RootControllerUI : MonoBehaviour
 
         AddScreen(ScreenId.Loading, _loadingScreen, _canvasRoot);
         AddScreen(ScreenId.Settings, _settingsMenu, _canvasRoot);
+
+        if (_popUp != null)
+            AddScreen(ScreenId.PopUp, _popUp, _canvasRoot);
+        else
+            Debug.LogError($"{nameof(GamePopUp)} is not assigned in {nameof(RootControllerUI)}. Popups are disabled.", this);
     }
 
     public void Register(ScreenId id, UIScreen screen)
@@ -64,7 +73,7 @@ public class RootControllerUI : MonoBehaviour
         foreach (var id in _registry.Where(pair => pair.Value.transform.parent == _sceneContainer).Select(pair => pair.Key).ToArray())
             Unregister(id);
 
-        _popupStack.Clear();
+        RemoveHiddenPopups();
     }
 
     private void AddScreen(ScreenId id, UIScreen screen, Transform container)
@@ -87,12 +96,23 @@ public class RootControllerUI : MonoBehaviour
             return;
 
         var top = _popupStack[^1];
-        _popupStack.RemoveAt(_popupStack.Count - 1);
-        top.SwitchState(false);
+
+        if (top.CanCloseByTrigger == false)
+            return;
+
+        // The screen may stay open (e.g. waiting for confirmation), so the stack is cleaned by actual state.
+        top.RequestClose();
+        RemoveHiddenPopups();
     }
+
+    // Screens closed directly through SwitchState bypass Hide and would stay in the stack.
+    private void RemoveHiddenPopups()
+        => _popupStack.RemoveAll(screen => screen == null || screen.IsActive == false);
 
     private void OnTriggerInvoke()
     {
+        RemoveHiddenPopups();
+
         if (_popupStack.Count > 0)
         {
             CloseTopPopup();
@@ -110,7 +130,7 @@ public class RootControllerUI : MonoBehaviour
         }
 
         var screenToDeactivate = triggerableScreens.FirstOrDefault(s => s.IsDeactivatedByTrigger && s.IsActive);
-        screenToDeactivate?.SwitchState(false);
+        screenToDeactivate?.RequestClose();
     }
 
     private void RefreshOrdering()

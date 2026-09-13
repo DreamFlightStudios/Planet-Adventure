@@ -4,16 +4,16 @@ using Zenject;
 public class PauseController : MonoBehaviour
 {
     protected IPausable PausableObject {  get; private set; }
-    private PauseMenuControllerUI _pauseMenu;
+    private IPauseService _pauseService;
 
-    private void Awake() 
+    private void Awake()
         => PausableObject = GetComponent<IPausable>();
 
     [Inject]
-    private void Construct(PauseMenuControllerUI pauseMenu)
+    private void Construct(IPauseService pauseService)
     {
-        _pauseMenu = pauseMenu;
-        _pauseMenu.Paused += OnPaused;
+        _pauseService = pauseService;
+        _pauseService.PauseChanged += OnPaused;
     }
 
     private void OnPaused(bool state)
@@ -42,7 +42,7 @@ public class PauseController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_pauseMenu != null)
-            _pauseMenu.Paused -= OnPaused;
+        if (_pauseService != null)
+            _pauseService.PauseChanged -= OnPaused;
     }
 }

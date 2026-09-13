@@ -26,13 +26,22 @@ public class SettingsMenuController : UIScreen
     [Header("Language Setup")]
     [SerializeField] private Toggle _subtitlesParameter;
 
+    [Header("PopUps")]
+    [SerializeField] private PopUpConfig _unsavedChangesPopUp;
+    [SerializeField] private PopUpConfig _resetSettingsPopUp;
+
     private ISettingsService _settingsService;
+    private IPopUpService _popUpService;
     private SettingsMenuModel _model;
     private SettingsMenuView _view;
 
     [Inject]
     private void Construct(ISettingsService settingsService)
         => _settingsService = settingsService;
+
+    // RootUI is created before IPopUpService is bound, so the service is passed from ProjectInstaller.
+    public void Initialize(IPopUpService popUpService)
+        => _popUpService = popUpService;
 
     private void Awake()
     {
@@ -54,10 +63,40 @@ public class SettingsMenuController : UIScreen
         }
     }
 
+    public override void RequestClose()
+    {
+        if (HasUnsavedChanges() == false)
+        {
+            SwitchState(false);
+            return;
+        }
+
+        _popUpService.Show(_unsavedChangesPopUp, OnUnsavedChangesPopUpClosed);
+    }
+
     public void OnSaveButtonClicked() => _settingsService.Apply(_model.GetUserSettingsData());
 
-    public void OnResetButtonClicked()
+    public void OnResetButtonClicked() => _popUpService.Show(_resetSettingsPopUp, OnResetSettingsPopUpClosed);
+
+    private bool HasUnsavedChanges()
+        => _model.GetUserSettingsData().IsSameAs(_settingsService.Settings) == false;
+
+    private void OnUnsavedChangesPopUpClosed(PopUpResult result)
     {
+        if (result == PopUpResult.Closed)
+            return;
+
+        if (result == PopUpResult.Accepted)
+            OnSaveButtonClicked();
+
+        SwitchState(false);
+    }
+
+    private void OnResetSettingsPopUpClosed(PopUpResult result)
+    {
+        if (result != PopUpResult.Accepted)
+            return;
+
         var defaultSettings = _settingsService.CreateDefault();
 
         _settingsService.Apply(defaultSettings);

@@ -11,6 +11,8 @@ public abstract class UIScreen : Configurable
     public bool IsActive { get; protected set; }
     public bool IsCreated { get; private set; }
 
+    public virtual bool CanCloseByTrigger => true;
+
     public void Attach(Transform container)
         => transform.SetParent(container, false);
 
@@ -31,6 +33,10 @@ public abstract class UIScreen : Configurable
 
     public virtual void SwitchState(bool state)
         => SwitchStateByContainer(state, gameObject);
+
+    // Closing requested by the user (Back button, Escape). Screens may override it to ask for confirmation first.
+    public virtual void RequestClose()
+        => SwitchState(false);
 
     public virtual void SwitchStateByContainer(bool state, GameObject container)
     {

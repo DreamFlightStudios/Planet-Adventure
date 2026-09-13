@@ -662,6 +662,7 @@ MonoBehaviour:
   _backMenuButton: {fileID: 1843292095443346962}
   _settingsButton: {fileID: 1760190665615505700}
   _pauseMenu: {fileID: 7822653206059538705}
+  _backMenuPopUp: {fileID: 11400000, guid: 82d206ab697cb0746bbafefd6bccc507, type: 2}
 --- !u!1 &7769422345866925059
 GameObject:
   m_ObjectHideFlags: 0

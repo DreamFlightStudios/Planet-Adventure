@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.Scripting;
 
 [Serializable]
@@ -35,5 +36,21 @@ public class UserSettingsData : SaveData
 
         Subtitles = other.Subtitles;
         FullScreen = other.FullScreen;
+    }
+
+    public bool IsSameAs(UserSettingsData other)
+    {
+        if (other == null)
+            return false;
+
+        return Mathf.Approximately(Sensivity, other.Sensivity)
+            && Graphics == other.Graphics
+            && Mathf.Approximately(Ambient, other.Ambient)
+            && Mathf.Approximately(Dialogues, other.Dialogues)
+            && Mathf.Approximately(Interface, other.Interface)
+            && Mathf.Approximately(Environment, other.Environment)
+            && Mathf.Approximately(Music, other.Music)
+            && Subtitles == other.Subtitles
+            && FullScreen == other.FullScreen;
     }
 }

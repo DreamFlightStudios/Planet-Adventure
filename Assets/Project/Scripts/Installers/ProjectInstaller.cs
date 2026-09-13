@@ -5,10 +5,12 @@ public class ProjectInstaller : MonoInstaller
 {
     private const string SettingsFileName = "Settings";
     private const string LevelsProgressFileName = "LevelsProgress";
+    private const string PolicyAgreementFileName = "PolicyAgreement";
 
     [Header("Configs")]
     [SerializeField] private SettingsConfigurationConfig _defaultSettings;
     [SerializeField] private LevelsConfig _levelsConfig;
+    [SerializeField] private PolicyConfig _policyConfig;
 
     [Header("Dependencies")]
     [SerializeField] private RootControllerUI _rootUI;
@@ -40,6 +42,9 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<ILevelProgressService>().FromInstance(progressService).AsSingle();
         progressService.Initialize();
 
+        var pauseService = new PauseService();
+        Container.Bind<IPauseService>().FromInstance(pauseService).AsSingle();
+
         var audioController = Container.InstantiatePrefabForComponent<AudioController>(_audioController);
         Container.Bind<AudioController>().FromInstance(audioController).AsSingle();
 
@@ -52,5 +57,14 @@ public class ProjectInstaller : MonoInstaller
 
         var coroutines = Container.InstantiatePrefabForComponent<Coroutines>(_coroutines);
         Container.Bind<Coroutines>().FromInstance(coroutines).AsSingle();
+
+        var popUpService = new PopUpService(rootControllerUI.PopUp, rootControllerUI, pauseService, sceneLoader);
+        Container.Bind<IPopUpService>().FromInstance(popUpService).AsSingle();
+        rootControllerUI.SettingsMenu.Initialize(popUpService);
+
+        var policyAgreementFile = new SaveFile<PolicyAgreementData>(PolicyAgreementFileName, PolicyAgreementData.CurrentVersion, storage, serializer, () => new PolicyAgreementData());
+        var policyAgreementService = new PolicyAgreementService(policyAgreementFile, _policyConfig, popUpService);
+        Container.Bind<IPolicyAgreementService>().FromInstance(policyAgreementService).AsSingle();
+        policyAgreementService.Initialize();
     }
 }
