@@ -9,8 +9,11 @@ public class InteractiveObject : MonoBehaviour, IInteractive
     [field: SerializeField] public string Context { get; private set; }
     [field: SerializeField] public bool CanInteract { get; protected set; }
 
+    [SerializeField] private Transform _anchor;
     [SerializeField] private bool _disableOnInteraction;
     [SerializeField] private bool _multipleInteractions;
+
+    public Transform Anchor => _anchor == null ? transform : _anchor;
 
     public virtual void Interaction()
     {
