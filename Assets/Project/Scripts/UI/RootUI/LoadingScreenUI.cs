@@ -11,9 +11,10 @@ public class LoadingScreenUI : UIScreen
     public override void SwitchStateByContainer(bool state, GameObject container)
         => ApplyState(state);
 
+    // Unscaled: the scene change can be requested from the pause menu, where the game is frozen.
     protected override void OnShow()
-        => _background.DOFade(1.0f, _fadeInDuration);
+        => _background.DOFade(1.0f, _fadeInDuration).SetUpdate(true);
 
     protected override void OnHide()
-        => _background.DOFade(0.0f, _fadeOutDuration);
+        => _background.DOFade(0.0f, _fadeOutDuration).SetUpdate(true);
 }

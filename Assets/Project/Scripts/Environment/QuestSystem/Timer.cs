@@ -32,7 +32,7 @@ public class Timer : InteractiveObject
     {
         for (int i = 0; i < _time; i++)
         {
-            yield return new WaitForSecondsRealtime(_delay);
+            yield return new WaitForSeconds(_delay);
             int remains = _time - i;
 
             Counted?.Invoke(remains);

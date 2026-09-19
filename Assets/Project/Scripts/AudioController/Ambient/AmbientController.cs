@@ -36,7 +36,7 @@ public class AmbientController : MonoBehaviour
     {
         while (_isPlaying)
         {
-            yield return new WaitForSecondsRealtime(_info.GetStartRandomDelay());
+            yield return new WaitForSeconds(_info.GetStartRandomDelay());
 
             Debug.Log(_isPlaying);
             if (!_isPlaying) 
@@ -51,7 +51,7 @@ public class AmbientController : MonoBehaviour
 
             _controller.Play(CurrentAmbient.Clip, SourceType.Ambient, CurrentAmbient.FadeInDelay);
 
-            yield return new WaitForSecondsRealtime(_info.GetRandomDelayFromAmbientItem(CurrentAmbient));
+            yield return new WaitForSeconds(_info.GetRandomDelayFromAmbientItem(CurrentAmbient));
         }
     }
 

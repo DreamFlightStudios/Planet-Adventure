@@ -25,7 +25,7 @@ public class LaunchLevelsPanel : MonoBehaviour
     }
 
     private void Awake()
-        => transform.DOScaleX(0.0f, 0.0f);
+        => transform.DOScaleX(0.0f, 0.0f).SetUpdate(true);
 
     private void Start()
         => RebuildButtons();
@@ -35,7 +35,7 @@ public class LaunchLevelsPanel : MonoBehaviour
         int scale = IsOpen ? 0 : 1;
         IsOpen = !IsOpen;
 
-        transform.DOScaleX(scale, _switchDuration);
+        transform.DOScaleX(scale, _switchDuration).SetUpdate(true);
     }
 
     private void RebuildButtons()

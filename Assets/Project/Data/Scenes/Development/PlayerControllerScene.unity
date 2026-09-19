@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68a5089ede5aa974fb54ae7e3aeb50fc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   _levelId: PlayerControllerScene
 --- !u!4 &13188783
 Transform:
@@ -2493,7 +2493,6 @@ GameObject:
   - component: {fileID: 170648167}
   - component: {fileID: 170648166}
   - component: {fileID: 170648165}
-  - component: {fileID: 170648170}
   m_Layer: 6
   m_Name: Quest Item
   m_TagString: Untagged
@@ -2637,18 +2636,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170648163}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &170648170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170648163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &181790534
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,7 +2647,6 @@ GameObject:
   - component: {fileID: 181790535}
   - component: {fileID: 181790538}
   - component: {fileID: 181790537}
-  - component: {fileID: 181790536}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -2683,18 +2669,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 756699425}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &181790536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181790534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86b9ae5371201d4595aa60d3fee8b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &181790537
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -8499,7 +8473,6 @@ GameObject:
   - component: {fileID: 499403031}
   - component: {fileID: 499403030}
   - component: {fileID: 499403029}
-  - component: {fileID: 499403034}
   m_Layer: 6
   m_Name: Quest Item
   m_TagString: Untagged
@@ -8643,18 +8616,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499403027}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &499403034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499403027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &530438058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8776,7 +8737,6 @@ GameObject:
   - component: {fileID: 582331035}
   - component: {fileID: 582331038}
   - component: {fileID: 582331037}
-  - component: {fileID: 582331036}
   m_Layer: 0
   m_Name: Particle System (1)
   m_TagString: Untagged
@@ -8799,18 +8759,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 756699425}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &582331036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582331034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86b9ae5371201d4595aa60d3fee8b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &582331037
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -15626,7 +15574,6 @@ GameObject:
   - component: {fileID: 1313009609}
   - component: {fileID: 1313009608}
   - component: {fileID: 1313009607}
-  - component: {fileID: 1313009612}
   m_Layer: 6
   m_Name: Quest Item
   m_TagString: Untagged
@@ -15770,18 +15717,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313009605}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1313009612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313009605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1319966155
 GameObject:
   m_ObjectHideFlags: 0
@@ -17058,7 +16993,6 @@ GameObject:
   - component: {fileID: 1406014236}
   - component: {fileID: 1406014235}
   - component: {fileID: 1406014234}
-  - component: {fileID: 1406014239}
   m_Layer: 6
   m_Name: Quest Item
   m_TagString: Untagged
@@ -17202,18 +17136,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406014232}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1406014239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406014232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1416083395
 GameObject:
   m_ObjectHideFlags: 0
@@ -19378,7 +19300,6 @@ GameObject:
   - component: {fileID: 1693107789}
   - component: {fileID: 1693107788}
   - component: {fileID: 1693107787}
-  - component: {fileID: 1693107792}
   m_Layer: 6
   m_Name: Quest Item
   m_TagString: Untagged
@@ -19522,18 +19443,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693107785}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1693107792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693107785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1823439607
 GameObject:
   m_ObjectHideFlags: 0
@@ -19548,7 +19457,6 @@ GameObject:
   - component: {fileID: 1823439611}
   - component: {fileID: 1823439610}
   - component: {fileID: 1823439609}
-  - component: {fileID: 1823439614}
   m_Layer: 6
   m_Name: Quest Item
   m_TagString: Untagged
@@ -19692,18 +19600,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823439607}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1823439614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823439607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1856417807
 GameObject:
   m_ObjectHideFlags: 0
@@ -19774,6 +19670,7 @@ MonoBehaviour:
   _forbiddenStates:
   - Crouching
   - Sprinting
+  _drawGizmosColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1887337349
 GameObject:
   m_ObjectHideFlags: 0
@@ -19784,7 +19681,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1887337350}
   - component: {fileID: 1887337351}
-  - component: {fileID: 1887337352}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -19836,18 +19732,6 @@ MonoBehaviour:
       m_Calls: []
   _perceptionRate: 1.2
   _activateOnStart: 1
---- !u!114 &1887337352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887337349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81c172cf0ddf7941a1c14154acd2bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1959774917
 GameObject:
   m_ObjectHideFlags: 0

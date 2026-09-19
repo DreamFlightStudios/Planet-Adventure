@@ -1,12 +1,11 @@
 using UnityEngine;
 
 [RequireComponent (typeof(AgentRoatationStrategy))]
-public class PlayerMover : MonoBehaviour, IAgentMover, IPausable
+public class PlayerMover : MonoBehaviour, IAgentMover
 {
     public bool IsGrounded => _groundChecker.IsGrounded;
 
     public Vector3 Velocity { get; private set; }
-    public bool IsPause { get; private set; }
 
     [SerializeField] private AgentMovementInfo _config;
     [SerializeField] private GroundChecker _groundChecker;
@@ -25,8 +24,6 @@ public class PlayerMover : MonoBehaviour, IAgentMover, IPausable
 
     public void Move(Vector3 direction, float speed)
     {
-        if (IsPause) return;
-
         if (direction != Vector3.zero)
         {
             ApplyMovement(direction, speed);
@@ -62,12 +59,4 @@ public class PlayerMover : MonoBehaviour, IAgentMover, IPausable
             _rigidbody.linearVelocity = new Vector3(0f, _rigidbody.linearVelocity.y, 0f);
         }
     }
-
-    public void OnPause()
-    {
-        IsPause = true;
-        Stop();
-    }
-
-    public void OnResume() => IsPause = false;
 }

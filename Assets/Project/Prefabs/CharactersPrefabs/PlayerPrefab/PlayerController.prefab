@@ -313,8 +313,6 @@ GameObject:
   - component: {fileID: 7785864765065152538}
   - component: {fileID: 786710808007214548}
   - component: {fileID: 2782166525023201291}
-  - component: {fileID: 4379299051705516819}
-  - component: {fileID: 6474013919199520026}
   - component: {fileID: 4596911351052742342}
   - component: {fileID: 8474691350837535491}
   m_Layer: 3
@@ -513,30 +511,6 @@ MonoBehaviour:
   <StateName>k__BackingField: Crouching
   _defaultCollider: {fileID: 4596911351052742342}
   _crouchCollider: {fileID: 8474691350837535491}
---- !u!114 &4379299051705516819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547007809801242559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f24c1ff1e3344298492a779726c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6474013919199520026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547007809801242559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81c172cf0ddf7941a1c14154acd2bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &4596911351052742342
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -740,7 +714,6 @@ GameObject:
   - component: {fileID: 357698196563289940}
   - component: {fileID: 5915161768284273966}
   - component: {fileID: 8694552730126821698}
-  - component: {fileID: 5598062642477617156}
   - component: {fileID: 5644189809535687035}
   - component: {fileID: 1187562030328184626}
   m_Layer: 3
@@ -804,18 +777,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 1512c7c7596523f45a8e3d0d6d666d2b, type: 2}
---- !u!114 &5598062642477617156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134093681373199854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b49cc5aeaeb169a4793328d02657ae0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5644189809535687035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,7 +1211,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3466738958761317293}
   - component: {fileID: 6496047580861054206}
-  - component: {fileID: 1357861462980202116}
   m_Layer: 3
   m_Name: Container
   m_TagString: Untagged
@@ -1286,18 +1246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 7075ea86bc6cb584d9dca3a3737834ec, type: 2}
---- !u!114 &1357861462980202116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1575520615264934933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81c172cf0ddf7941a1c14154acd2bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1640746290073463812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,7 +4742,6 @@ GameObject:
   - component: {fileID: 4139737550284680320}
   - component: {fileID: 8960047213032296470}
   - component: {fileID: 8542921888960869525}
-  - component: {fileID: 7613699764629198752}
   m_Layer: 3
   m_Name: AudioSource
   m_TagString: Untagged
@@ -4927,18 +4874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Info>k__BackingField: {fileID: 11400000, guid: 4f6c130ea37c8854082cb0ff033157da, type: 2}
---- !u!114 &7613699764629198752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9056803962977206068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81c172cf0ddf7941a1c14154acd2bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9083760817074702977
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<ILevelProgressService>().FromInstance(progressService).AsSingle();
         progressService.Initialize();
 
-        var pauseService = new PauseService();
+        var pauseService = new PauseService(input);
         Container.Bind<IPauseService>().FromInstance(pauseService).AsSingle();
 
         var audioController = Container.InstantiatePrefabForComponent<AudioController>(_audioController);
@@ -54,6 +54,7 @@ public class ProjectInstaller : MonoInstaller
 
         var sceneLoader = Container.InstantiatePrefabForComponent<SceneLoader>(_sceneLoader);
         Container.Bind<SceneLoader>().FromInstance(sceneLoader).AsSingle();
+        sceneLoader.LoadFinished += pauseService.ResetState;
 
         var coroutines = Container.InstantiatePrefabForComponent<Coroutines>(_coroutines);
         Container.Bind<Coroutines>().FromInstance(coroutines).AsSingle();

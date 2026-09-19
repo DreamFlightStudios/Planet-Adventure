@@ -4,11 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
-[RequireComponent(typeof(PauseController))]
-public class DialogueController : MonoBehaviour, IPausable
+public class DialogueController : MonoBehaviour
 {
-    public bool IsPause { get; private set; }
-
     [Header("Info")]
     [SerializeField] private Phrase[] _phrases;
 
@@ -57,17 +54,10 @@ public class DialogueController : MonoBehaviour, IPausable
         }
     }
 
-    public void OnPause() => IsPause = true;
-
-    public void OnResume() => IsPause = false;
-
     private IEnumerator CommunicateRoutine()
     {
         foreach (var phrase in _phrases)
         {
-            while (IsPause)
-                yield return null;
-
             var info = phrase.Info;
 
             if (!_speakers.ContainsKey(info.SpeakerInfo.Name))
@@ -86,35 +76,12 @@ public class DialogueController : MonoBehaviour, IPausable
 
             speaker.StartSpeak(info);
 
-            float duration = info.AudioClip.length * _perceptionRate;
-            float timer = 0f;
-
-            while (timer < duration)
-            {
-                if (IsPause)
-                {
-                    while (IsPause)
-                        yield return null;
-                }
-
-                timer += Time.unscaledDeltaTime;
-                yield return null;
-            }
+            // Scaled time, so the dialogue freezes together with the rest of the game on pause.
+            yield return new WaitForSeconds(info.AudioClip.length * _perceptionRate);
 
             speaker.InterruptSpeak(info);
-            timer = 0f;
 
-            while (timer < phrase.Delay)
-            {
-                if (IsPause)
-                {
-                    while (IsPause)
-                        yield return null;
-                }
-
-                timer += Time.unscaledDeltaTime;
-                yield return null;
-            }
+            yield return new WaitForSeconds(phrase.Delay);
         }
 
         Complete();

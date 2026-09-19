@@ -23,6 +23,10 @@ public class AudioController : Configurable
 
     private Dictionary<SourceType, Tween> _activeFades = new Dictionary<SourceType, Tween>();
 
+    // Interface sounds must stay audible while the pause mutes the listener. The flag is not serialized, so it is set here.
+    private void Awake()
+        => _ui.ignoreListenerPause = true;
+
     public void Play(AudioClip clip, SourceType type, float fadeDuration = 0f)
     {
         if (clip == null)
@@ -54,6 +58,7 @@ public class AudioController : Configurable
         {
             var fade = source.DOFade(1f, fadeDuration)
                 .SetId($"AudioFade_{type}")
+                .SetUpdate(true)
                 .OnComplete(() => _activeFades.Remove(type));
             _activeFades[type] = fade;
         }
@@ -75,6 +80,7 @@ public class AudioController : Configurable
 
         var fade = source.DOFade(0f, fadeDuration)
             .SetId($"AudioFade_{type}")
+            .SetUpdate(true)
             .OnComplete(() =>
             {
                 source.Stop();
@@ -92,6 +98,7 @@ public class AudioController : Configurable
 
         var fadeOut = source.DOFade(0, halfFade)
             .SetId($"AudioFade_{type}_out")
+            .SetUpdate(true)
             .OnComplete(() =>
             {
                 source.clip = newClip;
@@ -100,6 +107,7 @@ public class AudioController : Configurable
 
                 var fadeIn = source.DOFade(1f, halfFade)
                     .SetId($"AudioFade_{type}_in")
+                    .SetUpdate(true)
                     .OnComplete(() => _activeFades.Remove(type));
                 _activeFades[type] = fadeIn;
             });
